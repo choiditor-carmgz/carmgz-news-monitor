@@ -67,6 +67,14 @@ def same_event(a, b):
     da, db = timestamp(a['published_at']), timestamp(b['published_at'])
     if not da or not db or abs((da-db).total_seconds()) > 72*3600:
         return None
+    # Materially different actions or explicit locations/numbers veto broad anchors.
+    for facet in (r'리콜|결함', r'사망|사고', r'생산\s*중단', r'화재'):
+        if bool(re.search(facet, a['title'])) != bool(re.search(facet, b['title'])):
+            return None
+    for pattern in (r'(\d+)\s*대\s*공급', r'(20\d{2})년'):
+        left, right = set(re.findall(pattern,a['title'])), set(re.findall(pattern,b['title']))
+        if left and right and left != right:
+            return None
     for key, label, anchors in EVENTS:
         if all(re.search(p, a['title'], re.I) and re.search(p, b['title'], re.I) for p in anchors):
             # Conflicting explicit quantities/years can identify different events.
@@ -118,7 +126,8 @@ def analyze(database, sources, as_of):
         db.execute('BEGIN')
         articles = [dict(r) for r in db.execute('SELECT * FROM articles ORDER BY id')]
         checks = [dict(r) for r in db.execute('SELECT * FROM feed_checks WHERE run_id=(SELECT max(run_id) FROM feed_checks)')]
-        latest = dict(db.execute('SELECT * FROM runs ORDER BY id DESC LIMIT 1').fetchone())
+        latest_row = db.execute('SELECT * FROM runs ORDER BY id DESC LIMIT 1').fetchone()
+        latest = dict(latest_row) if latest_row else {'id':None, 'started_at':as_of.isoformat()}
         integrity = db.execute('PRAGMA integrity_check').fetchone()[0]
         metrics = [dict(r) for r in db.execute('SELECT * FROM article_metrics')]
     for a in articles:
@@ -146,6 +155,7 @@ def analyze(database, sources, as_of):
         publishers.append(dict(id=s['id'], publisher=s['publisher'],
             excluded=s['id'] in EXCLUDED_IDS or s['publisher'] in EXCLUDED_NAMES,
             stored=sum(a['publisher'] == s['publisher'] for a in articles),
+            checked_at=c.get('checked_at'),
             status=c.get('status', 'not_verified'), rss_items=c.get('fetched'),
             keyword_candidates=c.get('relevant'), error=c.get('error')))
     rankings = {}
