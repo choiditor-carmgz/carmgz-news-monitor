@@ -1,1 +1,21 @@
-{"keywords":["자동차","현대차","기아","전기차","배터리","자율주행","로봇","자동차 부품","모빌리티","수입차"],"database":"data/news.sqlite3","interval_seconds":5,"timeout_seconds":25,"retries":2,"lookback_days":7}
+{
+  "keywords": [
+    "자동차",
+    "현대차",
+    "기아",
+    "전기차",
+    "배터리",
+    "자율주행",
+    "로봇",
+    "자동차 부품",
+    "모빌리티",
+    "수입차"
+  ],
+  "database": "data/news.sqlite3",
+  "interval_seconds": 5,
+  "timeout_seconds": 12,
+  "retries": 0,
+  "lookback_days": 7,
+  "publishers": "publishers.json",
+  "report": "reports/latest.json"
+}

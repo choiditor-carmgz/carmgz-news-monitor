@@ -1,0 +1,252 @@
+[
+  {
+    "id": "sedaily",
+    "publisher": "서울경제",
+    "reference": "https://www.sedaily.com/rss",
+    "checked_at": "2026-10-23T05:23:52.008834+00:00",
+    "links": [
+      {
+        "href": "https://www.sedaily.com/rss",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://www.sedaily.com/rss"
+      },
+      {
+        "href": "https://m.sedaily.com/rss",
+        "type": null,
+        "rel": "alternate",
+        "url": "https://m.sedaily.com/rss"
+      },
+      {
+        "href": "https://static.sedaily.com/css/rss.min.css?v=202609291422",
+        "type": null,
+        "rel": "stylesheet",
+        "url": "https://static.sedaily.com/css/rss.min.css?v=202609291422"
+      },
+      {
+        "href": "//www.sedaily.com/company/event",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/event"
+      },
+      {
+        "href": "//www.sedaily.com/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company"
+      },
+      {
+        "href": "//www.sedaily.com/company/webad",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/webad"
+      },
+      {
+        "href": "//www.sedaily.com/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss"
+      },
+      {
+        "href": "//www.sedaily.com/rss/newsall",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/newsall"
+      },
+      {
+        "href": "//www.sedaily.com/rss/market",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/market"
+      },
+      {
+        "href": "//www.sedaily.com/rss/realestate",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/realestate"
+      },
+      {
+        "href": "//www.sedaily.com/rss/economy",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/economy"
+      },
+      {
+        "href": "//www.sedaily.com/rss/finance",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/finance"
+      },
+      {
+        "href": "//www.sedaily.com/rss/business",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/business"
+      },
+      {
+        "href": "//www.sedaily.com/rss/politics",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/politics"
+      },
+      {
+        "href": "//www.sedaily.com/rss/society",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/society"
+      },
+      {
+        "href": "//www.sedaily.com/rss/international",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/international"
+      },
+      {
+        "href": "//www.sedaily.com/rss/culture",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/culture"
+      },
+      {
+        "href": "//www.sedaily.com/rss/sports",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/sports"
+      },
+      {
+        "href": "//www.sedaily.com/rss/opinion",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss/opinion"
+      },
+      {
+        "href": "//www.sedaily.com/company/event",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/event"
+      },
+      {
+        "href": "//www.sedaily.com/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company"
+      },
+      {
+        "href": "//www.sedaily.com/company/webad",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/webad"
+      },
+      {
+        "href": "//www.sedaily.com/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.sedaily.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.sedaily.com/robots.txt"
+      },
+      {
+        "url": "https://www.sedaily.com/rss",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.sedaily.com/rss"
+      }
+    ]
+  },
+  {
+    "id": "pressian",
+    "publisher": "프레시안",
+    "reference": "https://www.pressian.com/rss",
+    "checked_at": "2026-10-23T05:23:54.166096+00:00",
+    "links": [
+      {
+        "href": "https://www.pressian.com/rss",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://www.pressian.com/rss"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/news",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/news"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/25",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/25"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/60",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/60"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/65",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/65"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/66",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/66"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/67",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/67"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/68",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/68"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/69",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/69"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/70",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/70"
+      },
+      {
+        "href": "http://www.pressian.com/api/v3/site/rss/section/75",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/api/v3/site/rss/section/75"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.pressian.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.pressian.com/robots.txt"
+      },
+      {
+        "url": "https://www.pressian.com/rss",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.pressian.com/rss"
+      }
+    ]
+  }
+]

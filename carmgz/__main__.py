@@ -54,7 +54,7 @@ def _collect(cfg, db_path, client=None, provider=None):
         store.close()
 
 def main():
-    parser = argparse.ArgumentParser(description='CARMGZ Google News RSS collector')
+    parser = argparse.ArgumentParser(description='CARMGZ multi-publisher RSS collector')
     parser.add_argument('--config',type=Path,default=Path('config.json'))
     args = parser.parse_args()
     try:
@@ -66,7 +66,10 @@ def main():
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s',
         handlers=[logging.StreamHandler(),logging.FileHandler(base/'logs'/'collector.log',encoding='utf-8')])
     try:
-        result = collect(cfg,base/cfg['database'])
+        from .multi import collect_publishers, load_sources
+        result = collect_publishers(cfg,base/cfg['database'],load_sources(base/cfg.get('publishers','publishers.json')),base/cfg.get('report','reports/latest.json'))
+    except ValueError as exc:
+        parser.error(str(exc))
     except (RuntimeError, OSError) as exc:
         logging.error('%s',exc)
         return 1
