@@ -32,7 +32,11 @@ def collect_publishers(cfg,db_path,sources,report_path=None,client_factory=Polic
                 result=dict(id=source['id'],publisher=source['publisher'],feed_url=source.get('feed_url'),
                     rss_status=source['rss_status'],permission=source['permission'],status='not_verified',
                     http_status=None,policy='not_checked',parsed=False,fetched=0,relevant=0,inserted=0,error=None,requests=[])
-                if not source.get('enabled'):
+                from .analysis import EXCLUDED_IDS, EXCLUDED_NAMES
+                if source['id'] in EXCLUDED_IDS or source['publisher'] in EXCLUDED_NAMES:
+                    result['status']='excluded'
+                    result['error']='사용자 지정 수집·분석 제외 매체'
+                elif not source.get('enabled'):
                     result['status']='held' if source.get('feed_url') else 'no_confirmed_feed'
                     result['error']=source.get('alternative') or '이용 조건 검토/허가 필요; RSS 요청하지 않음'
                 else:
