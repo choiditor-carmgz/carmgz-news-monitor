@@ -116,6 +116,11 @@ class CoverageTests(unittest.TestCase):
             self.assertTrue(matching_keywords(Article(title,'가상',None,'https://example.org/a','a'),['기아']),title)
         self.assertFalse(matching_keywords(Article('기아대책 후원','가상',None,'https://example.org/a','a'),['기아']))
         self.assertFalse(automotive_terms('유전자 GMOS 연구'))
+        self.assertFalse(automotive_terms('애플 iPad MINI 공개'))
+        self.assertFalse(automotive_terms('GM 작물 재배 연구'))
+        self.assertTrue(automotive_terms('기아 문제 차량 리콜 발표'))
+        for title in ('MINI 래핑카 공개','MINI 랠리 성능','GM 메리바라 회장 발표','GM 미래차 협력'):
+            self.assertTrue(automotive_terms(title))
 
     def test_foundation_boundary_and_specific_event_grouping(self):
         from carmgz.analysis import classify, same_event
