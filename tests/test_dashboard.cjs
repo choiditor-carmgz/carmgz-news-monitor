@@ -36,3 +36,18 @@ test('coverage evidence renders safe source links and no raw HTML',()=>{
   assert.ok(html.includes('&lt;script&gt;'));assert.ok(html.includes('href="#"'));
   assert.equal(html.includes('<script>'),false);
 });
+
+test('missing JSON and Pages HTML fallback show actionable diagnostics',async()=>{
+  for(const [status,type,expected] of [[404,'text/html','HTTP 404'],[200,'text/html','JSON 대신 HTML']]) {
+    const elements=new Map();
+    const local=vm.createContext({Intl,URL,console,window:{location:{href:'https://example.pages.dev/'}},
+      document:{querySelector:s=>{if(!elements.has(s))elements.set(s,{});return elements.get(s);}},
+      fetch:async(url,options)=>{
+        assert.equal(String(url),'https://example.pages.dev/dashboard.json');
+        assert.equal(options.credentials,'same-origin');
+        return {ok:status===200,status,headers:{get:()=>type}};
+      }});
+    vm.runInContext(code,local);await vm.runInContext('load()',local);
+    assert.ok(elements.get('#notice').textContent.includes(expected));
+  }
+});

@@ -9,3 +9,5 @@ reports/*pass.json
 reports/latest.json
 reports/operation*.json
 reports/operations-live.md
+node_modules/
+cloudflare-dist/

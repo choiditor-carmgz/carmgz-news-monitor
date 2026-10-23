@@ -5,7 +5,7 @@ Python 3.10+ 표준 라이브러리와 SQLite를 사용하는 다중 언론사 R
 
 실행 및 데이터 구조는 [COLLECTOR_README.md](COLLECTOR_README.md), Windows 실측 결과는
 [MULTI_SOURCE_VALIDATION.md](MULTI_SOURCE_VALIDATION.md)를 참고하세요.
-자동 수집·브리핑·GitHub Pages 대시보드 실행은 [OPERATIONS.md](OPERATIONS.md)를 참고하세요.
+자동 수집·브리핑은 [OPERATIONS.md](OPERATIONS.md), 비공개 Cloudflare Pages 배포는 [CLOUDFLARE_DEPLOYMENT.md](CLOUDFLARE_DEPLOYMENT.md)를 참고하세요. GitHub Pages 공개 배포는 사용하지 않습니다.
 운영은 Python 3.12와 브라우저 기본 기능을 사용하며 외부 Python 패키지나 유료 API가 필요하지 않습니다.
 예약 실행은 운영 워크플로를 main에 검토·병합하고 최초 상태를 준비한 후 활성화됩니다.
 ## 120개 매체·CARMGZ 취재 관리 확장

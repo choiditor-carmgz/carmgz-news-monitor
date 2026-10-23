@@ -95,8 +95,17 @@ function render() {
 }
 
 async function load() {
-  try {const response=await fetch('dashboard.json',{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`); data=await response.json();render();}
-  catch(error){$('#status').textContent='데이터를 불러오지 못했습니다';$('#notice').textContent='dashboard.json이 아직 생성되지 않았거나 네트워크 오류가 있습니다. 운영 명령을 실행한 뒤 다시 시도하세요.';}
+  let diagnostic='네트워크 연결 오류';
+  try {
+    const response=await fetch(new URL('dashboard.json',window.location.href),{cache:'no-store',credentials:'same-origin'});
+    diagnostic=`HTTP ${response.status}`;
+    if(!response.ok)throw new Error(diagnostic);
+    if(!(response.headers.get('content-type')||'').includes('application/json')) {
+      diagnostic='JSON 대신 HTML 응답: Access 세션 만료 또는 JSON 경로/배포 오류';throw new Error(diagnostic);
+    }
+    data=await response.json();render();
+  }
+  catch(error){$('#status').textContent='데이터를 불러오지 못했습니다';$('#notice').textContent=`dashboard.json 요청 실패 (${diagnostic}). 404: 데이터 배포 누락, 403: Access 인증 확인, 503: 서버 검증 설정 확인. 로그인 후 새로고침하고 문제가 계속되면 News operations 배포 결과를 확인하세요.`;}
 }
 document.addEventListener('click', e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.ranking){ranking=b.dataset.ranking;renderRankings();}if(b.dataset.issue){if($('#detail').open)$('#detail').close();showIssue(b.dataset.issue);}if(b.dataset.brief!==undefined)showBrief(Number(b.dataset.brief));});
 $('#coverage-filter').addEventListener('change',()=>{renderRankings();renderCoverage();});

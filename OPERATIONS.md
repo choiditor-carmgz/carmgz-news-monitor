@@ -71,7 +71,7 @@ python -m http.server 8766 --directory site --bind 127.0.0.1
 브라우저에서 `http://127.0.0.1:8766/`를 연다. `file://` 직접 열기는 JSON fetch가 제한될 수 있다. PC 및 모바일 브라우저는 배포 후 같은 Pages URL을 사용한다. 네 가지 순위·검색·매체/날짜 필터·이슈 상세/그래프·수집 상태·지난 브리핑·긴급 후보를 제공한다. 별도 로그인이나 API 키는 필요하지 않다. 날짜·시간 표시는 전부 KST다.
 
 1. 이 브랜치의 코드와 스키마 변경을 검토하여 main에 병합한다. 이번 작업은 main에 직접 병합하지 않는다.
-2. Repository Settings → Pages → Source를 **GitHub Actions**로 설정한다. Actions의 쓰기 권한과 github-pages 환경 배포 규칙을 확인한다.
+2. [비공개 Cloudflare 배포 설정](CLOUDFLARE_DEPLOYMENT.md)을 따른다. GitHub Pages 배포는 제거했으며 기존 공개 사이트는 별도로 게시 중단해야 한다. Cloudflare Access의 기존 로그인 정책을 유지한다.
 3. 첫 실행은 News operations → Run workflow → main → `initialize=true`. 기존 원격 상태가 없을 때만 빈 운영 DB를 명시적으로 시작하고 허용 RSS를 수집한다. 기존 로컬 DB는 공개 Git에 올리지 않는다. 로컬 이력까지 이관하려면 검증된 운영 DB를 같은 이름 규격으로 안전한 관리자 작업에서 업로드하고 복원을 확인해야 하며, 이 브랜치 push만으로 로컬 DB가 원격으로 옮겨지지는 않는다.
 4. 이후 cron은 main에서 동작한다. 수동 실행에는 initialize를 끈다. 첫 업로드·두 번째 복원과 Pages 주소를 확인한다.
 5. 저장소의 로그 보존은 7일 이하, 과금 예산/유료 runner는 0으로 설정한다. Pages 배포가 실패해도 DB 아티팩트 업로드 결과를 먼저 확인한다.
