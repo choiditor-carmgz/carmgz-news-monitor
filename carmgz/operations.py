@@ -128,7 +128,7 @@ def briefing(db, report, kind, scheduled, at, last_collection):
                    delayed_minutes=max(0, (at-scheduled).total_seconds()/60),
                    expires_at=min(deadlines+[at+timedelta(hours=168)]).isoformat(),
                    rankings=ranking_ids,
-                   entries={i['id']:dict(label=i['label'],article_count=i['article_count'],publishers=i['independent_publishers']) for i in current},
+                   entries={i['id']:dict(label=i['label'],article_count=i['article_count'],publishers=i['independent_publishers'],carmgz=i.get('carmgz')) for i in current},
                    changes=changes,
                    follow_up=[dict(issue_id=i['id'], reason='원문·정책/안전 영향 확인 필요') for i in current if i['importance_score'] >= 25])
     db.execute('INSERT INTO briefings VALUES(?,?,?,?)', (slot, kind, at.isoformat(), json.dumps(payload, ensure_ascii=False)))
@@ -157,7 +157,7 @@ def public_payload(db, report, at, data_kind='real_rss'):
                 errors=[dict(created_at=r[0], phase=r[1], message=r[2]) for r in db.execute('SELECT created_at,phase,message FROM operation_errors ORDER BY created_at DESC LIMIT 30')])
 
 
-def run(cfg, database, sources, output, mode='scheduled', at=None, client_factory=None):
+def run(cfg, database, sources, output, mode='scheduled', at=None, client_factory=None, coverage_checker=None):
     at = at or datetime.now(timezone.utc)
     # A separate outer lock covers retention, collection, briefings and snapshot generation.
     with collector_lock(str(database)+'.operations'):
@@ -205,6 +205,13 @@ def run(cfg, database, sources, output, mode='scheduled', at=None, client_factor
             report = enrich(analyze(database, sources, finished), finished)
             with db:
                 track(db, report, finished)
+                # Check after stable issue IDs, before briefing snapshots. Fixture runs stay offline.
+                if cfg.get('coverage', True) and (cfg.get('data_kind','real_rss') != 'synthetic_fixture' or coverage_checker):
+                    from .coverage import load_config, verify_issues
+                    coverage_config = load_config(cfg.get('coverage_config','coverage.json'))
+                    if coverage_config.get('enabled'):
+                        verify_issues(db, report, finished, coverage_config,
+                                      force=any(due_briefs), checker=coverage_checker)
                 if should_collect:
                     alerts(db, report['issues'], finished)
                 last_collection = state(db, 'last_collection_at')
@@ -260,7 +267,7 @@ def main():
             pass
         raise
     print(json.dumps(dict(articles=len(payload['articles']), issues=len(payload['issues']),
-                         briefings=len(payload['briefings']), last_collection_at=payload['last_collection_at'])))
+                         briefings=len(payload['briefings']), last_collection_at=payload['last_collection_at']),ensure_ascii=True))
 
 
 if __name__ == '__main__':

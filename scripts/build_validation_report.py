@@ -58,5 +58,5 @@ lines += ['', '## 조사 범위와 근거', '',
 '이슈 연결 테이블은 준비했으나 실제 이슈 분류·독립 취재/전재 판정·AI 분석은 다음 단계입니다.',
 '조회수와 댓글 수는 확보하지 못해 기록하지 않았습니다. 대시보드·스케줄러·main 병합은 이번 범위에 포함하지 않았습니다.', '']
 (root/'MULTI_SOURCE_VALIDATION.md').write_text('\n'.join(lines),encoding='utf-8')
-print(json.dumps(dict(status=dict(status),rss_items=sum(s['fetched'] for s in rows),relevant=sum(s['relevant'] for s in rows),summary=latest['summary'],stored=total,publishers=publishers,integrity=checks,foreign_keys=len(fk)),ensure_ascii=False))
+print(json.dumps(dict(status=dict(status),rss_items=sum(s['fetched'] for s in rows),relevant=sum(s['relevant'] for s in rows),summary=latest['summary'],stored=total,publishers=publishers,integrity=checks,foreign_keys=len(fk)),ensure_ascii=True))
 db.close()

@@ -18,6 +18,9 @@ def migrate(db):
     INSERT OR IGNORE INTO schema_version VALUES(3);
     ''')
     db.commit()
+    from .coverage import migrate as coverage_migrate
+    coverage_migrate(db)
+    db.commit()
 
 
 def prune(db, at, compact=True):
@@ -45,6 +48,7 @@ def prune(db, at, compact=True):
             db.execute(f'DELETE FROM {table} WHERE julianday({field}) IS NULL OR julianday({field})<=julianday(?)', (cutoff.isoformat(),))
         db.execute('DELETE FROM runs WHERE julianday(started_at)<=julianday(?) AND id NOT IN (SELECT run_id FROM feed_checks UNION SELECT run_id FROM query_results)', (cutoff.isoformat(),))
         db.execute('DELETE FROM alert_candidates WHERE issue_id NOT IN (SELECT issue_id FROM issue_articles)')
+        db.execute('DELETE FROM carmgz_checks WHERE issue_id NOT IN (SELECT issue_id FROM issue_articles) OR julianday(checked_at)<=julianday(?)', (cutoff.isoformat(),))
         db.execute('DELETE FROM issues WHERE id NOT IN (SELECT issue_id FROM issue_articles)')
         # Embedded article data expires at the article deadline, not briefing creation + 7d.
         for slot, payload, generated in db.execute('SELECT slot,payload,generated_at FROM briefings').fetchall():

@@ -16,6 +16,7 @@ EXCLUDED_NAMES = {'모터그래프', '탑라이더', '카가이', '오토뷰'}
 
 # Each event needs multiple concrete anchors, never a title similarity threshold.
 EVENTS = [
+    ('winter-evo4', '한국타이어 윈터 아이셉트 에보4 독일 평가', [r'한국타이어', r'윈터\s*아이셉트\s*에보\s*4', r'독일|獨', r'1위']),
     ('bali-bus', '발리 전기버스 공급·충전 사업', [r'발리', r'전기버스']),
     ('gm-autonomy', 'GM 자율주행 확대 로드맵', [r'GM|제너럴 모터스', r'자율주행']),
     ('pbv-dealers', '기아 글로벌 PBV 딜러 초청', [r'기아', r'PBV', r'딜러', r'초청|집결']),
@@ -49,16 +50,19 @@ def timestamp(value):
 
 
 def classify(article):
+    from .relevance import HUNGER, automotive_terms
     if article['publisher'] in EXCLUDED_NAMES:
         return 'excluded', '사용자 지정 제외 매체'
     title = article['title'] or ''
-    if '기아대책' in title:
+    if HUNGER.search(title):
         return 'irrelevant', '기아 자동차와 동음이의어인 구호단체'
+    if re.search(r'정몽구\s*재단',title) and not re.search(r'자동차\s*(?:기술|산업|안전)|미래차|전기차|자율주행',title):
+        return 'review', '완성차 재단 사회공헌: 자동차 산업과의 직접 연결 확인 필요'
     if re.search(r'바둑로봇|건설작업로봇|주강로보테크|빅웨이브로보틱스|한일,', title):
         return 'review', '일반 로봇·협력 기사: 자동차 연결 근거 부족'
     if '컨선' in title:
         return 'review', '배터리 선박: 자동차 중심 범위 재검토 필요'
-    if re.search(r'자동차|현대차|기아|전기차|자율주행|모빌리티|전기버스|타이어|투싼|토요타|GM|벤츠|폴스타|리튬금속전지', title, re.I):
+    if automotive_terms(title):
         return 'relevant', 'RSS 제목에 자동차·이동수단·핵심 전지 기술 근거'
     return 'review', '제목만으로 관련성 확정 불가'
 
@@ -130,6 +134,7 @@ def analyze(database, sources, as_of):
         latest = dict(latest_row) if latest_row else {'id':None, 'started_at':as_of.isoformat()}
         integrity = db.execute('PRAGMA integrity_check').fetchone()[0]
         metrics = [dict(r) for r in db.execute('SELECT * FROM article_metrics')]
+        successes = dict(db.execute("SELECT publisher_id,max(checked_at) FROM feed_checks WHERE parsed=1 GROUP BY publisher_id"))
     for a in articles:
         a['classification'], a['classification_reason'] = classify(a)
         a['missing_fields'] = [k for k in ('publisher', 'title', 'published_at', 'url') if not a[k]]
@@ -153,6 +158,12 @@ def analyze(database, sources, as_of):
     for s in sources:
         c = by_id.get(s['id'], {})
         publishers.append(dict(id=s['id'], publisher=s['publisher'],
+            category=s.get('category'),homepage=s.get('homepage'),feed_url=s.get('feed_url'),
+            address_source=s.get('official_reference'),registry_status=s.get('status','PENDING'),
+            last_success_at=successes.get(s['id']),
+            collection_state=('EXCLUDED' if s['id'] in EXCLUDED_IDS else
+                'ACTIVE' if c.get('parsed') else 'ERROR' if c.get('status')=='failed' else
+                'UNSUPPORTED' if s.get('status')=='UNSUPPORTED' else 'PENDING'),
             excluded=s['id'] in EXCLUDED_IDS or s['publisher'] in EXCLUDED_NAMES,
             stored=sum(a['publisher'] == s['publisher'] for a in articles),
             checked_at=c.get('checked_at'),

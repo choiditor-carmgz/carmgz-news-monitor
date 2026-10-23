@@ -5,11 +5,22 @@
     "category": "통신",
     "feed_url": "https://www.yna.co.kr/rss/news.xml",
     "official_reference": "https://www.yna.co.kr/rss/index",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#yna"
+    "investigation_reference": "reports/discovery.json#yna",
+    "homepage": "https://www.yna.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:43.108116+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.yna.co.kr/rss/index",
+      "policy": "allowed"
+    }
   },
   {
     "id": "news1",
@@ -22,7 +33,18 @@
     "permission": "not_confirmed",
     "alternative": "뉴스1 CONNECT 공식 계약형 뉴스 공급 서비스 확인. API/자동 연동 방식은 계약 시 문의 필요; 현재 수집 권한 없음.",
     "alternative_reference": "https://connect.news1.kr/",
-    "investigation_reference": "reports/discovery.json#news1"
+    "investigation_reference": "reports/discovery.json#news1",
+    "homepage": "https://www.news1.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:43.109118+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "newsis",
@@ -30,11 +52,22 @@
     "category": "통신",
     "feed_url": "https://www.newsis.com/RSS/industry.xml",
     "official_reference": "https://nwww.newsis.com/RSS/",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#newsis"
+    "investigation_reference": "reports/discovery.json#newsis",
+    "homepage": "https://www.newsis.com/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:43.109118+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://nwww.newsis.com/RSS/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "chosun",
@@ -43,10 +76,21 @@
     "feed_url": "https://www.chosun.com/arc/outboundfeeds/rss/?outputType=xml",
     "official_reference": "https://www.chosun.com/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#chosun"
+    "investigation_reference": "reports/discovery.json#chosun",
+    "homepage": "https://www.chosun.com/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:43.110124+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "joongang",
@@ -58,7 +102,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#joongang"
+    "investigation_reference": "reports/discovery.json#joongang",
+    "homepage": "https://www.joongang.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:43.110124+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "donga",
@@ -66,11 +121,22 @@
     "category": "종합",
     "feed_url": "https://rss.donga.com/total.xml",
     "official_reference": "https://www.donga.com/",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#donga"
+    "investigation_reference": "reports/discovery.json#donga",
+    "homepage": "https://www.donga.com/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:43.111126+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.donga.com/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "khan",
@@ -78,11 +144,22 @@
     "category": "종합",
     "feed_url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
     "official_reference": "https://www.khan.co.kr/company/sub03_2.html",
-    "rss_status": "official_documented",
-    "enabled": false,
-    "permission": "restricted_use_review",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#khan"
+    "investigation_reference": "reports/discovery.json#khan",
+    "homepage": "https://www.khan.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:45.319870+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.khan.co.kr/company/sub03_2.html",
+      "policy": "allowed"
+    }
   },
   {
     "id": "hani",
@@ -91,10 +168,21 @@
     "feed_url": "https://www.hani.co.kr/rss/",
     "official_reference": "https://www.hani.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#hani"
+    "investigation_reference": "reports/discovery.json#hani",
+    "homepage": "https://www.hani.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:45.417114+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "hankook",
@@ -106,7 +194,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#hankook"
+    "investigation_reference": "reports/discovery.json#hankook",
+    "homepage": "https://www.hankookilbo.com/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:45.461892+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "seoul",
@@ -114,14 +213,25 @@
     "category": "종합",
     "feed_url": "https://www.seoul.co.kr/xml/rss/google_flash_seoul.xml",
     "official_reference": "https://www.seoul.co.kr/",
-    "rss_status": "official_advertised",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
     "previous_candidates": [
       "https://www.seoul.co.kr/xml/rss/rss.xml"
     ],
-    "investigation_reference": "reports/discovery.json#seoul"
+    "investigation_reference": "reports/discovery.json#seoul",
+    "homepage": "https://www.seoul.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:45.608034+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.seoul.co.kr/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "kmib",
@@ -129,11 +239,22 @@
     "category": "종합",
     "feed_url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
     "official_reference": "https://www.kmib.co.kr/",
-    "rss_status": "official_advertised",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#kmib"
+    "investigation_reference": "reports/discovery.json#kmib",
+    "homepage": "https://www.kmib.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:45.971846+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.kmib.co.kr/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "mk",
@@ -141,11 +262,22 @@
     "category": "경제",
     "feed_url": "https://www.mk.co.kr/rss/40300001/",
     "official_reference": "https://www.mk.co.kr/rss",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#mk"
+    "investigation_reference": "reports/discovery.json#mk",
+    "homepage": "https://www.mk.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:46.099665+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.mk.co.kr/rss",
+      "policy": "allowed"
+    }
   },
   {
     "id": "hankyung",
@@ -153,11 +285,22 @@
     "category": "경제",
     "feed_url": "https://www.hankyung.com/feed/all-news",
     "official_reference": "https://www.hankyung.com/feed",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#hankyung"
+    "investigation_reference": "reports/discovery.json#hankyung",
+    "homepage": "https://www.hankyung.com/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:47.466044+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.hankyung.com/feed",
+      "policy": "allowed"
+    }
   },
   {
     "id": "sedaily",
@@ -172,7 +315,18 @@
     "investigation_reference": "reports/discovery.json#sedaily",
     "previous_candidates": [
       "https://www.sedaily.com/RSS/All"
-    ]
+    ],
+    "homepage": "https://www.sedaily.com/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:47.607909+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "fnnews",
@@ -180,14 +334,25 @@
     "category": "경제",
     "feed_url": "https://www.fnnews.com/rss/r20/fn_realnews_all.xml",
     "official_reference": "https://busan.fnnews.com/rss",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#fnnews",
     "previous_candidates": [
       "https://www.fnnews.com/rss/fn_realnews_all.xml"
-    ]
+    ],
+    "homepage": "https://www.fnnews.com/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:47.790611+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://busan.fnnews.com/rss",
+      "policy": "allowed"
+    }
   },
   {
     "id": "herald",
@@ -195,11 +360,22 @@
     "category": "경제",
     "feed_url": "https://biz.heraldcorp.com/rss/google/newsAll",
     "official_reference": "https://biz.heraldcorp.com/",
-    "rss_status": "official_advertised",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#herald"
+    "investigation_reference": "reports/discovery.json#herald",
+    "homepage": "https://biz.heraldcorp.com/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:48.202753+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://biz.heraldcorp.com/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "edaily",
@@ -208,10 +384,21 @@
     "feed_url": "https://rss.edaily.co.kr/edaily_news.xml",
     "official_reference": "https://www.edaily.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#edaily"
+    "investigation_reference": "reports/discovery.json#edaily",
+    "homepage": "https://www.edaily.co.kr/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:49.619833+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "'utf-8' codec can't decode byte 0xc0 in position 623: invalid start byte",
+      "address_source": null,
+      "policy": "unavailable"
+    }
   },
   {
     "id": "asiae",
@@ -220,10 +407,21 @@
     "feed_url": "https://www.asiae.co.kr/rss/all.htm",
     "official_reference": "https://www.asiae.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#asiae"
+    "investigation_reference": "reports/discovery.json#asiae",
+    "homepage": "https://www.asiae.co.kr/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:49.736823+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
   },
   {
     "id": "mt",
@@ -232,10 +430,21 @@
     "feed_url": "https://rss.mt.co.kr/mt_news.xml",
     "official_reference": "https://www.mt.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#mt"
+    "investigation_reference": "reports/discovery.json#mt",
+    "homepage": "https://www.mt.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:49.781582+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "yonhaptv",
@@ -243,11 +452,22 @@
     "category": "방송",
     "feed_url": "https://www.yonhapnewstv.co.kr/browse/feed/",
     "official_reference": "https://www.yonhapnewstv.co.kr/",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#yonhaptv"
+    "investigation_reference": "reports/discovery.json#yonhaptv",
+    "homepage": "https://www.yonhapnewstv.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:49.846044+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.yonhapnewstv.co.kr/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "kbs",
@@ -259,7 +479,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#kbs"
+    "investigation_reference": "reports/discovery.json#kbs",
+    "homepage": "https://news.kbs.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:49.970906+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "mbc",
@@ -271,7 +502,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#mbc"
+    "investigation_reference": "reports/discovery.json#mbc",
+    "homepage": "https://imnews.imbc.com/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:50.108650+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
   },
   {
     "id": "sbs",
@@ -279,11 +521,22 @@
     "category": "방송",
     "feed_url": "https://news.sbs.co.kr/news/newsflashRssFeed.do",
     "official_reference": "https://news.sbs.co.kr/news/rss.do",
-    "rss_status": "official_documented",
-    "enabled": false,
-    "permission": "restricted_use_review",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#sbs"
+    "investigation_reference": "reports/discovery.json#sbs",
+    "homepage": "https://news.sbs.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:50.186904+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://news.sbs.co.kr/news/rss.do",
+      "policy": "allowed"
+    }
   },
   {
     "id": "jtbc",
@@ -292,10 +545,21 @@
     "feed_url": "https://fs.jtbc.co.kr/RSS/newsflash.xml",
     "official_reference": "https://news.jtbc.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#jtbc"
+    "investigation_reference": "reports/discovery.json#jtbc",
+    "homepage": "https://news.jtbc.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:51.944629+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "mbn",
@@ -304,10 +568,21 @@
     "feed_url": "https://www.mbn.co.kr/rss/economy/",
     "official_reference": "https://www.mbn.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#mbn"
+    "investigation_reference": "reports/discovery.json#mbn",
+    "homepage": "https://www.mbn.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:51.999204+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "ytn",
@@ -319,7 +594,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#ytn"
+    "investigation_reference": "reports/discovery.json#ytn",
+    "homepage": "https://www.ytn.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:52.019452+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "etnews",
@@ -327,11 +613,22 @@
     "category": "IT산업",
     "feed_url": "https://rss.etnews.com/17.xml",
     "official_reference": "https://www.etnews.com/rss/",
-    "rss_status": "official_documented",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#etnews"
+    "investigation_reference": "reports/discovery.json#etnews",
+    "homepage": "https://www.etnews.com/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:52.125137+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.etnews.com/rss/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "dt",
@@ -343,7 +640,18 @@
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#dt"
+    "investigation_reference": "reports/discovery.json#dt",
+    "homepage": "https://www.dt.co.kr/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:52.359168+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "zdnet",
@@ -352,10 +660,21 @@
     "feed_url": "https://feeds.feedburner.com/zdkorea",
     "official_reference": "https://zdnet.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#zdnet"
+    "investigation_reference": "reports/discovery.json#zdnet",
+    "homepage": "https://zdnet.co.kr/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:52.413618+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
   },
   {
     "id": "autotimes",
@@ -370,7 +689,18 @@
     "investigation_reference": "reports/discovery.json#autotimes",
     "previous_references": [
       "https://autotimes.hankyung.com/"
-    ]
+    ],
+    "homepage": "https://autotimes.co.kr/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.136270+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
   },
   {
     "id": "motortrend",
@@ -378,14 +708,25 @@
     "category": "자동차",
     "feed_url": "https://cdn.motortrend.kr/rss/gn_rss_allArticle.xml",
     "official_reference": "https://www.motortrend.kr/",
-    "rss_status": "official_advertised",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#motortrend",
     "previous_references": [
       "https://www.motortrendkorea.com/"
-    ]
+    ],
+    "homepage": "https://www.motortrend.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.186102+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.motortrend.kr/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "motorgraph",
@@ -394,10 +735,21 @@
     "feed_url": "https://cdn.motorgraph.com/rss/allArticle.xml",
     "official_reference": "https://www.motorgraph.com/",
     "rss_status": "official_advertised",
-    "enabled": true,
+    "enabled": false,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#motorgraph"
+    "investigation_reference": "reports/discovery.json#motorgraph",
+    "homepage": "https://www.motorgraph.com/",
+    "status": "EXCLUDED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.231723+00:00",
+      "status": "EXCLUDED",
+      "http_status": null,
+      "parsed": false,
+      "error": null,
+      "address_source": null,
+      "policy": null
+    }
   },
   {
     "id": "autodaily",
@@ -405,11 +757,22 @@
     "category": "자동차",
     "feed_url": "https://cdn.autodaily.co.kr/rss/gn_rss_allArticle.xml",
     "official_reference": "https://www.autodaily.co.kr/",
-    "rss_status": "official_advertised",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#autodaily"
+    "investigation_reference": "reports/discovery.json#autodaily",
+    "homepage": "https://www.autodaily.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.231723+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.autodaily.co.kr/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "dailycar",
@@ -421,7 +784,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#dailycar"
+    "investigation_reference": "reports/discovery.json#dailycar",
+    "homepage": "https://www.dailycar.co.kr/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.280618+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
   },
   {
     "id": "etoday",
@@ -429,11 +803,22 @@
     "category": "경제",
     "feed_url": "https://rss.etoday.co.kr/eto/industry_news.xml",
     "official_reference": "https://www.etoday.co.kr/rss/",
-    "rss_status": "official_documented",
-    "enabled": false,
-    "permission": "restricted_use_review",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#etoday"
+    "investigation_reference": "reports/discovery.json#etoday",
+    "homepage": "https://www.etoday.co.kr/",
+    "status": "ACTIVE",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.322763+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.etoday.co.kr/rss/",
+      "policy": "allowed"
+    }
   },
   {
     "id": "itdonga",
@@ -445,7 +830,18 @@
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#itdonga"
+    "investigation_reference": "reports/discovery.json#itdonga",
+    "homepage": "https://it.donga.com/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.366635+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": "https://it.donga.com/rss/",
+      "policy": "denied"
+    }
   },
   {
     "id": "nocut",
@@ -454,10 +850,21 @@
     "feed_url": "https://www.nocutnews.co.kr/rss/all.xml",
     "official_reference": "https://www.nocutnews.co.kr/",
     "rss_status": "candidate_unverified",
-    "enabled": true,
-    "permission": "public_feed_policy_check",
+    "enabled": false,
+    "permission": "not_confirmed",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#nocut"
+    "investigation_reference": "reports/discovery.json#nocut",
+    "homepage": "https://www.nocutnews.co.kr/",
+    "status": "ERROR",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.424383+00:00",
+      "status": "ERROR",
+      "http_status": 406,
+      "parsed": false,
+      "error": "Policy unavailable: HTTP 406: https://www.nocutnews.co.kr/robots.txt",
+      "address_source": null,
+      "policy": "unavailable"
+    }
   },
   {
     "id": "ohmy",
@@ -469,7 +876,18 @@
     "enabled": false,
     "permission": "not_confirmed",
     "alternative": "공식 뉴스 공급·콘텐츠 제휴 문의 후 계약/API 제공 여부 확인 필요. 허용된 자동 수집 대안 미확인.",
-    "investigation_reference": "reports/discovery.json#ohmy"
+    "investigation_reference": "reports/discovery.json#ohmy",
+    "homepage": "https://www.ohmynews.com/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.514218+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "pressian",
@@ -481,7 +899,18 @@
     "enabled": true,
     "permission": "public_feed_policy_check",
     "alternative": null,
-    "investigation_reference": "reports/discovery.json#pressian"
+    "investigation_reference": "reports/discovery.json#pressian",
+    "homepage": "https://www.pressian.com/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:54.528777+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
   },
   {
     "id": "tvchosun",
@@ -490,9 +919,1883 @@
     "feed_url": "https://news.tvchosun.com/site/data/rss/rss.xml",
     "official_reference": "https://news.tvchosun.com/",
     "rss_status": "candidate_unverified",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "alternative": null,
+    "investigation_reference": "reports/discovery.json#tvchosun",
+    "homepage": "https://news.tvchosun.com/",
+    "status": "UNSUPPORTED",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:56.412577+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "segye",
+    "publisher": "세계일보",
+    "category": "종합",
+    "homepage": "https://www.segye.com/",
+    "feed_url": "https://www.segye.com/Articles/RSSList/segye_recent.xml",
+    "official_reference": "https://www.segye.com/",
+    "rss_status": "official_advertised_verified",
     "enabled": true,
     "permission": "public_feed_policy_check",
-    "alternative": null,
-    "investigation_reference": "reports/discovery.json#tvchosun"
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:56.618897+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.segye.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "munhwa",
+    "publisher": "문화일보",
+    "category": "종합",
+    "homepage": "https://www.munhwa.com/",
+    "feed_url": null,
+    "official_reference": "https://www.munhwa.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:57.111328+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "naeil",
+    "publisher": "내일신문",
+    "category": "종합",
+    "homepage": "https://www.naeil.com/",
+    "feed_url": null,
+    "official_reference": "https://www.naeil.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:58.499985+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
+  },
+  {
+    "id": "dailian",
+    "publisher": "데일리안",
+    "category": "종합",
+    "homepage": "https://www.dailian.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.dailian.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:58.589444+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "ebs",
+    "publisher": "EBS",
+    "category": "방송",
+    "homepage": "https://news.ebs.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://news.ebs.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:58.670824+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
+  },
+  {
+    "id": "obs",
+    "publisher": "OBS",
+    "category": "방송",
+    "homepage": "https://www.obsnews.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.obsnews.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:58.757935+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "knn",
+    "publisher": "KNN",
+    "category": "방송",
+    "homepage": "https://www.knn.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.knn.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:15:59.288999+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "tbc",
+    "publisher": "TBC",
+    "category": "방송",
+    "homepage": "https://www.tbc.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.tbc.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:00.347399+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "tjb",
+    "publisher": "TJB",
+    "category": "방송",
+    "homepage": "https://www.tjb.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.tjb.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:00.433222+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
+  },
+  {
+    "id": "jtv",
+    "publisher": "JTV",
+    "category": "방송",
+    "homepage": "https://www.jtv.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.jtv.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:00.546268+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "g1",
+    "publisher": "G1",
+    "category": "방송",
+    "homepage": "https://www.g1tv.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.g1tv.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:00.753595+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "ubc",
+    "publisher": "ubc",
+    "category": "방송",
+    "homepage": "https://www.ubc.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.ubc.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:00.834239+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kbc",
+    "publisher": "kbc",
+    "category": "방송",
+    "homepage": "https://www.ikbc.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.ikbc.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:00.922239+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "cjb",
+    "publisher": "CJB",
+    "category": "방송",
+    "homepage": "https://www.cjb.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.cjb.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:02.768091+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
+  },
+  {
+    "id": "jibs",
+    "publisher": "JIBS",
+    "category": "방송",
+    "homepage": "https://www.jibs.com/",
+    "feed_url": null,
+    "official_reference": "https://www.jibs.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:02.873389+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error timed out>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "tbs",
+    "publisher": "TBS",
+    "category": "방송",
+    "homepage": "https://tbs.seoul.kr/",
+    "feed_url": null,
+    "official_reference": "https://tbs.seoul.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:04.413034+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "ajunews",
+    "publisher": "아주경제",
+    "category": "경제",
+    "homepage": "https://www.ajunews.com/",
+    "feed_url": null,
+    "official_reference": "https://www.ajunews.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:04.495122+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "econovill",
+    "publisher": "이코노믹리뷰",
+    "category": "경제",
+    "homepage": "https://www.econovill.com/",
+    "feed_url": null,
+    "official_reference": "https://www.econovill.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:04.541430+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "economist",
+    "publisher": "이코노미스트",
+    "category": "경제",
+    "homepage": "https://economist.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://economist.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:06.055362+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "bizwatch",
+    "publisher": "비즈워치",
+    "category": "경제",
+    "homepage": "https://www.bizwatch.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.bizwatch.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:06.683481+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "businesspost",
+    "publisher": "비즈니스포스트",
+    "category": "경제",
+    "homepage": "https://www.businesspost.co.kr/",
+    "feed_url": "https://www.businesspost.co.kr/rss/Article.xml",
+    "official_reference": "https://www.businesspost.co.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:06.937489+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.businesspost.co.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "newspim",
+    "publisher": "뉴스핌",
+    "category": "경제",
+    "homepage": "https://www.newspim.com/",
+    "feed_url": null,
+    "official_reference": "https://www.newspim.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:07.653023+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "newsway",
+    "publisher": "뉴스웨이",
+    "category": "경제",
+    "homepage": "https://www.newsway.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.newsway.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:08.628929+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "ceoscoredaily",
+    "publisher": "CEO스코어데일리",
+    "category": "경제",
+    "homepage": "https://www.ceoscoredaily.com/",
+    "feed_url": null,
+    "official_reference": "https://www.ceoscoredaily.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:08.683616+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "Unrecognized robots response; manual review required",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "dnews",
+    "publisher": "대한경제",
+    "category": "경제",
+    "homepage": "https://www.dnews.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.dnews.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:08.814832+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": null,
+      "policy": "denied"
+    }
+  },
+  {
+    "id": "viva100",
+    "publisher": "브릿지경제",
+    "category": "경제",
+    "homepage": "https://www.viva100.com/",
+    "feed_url": null,
+    "official_reference": "https://www.viva100.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:08.893712+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "enewstoday",
+    "publisher": "이뉴스투데이",
+    "category": "경제",
+    "homepage": "https://www.enewstoday.co.kr/",
+    "feed_url": "https://www.enewstoday.co.kr/rss/gns_allArticle.xml",
+    "official_reference": "https://www.enewstoday.co.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:08.978099+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.enewstoday.co.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "seoulfn",
+    "publisher": "서울파이낸스",
+    "category": "경제",
+    "homepage": "https://www.seoulfn.com/",
+    "feed_url": "https://cdn.seoulfn.com/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.seoulfn.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:09.865352+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.seoulfn.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "newstomato",
+    "publisher": "뉴스토마토",
+    "category": "경제",
+    "homepage": "https://www.newstomato.com/",
+    "feed_url": "http://www.newstomato.com/rss/",
+    "official_reference": "https://www.newstomato.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:11.047872+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.newstomato.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "maililbo",
+    "publisher": "매일일보",
+    "category": "경제",
+    "homepage": "https://www.m-i.kr/",
+    "feed_url": "https://cdn.m-i.kr/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.m-i.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:11.124080+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.m-i.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "busan",
+    "publisher": "부산일보",
+    "category": "지역",
+    "homepage": "https://www.busan.com/",
+    "feed_url": null,
+    "official_reference": "https://www.busan.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:11.231154+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kookje",
+    "publisher": "국제신문",
+    "category": "지역",
+    "homepage": "https://www.kookje.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.kookje.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:11.299339+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "imaeil",
+    "publisher": "매일신문",
+    "category": "지역",
+    "homepage": "https://www.imaeil.com/",
+    "feed_url": null,
+    "official_reference": "https://www.imaeil.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:13.155669+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "yeongnam",
+    "publisher": "영남일보",
+    "category": "지역",
+    "homepage": "https://www.yeongnam.com/",
+    "feed_url": null,
+    "official_reference": "https://www.yeongnam.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:13.404979+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kyeongin",
+    "publisher": "경인일보",
+    "category": "지역",
+    "homepage": "https://www.kyeongin.com/",
+    "feed_url": null,
+    "official_reference": "https://www.kyeongin.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:13.526191+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kyeonggi",
+    "publisher": "경기일보",
+    "category": "지역",
+    "homepage": "https://www.kyeonggi.com/",
+    "feed_url": null,
+    "official_reference": "https://www.kyeonggi.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:15.536365+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "joongboo",
+    "publisher": "중부일보",
+    "category": "지역",
+    "homepage": "https://www.joongboo.com/",
+    "feed_url": null,
+    "official_reference": "https://www.joongboo.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:15.697620+00:00",
+      "status": "ERROR",
+      "http_status": 200,
+      "parsed": false,
+      "error": "robots.txt disallows feed access",
+      "address_source": "https://www.joongboo.com/",
+      "policy": "denied"
+    }
+  },
+  {
+    "id": "incheonilbo",
+    "publisher": "인천일보",
+    "category": "지역",
+    "homepage": "https://www.incheonilbo.com/",
+    "feed_url": "https://cdn.incheonilbo.com/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.incheonilbo.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:15.982609+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.incheonilbo.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kwnews",
+    "publisher": "강원일보",
+    "category": "지역",
+    "homepage": "https://www.kwnews.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.kwnews.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:17.319142+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kado",
+    "publisher": "강원도민일보",
+    "category": "지역",
+    "homepage": "https://www.kado.net/",
+    "feed_url": "https://cdn.kado.net/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.kado.net/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:17.335976+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.kado.net/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "daejonilbo",
+    "publisher": "대전일보",
+    "category": "지역",
+    "homepage": "https://www.daejonilbo.com/",
+    "feed_url": null,
+    "official_reference": "https://www.daejonilbo.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:17.385280+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "joongdo",
+    "publisher": "중도일보",
+    "category": "지역",
+    "homepage": "https://www.joongdo.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.joongdo.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:17.722289+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "cctoday",
+    "publisher": "충청투데이",
+    "category": "지역",
+    "homepage": "https://www.cctoday.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.cctoday.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:19.465271+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "ccdaily",
+    "publisher": "충청일보",
+    "category": "지역",
+    "homepage": "https://www.ccdailynews.com/",
+    "feed_url": null,
+    "official_reference": "https://www.ccdailynews.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:19.571113+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "inews365",
+    "publisher": "충북일보",
+    "category": "지역",
+    "homepage": "https://www.inews365.com/",
+    "feed_url": "https://www.inews365.com/data/rss/news.xml",
+    "official_reference": "https://www.inews365.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:19.889119+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.inews365.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "jbnews",
+    "publisher": "중부매일",
+    "category": "지역",
+    "homepage": "https://www.jbnews.com/",
+    "feed_url": null,
+    "official_reference": "https://www.jbnews.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:21.640154+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kwangju",
+    "publisher": "광주일보",
+    "category": "지역",
+    "homepage": "https://www.kwangju.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.kwangju.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:21.761592+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error timed out>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "jnilbo",
+    "publisher": "전남일보",
+    "category": "지역",
+    "homepage": "https://www.jnilbo.com/",
+    "feed_url": "https://cdn.jnilbo.com/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.jnilbo.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:22.103944+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.jnilbo.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "mdilbo",
+    "publisher": "무등일보",
+    "category": "지역",
+    "homepage": "https://www.mdilbo.com/",
+    "feed_url": null,
+    "official_reference": "https://www.mdilbo.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:22.222868+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "jjan",
+    "publisher": "전북일보",
+    "category": "지역",
+    "homepage": "https://www.jjan.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.jjan.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:23.529940+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "domin",
+    "publisher": "전북도민일보",
+    "category": "지역",
+    "homepage": "https://www.domin.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.domin.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:23.766412+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "knnews",
+    "publisher": "경남신문",
+    "category": "지역",
+    "homepage": "https://www.knnews.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.knnews.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:23.973693+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "idomin",
+    "publisher": "경남도민일보",
+    "category": "지역",
+    "homepage": "https://www.idomin.com/",
+    "feed_url": "https://cdn.idomin.com/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.idomin.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:24.349031+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.idomin.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "ksilbo",
+    "publisher": "경상일보",
+    "category": "지역",
+    "homepage": "https://www.ksilbo.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.ksilbo.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:26.127394+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "jejunews",
+    "publisher": "제주일보",
+    "category": "지역",
+    "homepage": "https://www.jejunews.com/",
+    "feed_url": null,
+    "official_reference": "https://www.jejunews.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:27.617189+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "sisain",
+    "publisher": "시사IN",
+    "category": "주간",
+    "homepage": "https://www.sisain.co.kr/",
+    "feed_url": "https://cdn.sisain.co.kr/rss/gns_allArticle.xml",
+    "official_reference": "https://www.sisain.co.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:27.898729+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.sisain.co.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "sisajournal",
+    "publisher": "시사저널",
+    "category": "주간",
+    "homepage": "https://www.sisajournal.com/",
+    "feed_url": "https://cdn.sisajournal.com/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://www.sisajournal.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:28.269800+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.sisajournal.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "weeklychosun",
+    "publisher": "주간조선",
+    "category": "주간",
+    "homepage": "https://weekly.chosun.com/",
+    "feed_url": null,
+    "official_reference": "https://weekly.chosun.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:28.334908+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "weeklydonga",
+    "publisher": "주간동아",
+    "category": "주간",
+    "homepage": "https://weekly.donga.com/",
+    "feed_url": null,
+    "official_reference": "https://weekly.donga.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:29.806411+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "h21",
+    "publisher": "한겨레21",
+    "category": "주간",
+    "homepage": "https://h21.hani.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://h21.hani.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:30.429801+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "검증 시간 예산 초과; robots 대기 시간을 우회하지 않고 보류",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "weeklykhan",
+    "publisher": "주간경향",
+    "category": "주간",
+    "homepage": "https://weekly.khan.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://weekly.khan.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:30.501535+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "shindonga",
+    "publisher": "신동아",
+    "category": "주간",
+    "homepage": "https://shindonga.donga.com/",
+    "feed_url": null,
+    "official_reference": "https://shindonga.donga.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:30.578272+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "monthlychosun",
+    "publisher": "월간조선",
+    "category": "주간",
+    "homepage": "https://monthly.chosun.com/",
+    "feed_url": "https://cdn.monthly.chosun.com/rss/gn_rss_allArticle.xml",
+    "official_reference": "https://monthly.chosun.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:31.743380+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://monthly.chosun.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "monthlyjoongang",
+    "publisher": "월간중앙",
+    "category": "주간",
+    "homepage": "https://jmagazine.joins.com/monthly/",
+    "feed_url": null,
+    "official_reference": "https://jmagazine.joins.com/monthly/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:31.915787+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Cross-host robots redirect requires manual review",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "mediatoday",
+    "publisher": "미디어오늘",
+    "category": "주간",
+    "homepage": "https://www.mediatoday.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.mediatoday.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:32.060475+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "mediaus",
+    "publisher": "미디어스",
+    "category": "주간",
+    "homepage": "https://www.mediaus.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.mediaus.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:32.695739+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "journalist",
+    "publisher": "기자협회보",
+    "category": "주간",
+    "homepage": "https://www.journalist.or.kr/",
+    "feed_url": "https://www.journalist.or.kr/data/rss/news.xml",
+    "official_reference": "https://www.journalist.or.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:34.026980+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.journalist.or.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "autoherald",
+    "publisher": "오토헤럴드",
+    "category": "자동차",
+    "homepage": "https://www.autoherald.co.kr/",
+    "feed_url": "https://www.autoherald.co.kr/rss/gns_allArticle.xml",
+    "official_reference": "https://www.autoherald.co.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:34.143092+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.autoherald.co.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "autotribune",
+    "publisher": "오토트리뷴",
+    "category": "자동차",
+    "homepage": "https://www.autotribune.co.kr/",
+    "feed_url": "https://cdn.autotribune.co.kr/rss/gns_allArticle.xml",
+    "official_reference": "https://www.autotribune.co.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:34.386379+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.autotribune.co.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "globalautonews",
+    "publisher": "글로벌오토뉴스",
+    "category": "자동차",
+    "homepage": "https://www.global-autonews.com/",
+    "feed_url": null,
+    "official_reference": "https://www.global-autonews.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:34.853362+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "autodiary",
+    "publisher": "오토다이어리",
+    "category": "자동차",
+    "homepage": "https://www.autodiary.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.autodiary.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:35.007882+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Cross-host robots redirect requires manual review",
+      "address_source": null,
+      "policy": "unavailable"
+    }
+  },
+  {
+    "id": "autocast",
+    "publisher": "오토캐스트",
+    "category": "자동차",
+    "homepage": "https://www.autocast.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.autocast.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:35.322257+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "thedrive",
+    "publisher": "더드라이브",
+    "category": "자동차",
+    "homepage": "https://www.thedrive.co.kr/",
+    "feed_url": "https://www.thedrive.co.kr/news/rss.php",
+    "official_reference": "https://www.thedrive.co.kr/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:36.795323+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.thedrive.co.kr/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "inews24",
+    "publisher": "아이뉴스24",
+    "category": "IT산업",
+    "homepage": "https://www.inews24.com/",
+    "feed_url": null,
+    "official_reference": "https://www.inews24.com/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:37.569499+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "ddaily",
+    "publisher": "디지털데일리",
+    "category": "IT산업",
+    "homepage": "https://www.ddaily.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.ddaily.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:38.010608+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "digitaltoday",
+    "publisher": "디지털투데이",
+    "category": "IT산업",
+    "homepage": "https://www.digitaltoday.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.digitaltoday.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:38.109761+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "bloter",
+    "publisher": "블로터",
+    "category": "IT산업",
+    "homepage": "https://www.bloter.net/",
+    "feed_url": "https://cdn.bloter.net/rss/gns_allArticle.xml",
+    "official_reference": "https://www.bloter.net/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:38.251811+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.bloter.net/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "byline",
+    "publisher": "바이라인네트워크",
+    "category": "IT산업",
+    "homepage": "https://byline.network/",
+    "feed_url": null,
+    "official_reference": "https://byline.network/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "UNSUPPORTED",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:40.008169+00:00",
+      "status": "UNSUPPORTED",
+      "http_status": null,
+      "parsed": false,
+      "error": "공식 페이지에서 검증 가능한 RSS alternate 미확보",
+      "address_source": null,
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "itchosun",
+    "publisher": "IT조선",
+    "category": "IT산업",
+    "homepage": "https://it.chosun.com/",
+    "feed_url": "https://cdn.it.chosun.com/rss/gns_allArticle.xml",
+    "official_reference": "https://it.chosun.com/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:40.203127+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://it.chosun.com/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "hellot",
+    "publisher": "헬로티",
+    "category": "IT산업",
+    "homepage": "https://www.hellot.net/",
+    "feed_url": "https://www.hellot.net/data/rss/news.xml",
+    "official_reference": "https://www.hellot.net/",
+    "rss_status": "official_advertised_verified",
+    "enabled": true,
+    "permission": "public_feed_policy_check",
+    "status": "ACTIVE",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:40.262947+00:00",
+      "status": "ACTIVE",
+      "http_status": 200,
+      "parsed": true,
+      "error": null,
+      "address_source": "https://www.hellot.net/",
+      "policy": "allowed"
+    }
+  },
+  {
+    "id": "kidd",
+    "publisher": "산업일보",
+    "category": "IT산업",
+    "homepage": "https://www.kidd.co.kr/",
+    "feed_url": null,
+    "official_reference": "https://www.kidd.co.kr/",
+    "rss_status": "not_confirmed",
+    "enabled": false,
+    "permission": "not_confirmed",
+    "status": "ERROR",
+    "alternative": "공식 수집 경로 및 이용 조건 확인 중; 미검증 주소 요청 금지",
+    "investigation_reference": "공식 홈페이지에서 RSS 안내/alternate 링크 확인 필요",
+    "verification": {
+      "checked_at": "2026-10-23T07:16:40.554586+00:00",
+      "status": "ERROR",
+      "http_status": null,
+      "parsed": false,
+      "error": "Policy unavailable: Cross-host robots redirect requires manual review",
+      "address_source": null,
+      "policy": "unavailable"
+    }
   }
 ]

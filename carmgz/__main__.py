@@ -6,6 +6,7 @@ from .http import HttpClient
 from .providers import GoogleNews
 from .storage import Storage
 from .locking import collector_lock
+from .console import AsciiConsoleFormatter
 
 def load_config(path):
     cfg = json.loads(path.read_text(encoding='utf-8-sig'))
@@ -63,8 +64,11 @@ def main():
         parser.error(str(exc))
     base = args.config.resolve().parent
     (base/'logs').mkdir(exist_ok=True)
-    logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s',
-        handlers=[logging.StreamHandler(),logging.FileHandler(base/'logs'/'collector.log',encoding='utf-8')])
+    log_format='%(asctime)s %(levelname)s %(message)s'
+    console=logging.StreamHandler()
+    console.setFormatter(AsciiConsoleFormatter(log_format))
+    logging.basicConfig(level=logging.INFO,format=log_format,
+        handlers=[console,logging.FileHandler(base/'logs'/'collector.log',encoding='utf-8')])
     try:
         from .multi import collect_publishers, load_sources
         result = collect_publishers(cfg,base/cfg['database'],load_sources(base/cfg.get('publishers','publishers.json')),base/cfg.get('report','reports/latest.json'))
@@ -73,7 +77,7 @@ def main():
     except (RuntimeError, OSError) as exc:
         logging.error('%s',exc)
         return 1
-    print(json.dumps(result,ensure_ascii=False))
+    print(json.dumps(result,ensure_ascii=True))
     return 1 if result['errors'] else 0
 
 if __name__ == '__main__':

@@ -28,7 +28,8 @@ jobs:
   operate:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    # RSS budget 8 min + CARMGZ 3 min + state/deployment overhead.
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

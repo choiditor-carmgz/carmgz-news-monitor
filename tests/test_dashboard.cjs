@@ -24,3 +24,15 @@ test('untrusted feed titles and unsafe URLs cannot insert executable HTML',()=>{
 test('dates are filtered using KST across a UTC day boundary',()=>{
   assert.equal(vm.runInContext("day('2026-10-22T16:00:00Z')",ctx),'2026-10-23');
 });
+test('coverage filters preserve uncertain and not-checked issues',()=>{
+  assert.equal(vm.runInContext("coverageMatches({},'uncertain')",ctx),true);
+  assert.equal(vm.runInContext("coverageMatches({carmgz:{status:'확인 필요'}},'uncertain')",ctx),true);
+  assert.equal(vm.runInContext("coverageMatches({carmgz:{status:'확인 불가'}},'미보도')",ctx),false);
+  assert.equal(vm.runInContext("coverageMatches({carmgz:{status:'보도 완료'}},'보도 완료')",ctx),true);
+});
+test('coverage evidence renders safe source links and no raw HTML',()=>{
+  ctx.item={carmgz:{status:'확인 필요',reason:'<script>alert(1)</script>',matches:[{title:'<img>',url:'javascript:alert(1)',reason:'fixture'}]}};
+  const html=vm.runInContext('coverageDetail(item)',ctx);
+  assert.ok(html.includes('&lt;script&gt;'));assert.ok(html.includes('href="#"'));
+  assert.equal(html.includes('<script>'),false);
+});
