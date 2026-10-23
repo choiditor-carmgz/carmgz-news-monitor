@@ -110,3 +110,10 @@ class CloudflareAuthTests(unittest.TestCase):
         status,text,_=self.run_cli([denied(302),denied(302),denied(302)])
         self.assertEqual(status,1)
         self.assertIn('HTTP 302',text)
+
+    def test_unset_cloudflare_runtime_bindings_return_specific_safe_error(self):
+        for configs in [None, {'production':None}, {'production':{'env_vars':None}}]:
+            status,text,_=self.run_cli([ok({'status':'active'}),ok(dict(CONFIG,deployment_configs=configs))])
+            self.assertEqual(status,1)
+            self.assertIn('Configure existing Access verification variable in Pages production: CF_ACCESS_TEAM_DOMAIN',text)
+            self.assertNotIn('unexpected response',text)

@@ -79,9 +79,13 @@ def main():
     print('Pages API authentication and project lookup succeeded (this does not test deployment write access)')
     if project.get('production_branch') != 'main':
         raise PreflightError('Existing Pages production branch must be main; refuse preview with production data')
-    variables = project.get('deployment_configs', {}).get('production', {}).get('env_vars', {})
+    # Cloudflare can return null for unset deployment configs/env_vars.
+    def mapping(value):
+        return value if isinstance(value, dict) else {}
+    production = mapping(mapping(project.get('deployment_configs')).get('production'))
+    variables = mapping(production.get('env_vars'))
     for name in ('CF_ACCESS_TEAM_DOMAIN', 'CF_ACCESS_AUD'):
-        item = variables.get(name, {})
+        item = mapping(variables.get(name))
         if not item or (item.get('type') != 'secret_text' and not item.get('value')):
             raise PreflightError('Configure existing Access verification variable in Pages production: '+name)
     print('Existing Pages project and Access verification bindings confirmed')
