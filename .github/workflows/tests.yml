@@ -2,7 +2,7 @@ name: Code tests
 on:
   push:
     branches: ['main', 'codex/**']
-    paths: ['carmgz/**', 'tests/**', 'scripts/**', 'web/**', 'publishers.json', 'coverage.json', '.github/workflows/**']
+    paths: ['carmgz/**', 'tests/**', 'scripts/**', 'web/**', 'cloudflare/**', 'package.json', 'pnpm-lock.yaml', 'publishers.json', 'coverage.json', '.github/workflows/**']
   pull_request:
 permissions:
   contents: read
@@ -30,4 +30,9 @@ jobs:
         with:
           node-version: '22'
       - run: node --check web/app.js
-      - run: node --test tests/test_dashboard.cjs
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm test
+      - run: pnpm run build:guard

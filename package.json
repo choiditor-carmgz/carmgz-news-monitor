@@ -1,0 +1,16 @@
+{
+  "name": "carmgz-private-dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:guard": "esbuild cloudflare/worker.mjs --bundle --format=esm --platform=browser --outfile=site/_worker.js",
+    "test": "node --test tests/*.cjs tests/*.mjs"
+  },
+  "dependencies": {
+    "jose": "6.2.13"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "wrangler": "4.151.3"
+  }
+}

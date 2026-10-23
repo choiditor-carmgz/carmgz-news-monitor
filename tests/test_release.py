@@ -89,7 +89,11 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn('publish:',text)
         operate,deploy=text.split('\n  deploy:')
         self.assertNotIn('environment:',operate)
-        self.assertIn('name: github-pages',deploy)
+        self.assertIn('name: cloudflare-pages',deploy)
+        self.assertIn("github.ref == 'refs/heads/main'",deploy)
+        self.assertNotIn('actions/deploy-pages',text)
+        self.assertNotIn('actions/upload-pages-artifact',text)
+        self.assertIn('wrangler pages deploy cloudflare-dist',deploy)
 
     def test_private_issue_notes_and_error_details_stay_out_of_public_json(self):
         from carmgz.operations import public_payload
