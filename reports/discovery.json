@@ -1,0 +1,3471 @@
+[
+  {
+    "id": "yna",
+    "publisher": "연합뉴스",
+    "reference": "https://www.yna.co.kr/rss/index",
+    "checked_at": "2026-10-23T05:19:06.285201+00:00",
+    "links": [
+      {
+        "href": "https://www.yna.co.kr/rss/index",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://www.yna.co.kr/rss/index"
+      },
+      {
+        "href": "https://www.yna.co.kr/aboutus/partner",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://www.yna.co.kr/aboutus/partner"
+      },
+      {
+        "href": "https://www.yna.co.kr/aboutus/partner",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://www.yna.co.kr/aboutus/partner"
+      },
+      {
+        "href": "https://www.yna.co.kr/aboutus/company/index",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://www.yna.co.kr/aboutus/company/index"
+      },
+      {
+        "href": "https://www.yna.co.kr/policy/copyright",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://www.yna.co.kr/policy/copyright"
+      },
+      {
+        "href": "https://www.yna.co.kr/rss/index",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yna.co.kr/rss/index"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.yna.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.yna.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.yna.co.kr/rss/index",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.yna.co.kr/rss/index"
+      }
+    ]
+  },
+  {
+    "id": "news1",
+    "publisher": "뉴스1",
+    "reference": "https://www.news1.kr/",
+    "checked_at": "2026-10-23T05:19:08.423026+00:00",
+    "links": [
+      {
+        "href": "/industry/company/6329881",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/industry/company/6329881"
+      },
+      {
+        "href": "/industry/company/6329881",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/industry/company/6329881"
+      },
+      {
+        "href": "/industry/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/industry/company"
+      },
+      {
+        "href": "/partners/globalmarket",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/partners/globalmarket"
+      },
+      {
+        "href": "/customer",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/customer"
+      },
+      {
+        "href": "/customer/contents",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/customer/contents"
+      },
+      {
+        "href": "/customer/agreement",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/customer/agreement"
+      },
+      {
+        "href": "/customer/privacy",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/customer/privacy"
+      },
+      {
+        "href": "/customer/privacy_youth",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/customer/privacy_youth"
+      },
+      {
+        "href": "/customer/problem",
+        "type": null,
+        "rel": null,
+        "url": "https://www.news1.kr/customer/problem"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.news1.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.news1.kr/robots.txt"
+      },
+      {
+        "url": "https://www.news1.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.news1.kr/"
+      }
+    ]
+  },
+  {
+    "id": "newsis",
+    "publisher": "뉴시스",
+    "reference": "https://nwww.newsis.com/RSS/",
+    "checked_at": "2026-10-23T05:19:11.092175+00:00",
+    "links": [
+      {
+        "href": "https://www.newsis.com/RSS/",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://www.newsis.com/RSS/"
+      },
+      {
+        "href": "/RSS/",
+        "type": null,
+        "rel": null,
+        "url": "https://nwww.newsis.com/RSS/"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/sokbo.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/sokbo.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/politics.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/politics.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/international.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/international.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/economy.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/economy.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/bank.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/bank.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/industry.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/industry.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/society.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/society.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/health.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/health.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/met.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/met.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/whol.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/whol.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/sports.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/sports.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/entertain.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/entertain.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/culture.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/culture.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/square.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/square.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/photo.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/photo.xml');"
+      },
+      {
+        "href": "javascript:mOutLink2('https://nwww.newsis.com/RSS/newsiseyes.xml');",
+        "type": null,
+        "rel": null,
+        "url": "javascript:mOutLink2('https://nwww.newsis.com/RSS/newsiseyes.xml');"
+      },
+      {
+        "href": "/RSS/",
+        "type": null,
+        "rel": null,
+        "url": "https://nwww.newsis.com/RSS/"
+      },
+      {
+        "href": "/company/about",
+        "type": null,
+        "rel": null,
+        "url": "https://nwww.newsis.com/company/about"
+      },
+      {
+        "href": "/contents/copyright",
+        "type": null,
+        "rel": null,
+        "url": "https://nwww.newsis.com/contents/copyright"
+      },
+      {
+        "href": "/company/about",
+        "type": null,
+        "rel": null,
+        "url": "https://nwww.newsis.com/company/about"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://nwww.newsis.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://nwww.newsis.com/robots.txt"
+      },
+      {
+        "url": "https://nwww.newsis.com/RSS/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://nwww.newsis.com/RSS/"
+      }
+    ]
+  },
+  {
+    "id": "chosun",
+    "publisher": "조선일보",
+    "reference": "https://www.chosun.com/",
+    "checked_at": "2026-10-23T05:19:13.190403+00:00",
+    "links": [
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/GFTCAZ4QLZG65PKQCZ4GRK6OTI/"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://biz.chosun.com/industry/company/2026/10/23/ABG6JWLZD5DETJLUUO3IA55YLQ/?utm_source=chosun.com&utm_medium=referral&utm_campaign=chosun-main"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/LCQQXDHLFVA6ZMTV2KFFPWJFTQ/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/"
+      },
+      {
+        "href": "https://www.chosun.com/economy/industry-company/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/"
+      },
+      {
+        "href": "https://about.chosun.com/pages/partners/ad_info_01.php",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://about.chosun.com/pages/partners/ad_info_01.php"
+      },
+      {
+        "href": "https://www.chosun.com/economy/industry-company/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/"
+      },
+      {
+        "href": "https://about.chosun.com/pages/partners/ad_info_01.php",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://about.chosun.com/pages/partners/ad_info_01.php"
+      },
+      {
+        "href": "https://www.chosun.com/economy/industry-company/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.chosun.com/economy/industry-company/"
+      },
+      {
+        "href": "https://about.chosun.com/pages/partners/ad_info_01.php",
+        "type": null,
+        "rel": "noreferrer noopener",
+        "url": "https://about.chosun.com/pages/partners/ad_info_01.php"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.chosun.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.chosun.com/robots.txt"
+      },
+      {
+        "url": "https://www.chosun.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.chosun.com/"
+      }
+    ]
+  },
+  {
+    "id": "joongang",
+    "publisher": "중앙일보",
+    "reference": "https://www.joongang.co.kr/",
+    "checked_at": "2026-10-23T05:19:15.779459+00:00",
+    "links": [
+      {
+        "href": "https://www.joongang.co.kr/customercenter",
+        "type": null,
+        "rel": null,
+        "url": "https://www.joongang.co.kr/customercenter"
+      },
+      {
+        "href": "https://www.joongang.co.kr/customercenter",
+        "type": null,
+        "rel": null,
+        "url": "https://www.joongang.co.kr/customercenter"
+      },
+      {
+        "href": "https://www.joongang.co.kr/customercenter",
+        "type": null,
+        "rel": null,
+        "url": "https://www.joongang.co.kr/customercenter"
+      },
+      {
+        "href": "https://www.joongang.co.kr/customercenter",
+        "type": null,
+        "rel": null,
+        "url": "https://www.joongang.co.kr/customercenter"
+      },
+      {
+        "href": "https://www.joongang.co.kr/customercenter",
+        "type": null,
+        "rel": null,
+        "url": "https://www.joongang.co.kr/customercenter"
+      },
+      {
+        "href": "https://bbs.joongang.co.kr/customercenter/faq?boardSeq=1481",
+        "type": null,
+        "rel": null,
+        "url": "https://bbs.joongang.co.kr/customercenter/faq?boardSeq=1481"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.joongang.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.joongang.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.joongang.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.joongang.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "donga",
+    "publisher": "동아일보",
+    "reference": "https://www.donga.com/",
+    "checked_at": "2026-10-23T05:19:18.004704+00:00",
+    "links": [
+      {
+        "href": "https://rss.donga.com/total.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/total.xml"
+      },
+      {
+        "href": "https://rss.donga.com/politics.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/politics.xml"
+      },
+      {
+        "href": "https://rss.donga.com/economy.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/economy.xml"
+      },
+      {
+        "href": "https://rss.donga.com/international.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/international.xml"
+      },
+      {
+        "href": "https://rss.donga.com/national.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/national.xml"
+      },
+      {
+        "href": "https://rss.donga.com/editorials.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/editorials.xml"
+      },
+      {
+        "href": "https://rss.donga.com/science.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/science.xml"
+      },
+      {
+        "href": "https://rss.donga.com/culture.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/culture.xml"
+      },
+      {
+        "href": "https://rss.donga.com/sports.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/sports.xml"
+      },
+      {
+        "href": "https://rss.donga.com/inmul.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/inmul.xml"
+      },
+      {
+        "href": "https://rss.donga.com/health.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/health.xml"
+      },
+      {
+        "href": "https://rss.donga.com/leisure.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/leisure.xml"
+      },
+      {
+        "href": "https://rss.donga.com/book.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/book.xml"
+      },
+      {
+        "href": "https://rss.donga.com/show.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/show.xml"
+      },
+      {
+        "href": "https://rss.donga.com/woman.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/woman.xml"
+      },
+      {
+        "href": "https://rss.donga.com/travel.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/travel.xml"
+      },
+      {
+        "href": "https://rss.donga.com/lifeinfo.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://rss.donga.com/lifeinfo.xml"
+      },
+      {
+        "href": "https://www.donga.com/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.donga.com/company"
+      },
+      {
+        "href": "https://www.donga.com/dongailbo?m=copyright",
+        "type": null,
+        "rel": null,
+        "url": "https://www.donga.com/dongailbo?m=copyright"
+      },
+      {
+        "href": "https://www.donga.com/company?m=cooperation",
+        "type": null,
+        "rel": null,
+        "url": "https://www.donga.com/company?m=cooperation"
+      },
+      {
+        "href": "https://www.donga.com/company?m=adguide",
+        "type": null,
+        "rel": null,
+        "url": "https://www.donga.com/company?m=adguide"
+      },
+      {
+        "href": "https://rss.donga.com/",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.donga.com/"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.donga.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.donga.com/robots.txt"
+      },
+      {
+        "url": "https://www.donga.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.donga.com/"
+      }
+    ]
+  },
+  {
+    "id": "khan",
+    "publisher": "경향신문",
+    "reference": "https://www.khan.co.kr/company/sub03_2.html",
+    "checked_at": "2026-10-23T05:19:20.213585+00:00",
+    "links": [
+      {
+        "href": "//img.khan.co.kr/spko/css_2009/company.css?v=20171214b",
+        "type": "text/css",
+        "rel": "stylesheet",
+        "url": "https://img.khan.co.kr/spko/css_2009/company.css?v=20171214b"
+      },
+      {
+        "href": "/company/sub04_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub04_1.html"
+      },
+      {
+        "href": "/company/sub04_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub04_1.html"
+      },
+      {
+        "href": "/company/sub04_2.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub04_2.html"
+      },
+      {
+        "href": "/company/sub03_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_1.html"
+      },
+      {
+        "href": "/company/sub03_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_1.html"
+      },
+      {
+        "href": "/company/sub03_2.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_2.html"
+      },
+      {
+        "href": "/company/sub03_3.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_3.html"
+      },
+      {
+        "href": "/company/sub03_4.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_4.html"
+      },
+      {
+        "href": "https://member.khan.co.kr/login.html?url=%2F%2Fwww.khan.co.kr%2Fcompany%2Fsub03_2.html",
+        "type": null,
+        "rel": null,
+        "url": "https://member.khan.co.kr/login.html?url=%2F%2Fwww.khan.co.kr%2Fcompany%2Fsub03_2.html"
+      },
+      {
+        "href": "https://member.khan.co.kr/join/join.html?url=%2F%2Fwww.khan.co.kr%2Fcompany%2Fsub03_2.html",
+        "type": null,
+        "rel": null,
+        "url": "https://member.khan.co.kr/join/join.html?url=%2F%2Fwww.khan.co.kr%2Fcompany%2Fsub03_2.html"
+      },
+      {
+        "href": "/company/sub03_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_1.html"
+      },
+      {
+        "href": "/company/sub03_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_1.html"
+      },
+      {
+        "href": "/company/sub03_2.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_2.html"
+      },
+      {
+        "href": "/company/sub03_3.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_3.html"
+      },
+      {
+        "href": "/company/sub03_4.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_4.html"
+      },
+      {
+        "href": "/company/sub03_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_1.html"
+      },
+      {
+        "href": "/company/sub03_1.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_1.html"
+      },
+      {
+        "href": "/company/sub03_2.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_2.html"
+      },
+      {
+        "href": "/company/sub03_3.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.khan.co.kr/company/sub03_3.html"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.khan.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.khan.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.khan.co.kr/company/sub03_2.html",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.khan.co.kr/company/sub03_2.html"
+      }
+    ]
+  },
+  {
+    "id": "hani",
+    "publisher": "한겨레",
+    "reference": "https://www.hani.co.kr/",
+    "checked_at": "2026-10-23T05:19:22.397666+00:00",
+    "links": [
+      {
+        "href": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=844&page=1",
+        "type": null,
+        "rel": null,
+        "url": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=844&page=1"
+      },
+      {
+        "href": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=842",
+        "type": null,
+        "rel": null,
+        "url": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=842"
+      },
+      {
+        "href": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=841&page=1",
+        "type": null,
+        "rel": null,
+        "url": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=841&page=1"
+      },
+      {
+        "href": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=840&page=1",
+        "type": null,
+        "rel": null,
+        "url": "https://notice.hani.co.kr/customer_view.html?bid=notice&no=840&page=1"
+      },
+      {
+        "href": "https://company.hani.co.kr/",
+        "type": null,
+        "rel": null,
+        "url": "https://company.hani.co.kr/"
+      },
+      {
+        "href": "https://company.hani.co.kr/haniad.html",
+        "type": null,
+        "rel": null,
+        "url": "https://company.hani.co.kr/haniad.html"
+      },
+      {
+        "href": "https://notice.hani.co.kr/customer_view.html?bid=notification&no=749",
+        "type": null,
+        "rel": null,
+        "url": "https://notice.hani.co.kr/customer_view.html?bid=notification&no=749"
+      },
+      {
+        "href": "https://member.hani.co.kr/help/rules/mypage_help_copyright.hani",
+        "type": null,
+        "rel": null,
+        "url": "https://member.hani.co.kr/help/rules/mypage_help_copyright.hani"
+      },
+      {
+        "href": "https://member.hani.co.kr/help/rules/mypage_help_copyright.hani?type=intellectual_property_protection",
+        "type": null,
+        "rel": null,
+        "url": "https://member.hani.co.kr/help/rules/mypage_help_copyright.hani?type=intellectual_property_protection"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.hani.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.hani.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.hani.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.hani.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "hankook",
+    "publisher": "한국일보",
+    "reference": "https://www.hankookilbo.com/",
+    "checked_at": "2026-10-23T05:19:24.636631+00:00",
+    "links": [
+      {
+        "href": "https://www.hankookilbo.com/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/advertisement/dep",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/advertisement/dep"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/business/contact",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/business/contact"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/copyright/info",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/copyright/info"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/terms_conditions",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/terms_conditions"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/privacy_policy",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/privacy_policy"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/privacy_policychild",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/privacy_policychild"
+      },
+      {
+        "href": "https://www.hankookilbo.com/company/grievance",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankookilbo.com/company/grievance"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.hankookilbo.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.hankookilbo.com/robots.txt"
+      },
+      {
+        "url": "https://www.hankookilbo.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.hankookilbo.com/"
+      }
+    ]
+  },
+  {
+    "id": "seoul",
+    "publisher": "서울신문",
+    "reference": "https://www.seoul.co.kr/",
+    "checked_at": "2026-10-23T05:19:26.770798+00:00",
+    "links": [
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_flash_seoul.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_flash_seoul.xml"
+      },
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_top.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_top.xml"
+      },
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_politics.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_politics.xml"
+      },
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_economy.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_economy.xml"
+      },
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_society.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_society.xml"
+      },
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_sports.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_sports.xml"
+      },
+      {
+        "href": "https://www.seoul.co.kr/xml/rss/google_plan.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.seoul.co.kr/xml/rss/google_plan.xml"
+      },
+      {
+        "href": "https://company.seoul.co.kr/",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=003000000",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=003000000"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=005000000",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=005000000"
+      },
+      {
+        "href": "https://company.seoul.co.kr/readers/subscribe.php",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/readers/subscribe.php"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=002000000",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=002000000"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=001003003",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001003003"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=001003002",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001003002"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=001002004",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001002004"
+      },
+      {
+        "href": "https://company.seoul.co.kr/readers/subscribe.php",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/readers/subscribe.php"
+      },
+      {
+        "href": "https://company.seoul.co.kr/readers/subscribe.php",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/readers/subscribe.php"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=001002007&sbUrl=%2Fsboard%2Fview.php%3Fboard_id%3Devent%26board_idx%3D73",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001002007&sbUrl=%2Fsboard%2Fview.php%3Fboard_id%3Devent%26board_idx%3D73"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=001002007&sbUrl=%2Fsboard%2Flist.php%3Fboard_id%3Devent",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001002007&sbUrl=%2Fsboard%2Flist.php%3Fboard_id%3Devent"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=001006004",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001006004"
+      },
+      {
+        "href": "https://company.seoul.co.kr/readers/subscribe.php",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/readers/subscribe.php"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=002000000",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=002000000"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=001003003",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001003003"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=001003002",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001003002"
+      },
+      {
+        "href": "//company.seoul.co.kr/index.php?category_code=001002004",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001002004"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=003000000",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=003000000"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=005000000",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=005000000"
+      },
+      {
+        "href": "https://company.seoul.co.kr/",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=001006002",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001006002"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=001006005",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001006005"
+      },
+      {
+        "href": "https://www.seoul.co.kr/members/newsCopyright.php",
+        "type": null,
+        "rel": null,
+        "url": "https://www.seoul.co.kr/members/newsCopyright.php"
+      },
+      {
+        "href": "https://company.seoul.co.kr/index.php?category_code=001006003",
+        "type": null,
+        "rel": null,
+        "url": "https://company.seoul.co.kr/index.php?category_code=001006003"
+      },
+      {
+        "href": "/members/newsCopyright.php",
+        "type": null,
+        "rel": null,
+        "url": "https://www.seoul.co.kr/members/newsCopyright.php"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.seoul.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.seoul.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.seoul.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.seoul.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "kmib",
+    "publisher": "국민일보",
+    "reference": "https://www.kmib.co.kr/",
+    "checked_at": "2026-10-23T05:19:28.953643+00:00",
+    "links": [
+      {
+        "href": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml"
+      },
+      {
+        "href": "https://www.kmib.co.kr/company/contents",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/company/contents"
+      },
+      {
+        "href": "https://www.kmib.co.kr/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/rss"
+      },
+      {
+        "href": "https://www.kmib.co.kr/company/greeting",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/company/greeting"
+      },
+      {
+        "href": "https://www.kmib.co.kr/company/customer",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/company/customer"
+      },
+      {
+        "href": "https://www.kmib.co.kr/company/ad",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/company/ad"
+      },
+      {
+        "href": "https://www.kmib.co.kr/company/grievance",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/company/grievance"
+      },
+      {
+        "href": "https://www.kmib.co.kr/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.kmib.co.kr/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.kmib.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.kmib.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.kmib.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.kmib.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "mk",
+    "publisher": "매일경제",
+    "reference": "https://www.mk.co.kr/rss",
+    "checked_at": "2026-10-23T05:19:31.158661+00:00",
+    "links": [
+      {
+        "href": "https://www.mk.co.kr/rss",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://www.mk.co.kr/rss"
+      },
+      {
+        "href": "https://m.mk.co.kr/rss",
+        "type": null,
+        "rel": "alternate",
+        "url": "https://m.mk.co.kr/rss"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/30000001/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/30000001/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/40300001/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/40300001/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/30100041/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/30100041/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/30200030/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/30200030/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/50400012/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/50400012/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/30300018/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/30300018/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/50100032/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/50100032/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/50200011/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/50200011/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/50300009/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/50300009/"
+      },
+      {
+        "href": " https://www.mk.co.kr/rss/30000023/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/30000023/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/71000001/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/71000001/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/50700001/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/50700001/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/40200124/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/40200124/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/40200003/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/40200003/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/30800011/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/30800011/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/50000001/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/50000001/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss/60000007/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss/60000007/"
+      },
+      {
+        "href": "https://www.mk.co.kr/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mk.co.kr/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.mk.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.mk.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.mk.co.kr/rss",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.mk.co.kr/rss"
+      }
+    ]
+  },
+  {
+    "id": "hankyung",
+    "publisher": "한국경제",
+    "reference": "https://www.hankyung.com/feed",
+    "checked_at": "2026-10-23T05:19:33.282896+00:00",
+    "links": [
+      {
+        "href": "https://www.hankyung.com/feed",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://www.hankyung.com/feed"
+      },
+      {
+        "href": "https://hkstatic.hankyung.com/resource/www/rss/css/rss.css?v=202610231320",
+        "type": null,
+        "rel": "stylesheet",
+        "url": "https://hkstatic.hankyung.com/resource/www/rss/css/rss.css?v=202610231320"
+      },
+      {
+        "href": "https://www.hankyung.com/feed",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/all-news",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/all-news"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/finance",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/finance"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/economy",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/economy"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/realestate",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/realestate"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/it",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/it"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/politics",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/politics"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/international",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/international"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/society",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/society"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/life",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/life"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/opinion",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/opinion"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/sports",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/sports"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/entertainment",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/entertainment"
+      },
+      {
+        "href": "https://www.hankyung.com/feed/video",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed/video"
+      },
+      {
+        "href": "https://company.hankyung.com/ked/",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/ked/"
+      },
+      {
+        "href": "https://company.hankyung.com/ked/kor/ombudsman",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/ked/kor/ombudsman"
+      },
+      {
+        "href": "https://company.hankyung.com/ked/kor/ad",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/ked/kor/ad"
+      },
+      {
+        "href": "https://company.hankyung.com/dotcom/",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/dotcom/"
+      },
+      {
+        "href": "https://company.hankyung.com/dotcom/partnership/business/",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/dotcom/partnership/business/"
+      },
+      {
+        "href": "https://company.hankyung.com/dotcom/partnership/contents/",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/dotcom/partnership/contents/"
+      },
+      {
+        "href": "https://company.hankyung.com/dotcom/partnership/advertising/",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://company.hankyung.com/dotcom/partnership/advertising/"
+      },
+      {
+        "href": "https://www.hankyung.com/feed",
+        "type": null,
+        "rel": null,
+        "url": "https://www.hankyung.com/feed"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.hankyung.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.hankyung.com/robots.txt"
+      },
+      {
+        "url": "https://www.hankyung.com/feed",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.hankyung.com/feed"
+      }
+    ]
+  },
+  {
+    "id": "sedaily",
+    "publisher": "서울경제",
+    "reference": "https://www.sedaily.com/",
+    "checked_at": "2026-10-23T05:19:35.371072+00:00",
+    "links": [
+      {
+        "href": "//www.sedaily.com/company/event",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/event"
+      },
+      {
+        "href": "//www.sedaily.com/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company"
+      },
+      {
+        "href": "//www.sedaily.com/company/webad",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/webad"
+      },
+      {
+        "href": "//www.sedaily.com/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss"
+      },
+      {
+        "href": "https://recruit.sedaily.com/Info/Company/recruitinfo",
+        "type": null,
+        "rel": null,
+        "url": "https://recruit.sedaily.com/Info/Company/recruitinfo"
+      },
+      {
+        "href": "/company/event",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/event"
+      },
+      {
+        "href": "https://recruit.sedaily.com/Info/Company/recruitinfo",
+        "type": null,
+        "rel": null,
+        "url": "https://recruit.sedaily.com/Info/Company/recruitinfo"
+      },
+      {
+        "href": "//www.sedaily.com/company/event",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/event"
+      },
+      {
+        "href": "//www.sedaily.com/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company"
+      },
+      {
+        "href": "//www.sedaily.com/company/webad",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/company/webad"
+      },
+      {
+        "href": "//www.sedaily.com/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.sedaily.com/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.sedaily.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.sedaily.com/robots.txt"
+      },
+      {
+        "url": "https://www.sedaily.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.sedaily.com/"
+      }
+    ]
+  },
+  {
+    "id": "fnnews",
+    "publisher": "파이낸셜뉴스",
+    "reference": "https://www.fnnews.com/",
+    "checked_at": "2026-10-23T05:19:37.521211+00:00",
+    "links": [
+      {
+        "href": "/userinfo/partner",
+        "type": null,
+        "rel": null,
+        "url": "https://www.fnnews.com/userinfo/partner"
+      },
+      {
+        "href": "/userinfo/copyright",
+        "type": null,
+        "rel": null,
+        "url": "https://www.fnnews.com/userinfo/copyright"
+      },
+      {
+        "href": "/userinfo/correctionContact",
+        "type": null,
+        "rel": null,
+        "url": "https://www.fnnews.com/userinfo/correctionContact"
+      },
+      {
+        "href": "/userinfo/partner",
+        "type": null,
+        "rel": null,
+        "url": "https://www.fnnews.com/userinfo/partner"
+      },
+      {
+        "href": "/userinfo/copyright",
+        "type": null,
+        "rel": null,
+        "url": "https://www.fnnews.com/userinfo/copyright"
+      },
+      {
+        "href": "/userinfo/correctionContact",
+        "type": null,
+        "rel": null,
+        "url": "https://www.fnnews.com/userinfo/correctionContact"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.fnnews.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.fnnews.com/robots.txt"
+      },
+      {
+        "url": "https://www.fnnews.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.fnnews.com/"
+      }
+    ]
+  },
+  {
+    "id": "herald",
+    "publisher": "헤럴드경제",
+    "reference": "https://biz.heraldcorp.com/",
+    "checked_at": "2026-10-23T05:19:39.665503+00:00",
+    "links": [
+      {
+        "href": "https://biz.heraldcorp.com/rss/google/newsAll",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://biz.heraldcorp.com/rss/google/newsAll"
+      },
+      {
+        "href": " https://www.daishin.com/content/w/customer/event/eventDetail.ds?m=1109&p=12933&v=12835&cid=5193",
+        "type": null,
+        "rel": "sponsored nofollow",
+        "url": "https://www.daishin.com/content/w/customer/event/eventDetail.ds?m=1109&p=12933&v=12835&cid=5193"
+      },
+      {
+        "href": "https://company.heraldcorp.com/",
+        "type": null,
+        "rel": null,
+        "url": "https://company.heraldcorp.com/"
+      },
+      {
+        "href": "https://company.heraldcorp.com/location.php",
+        "type": null,
+        "rel": null,
+        "url": "https://company.heraldcorp.com/location.php"
+      },
+      {
+        "href": "https://company.heraldcorp.com/recruit.php",
+        "type": null,
+        "rel": null,
+        "url": "https://company.heraldcorp.com/recruit.php"
+      },
+      {
+        "href": "https://members.heraldcorp.com/html/custom/copyright.php",
+        "type": null,
+        "rel": null,
+        "url": "https://members.heraldcorp.com/html/custom/copyright.php"
+      },
+      {
+        "href": "https://biz.heraldcorp.com/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://biz.heraldcorp.com/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://biz.heraldcorp.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://biz.heraldcorp.com/robots.txt"
+      },
+      {
+        "url": "https://biz.heraldcorp.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://biz.heraldcorp.com/"
+      }
+    ]
+  },
+  {
+    "id": "edaily",
+    "publisher": "이데일리",
+    "reference": "https://www.edaily.co.kr/",
+    "checked_at": "2026-10-23T05:19:41.786486+00:00",
+    "links": [],
+    "error": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 623: invalid start byte",
+    "requests": [
+      {
+        "url": "https://www.edaily.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.edaily.co.kr/robots.txt"
+      }
+    ]
+  },
+  {
+    "id": "asiae",
+    "publisher": "아시아경제",
+    "reference": "https://www.asiae.co.kr/",
+    "checked_at": "2026-10-23T05:19:42.250730+00:00",
+    "links": [],
+    "error": "FetchError: robots.txt disallows feed access",
+    "requests": [
+      {
+        "url": "https://www.asiae.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.asiae.co.kr/robots.txt"
+      }
+    ]
+  },
+  {
+    "id": "mt",
+    "publisher": "머니투데이",
+    "reference": "https://www.mt.co.kr/",
+    "checked_at": "2026-10-23T05:19:42.329844+00:00",
+    "links": [
+      {
+        "href": "/company/info/privacy",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mt.co.kr/company/info/privacy"
+      },
+      {
+        "href": "/company/info/tou",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mt.co.kr/company/info/tou"
+      },
+      {
+        "href": "https://www.mtcorp.co.kr/partners/advertisement",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mtcorp.co.kr/partners/advertisement"
+      },
+      {
+        "href": "https://www.mtcorp.co.kr/partners/cooperation",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mtcorp.co.kr/partners/cooperation"
+      },
+      {
+        "href": "https://www.mtcorp.co.kr/partners/copyright/contents-contract",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mtcorp.co.kr/partners/copyright/contents-contract"
+      },
+      {
+        "href": "/company/info/policy",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mt.co.kr/company/info/policy"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.mt.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.mt.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.mt.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.mt.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "yonhaptv",
+    "publisher": "연합뉴스TV",
+    "reference": "https://www.yonhapnewstv.co.kr/",
+    "checked_at": "2026-10-23T05:19:44.534585+00:00",
+    "links": [
+      {
+        "href": "/newsFeed",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed"
+      },
+      {
+        "href": "/newsFeed",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed"
+      },
+      {
+        "href": "/newsFeed/7509",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7509"
+      },
+      {
+        "href": "/newsFeed?ct=20",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed?ct=20"
+      },
+      {
+        "href": "/newsFeed/7509",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7509"
+      },
+      {
+        "href": "/newsFeed/7508",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7508"
+      },
+      {
+        "href": "/newsFeed?ct=30",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed?ct=30"
+      },
+      {
+        "href": "/newsFeed/7508",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7508"
+      },
+      {
+        "href": "/newsFeed/7494",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7494"
+      },
+      {
+        "href": "/newsFeed?ct=32",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed?ct=32"
+      },
+      {
+        "href": "/newsFeed/7494",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7494"
+      },
+      {
+        "href": "/newsFeed/7485",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7485"
+      },
+      {
+        "href": "/newsFeed?ct=32",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed?ct=32"
+      },
+      {
+        "href": "/newsFeed/7485",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed/7485"
+      },
+      {
+        "href": "https://www.daishin.com/content/w/customer/event/eventDetail.ds?m=1109&p=12933&v=12835&cid=5193",
+        "type": null,
+        "rel": null,
+        "url": "https://www.daishin.com/content/w/customer/event/eventDetail.ds?m=1109&p=12933&v=12835&cid=5193"
+      },
+      {
+        "href": "/company/about",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/about"
+      },
+      {
+        "href": "/company/ceo",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/ceo"
+      },
+      {
+        "href": "/company/history",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/history"
+      },
+      {
+        "href": "/company/status",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/status"
+      },
+      {
+        "href": "/company/organizationPlan",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/organizationPlan"
+      },
+      {
+        "href": "/company/location",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/location"
+      },
+      {
+        "href": "/company/ethics",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/company/ethics"
+      },
+      {
+        "href": "/newsFeed",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/newsFeed"
+      },
+      {
+        "href": "/add/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.yonhapnewstv.co.kr/add/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.yonhapnewstv.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.yonhapnewstv.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.yonhapnewstv.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.yonhapnewstv.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "kbs",
+    "publisher": "KBS",
+    "reference": "https://news.kbs.co.kr/",
+    "checked_at": "2026-10-23T05:19:46.718821+00:00",
+    "links": [],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://news.kbs.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://news.kbs.co.kr/robots.txt"
+      },
+      {
+        "url": "https://news.kbs.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://news.kbs.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "mbc",
+    "publisher": "MBC",
+    "reference": "https://imnews.imbc.com/",
+    "checked_at": "2026-10-23T05:19:48.794712+00:00",
+    "links": [],
+    "error": "FetchError: robots.txt disallows feed access",
+    "requests": [
+      {
+        "url": "https://imnews.imbc.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://imnews.imbc.com/robots.txt"
+      }
+    ]
+  },
+  {
+    "id": "sbs",
+    "publisher": "SBS",
+    "reference": "https://news.sbs.co.kr/news/rss.do",
+    "checked_at": "2026-10-23T05:19:48.888534+00:00",
+    "links": [
+      {
+        "href": "https://news.sbs.co.kr/news/rss.do",
+        "type": null,
+        "rel": "canonical",
+        "url": "https://news.sbs.co.kr/news/rss.do"
+      },
+      {
+        "href": "https://mnews.sbs.co.kr/news/rss.do",
+        "type": null,
+        "rel": "alternate",
+        "url": "https://mnews.sbs.co.kr/news/rss.do"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/sitemapRSS.do",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://news.sbs.co.kr/news/sitemapRSS.do"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/rss.do",
+        "type": null,
+        "rel": null,
+        "url": "https://news.sbs.co.kr/news/rss.do"
+      },
+      {
+        "href": "/news/rss.do?plink=MENU&cooper=SBSNEWS",
+        "type": null,
+        "rel": null,
+        "url": "https://news.sbs.co.kr/news/rss.do?plink=MENU&cooper=SBSNEWS"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/headlineRssFeed.do?plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/headlineRssFeed.do?plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/TopicRssFeed.do?plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/TopicRssFeed.do?plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/newsflashRssFeed.do?plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/newsflashRssFeed.do?plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=02&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=02&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=03&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=03&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=07&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=07&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=08&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=08&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=14&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=14&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=09&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=09&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/Special_RssFeed.do?plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/Special_RssFeed.do?plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/VideoMug_RssFeed.do?plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/VideoMug_RssFeed.do?plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/Subusu_RssFeed.do?plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/Subusu_RssFeed.do?plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=R1&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=R1&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=R2&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=R2&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RN&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RN&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RO&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RO&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=R5&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=R5&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RJ&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RJ&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RS&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RS&plink=RSSREADER"
+      },
+      {
+        "href": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RH&plink=RSSREADER",
+        "type": null,
+        "rel": "nofollow",
+        "url": "https://news.sbs.co.kr/news/ReplayRssFeed.do?prog_cd=RH&plink=RSSREADER"
+      },
+      {
+        "href": "/news/rss.do?plink=SITEMAP&cooper=SBSNEWS",
+        "type": null,
+        "rel": null,
+        "url": "https://news.sbs.co.kr/news/rss.do?plink=SITEMAP&cooper=SBSNEWS"
+      },
+      {
+        "href": "http://w3.sbs.co.kr/cs/endPage.do?contNo=8&bbsCd=com_cs0001&backUrl=http%3A%2F%2Fw3.sbs.co.kr%2Fcs%2FcustomerNotice.do&utm_source=sbsnews&utm_medium=sbsnews",
+        "type": null,
+        "rel": "noopener nofollow",
+        "url": "http://w3.sbs.co.kr/cs/endPage.do?contNo=8&bbsCd=com_cs0001&backUrl=http%3A%2F%2Fw3.sbs.co.kr%2Fcs%2FcustomerNotice.do&utm_source=sbsnews&utm_medium=sbsnews"
+      },
+      {
+        "href": "http://w3.sbs.co.kr/cs/customerMain.do?utm_source=sbsnews&utm_medium=sbsnews",
+        "type": null,
+        "rel": "noopener nofollow",
+        "url": "http://w3.sbs.co.kr/cs/customerMain.do?utm_source=sbsnews&utm_medium=sbsnews"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://news.sbs.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://news.sbs.co.kr/robots.txt"
+      },
+      {
+        "url": "https://news.sbs.co.kr/news/rss.do",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://news.sbs.co.kr/news/rss.do"
+      }
+    ]
+  },
+  {
+    "id": "jtbc",
+    "publisher": "JTBC",
+    "reference": "https://news.jtbc.co.kr/",
+    "checked_at": "2026-10-23T05:19:50.975454+00:00",
+    "links": [],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://news.jtbc.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://news.jtbc.co.kr/robots.txt"
+      },
+      {
+        "url": "https://news.jtbc.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://news.jtbc.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "mbn",
+    "publisher": "MBN",
+    "reference": "https://www.mbn.co.kr/",
+    "checked_at": "2026-10-23T05:19:53.454730+00:00",
+    "links": [
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerReportMobile.php",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerReportMobile.php"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=52487",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=52487"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=52240",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=52240"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=51746",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=51746"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=51677",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=51677"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=51187",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerNoticeView.php?article_seq_no=51187"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerNotice.php",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerNotice.php"
+      },
+      {
+        "href": "//www.mbn.co.kr/pages/customer/customerReportMobile.php",
+        "type": null,
+        "rel": null,
+        "url": "https://www.mbn.co.kr/pages/customer/customerReportMobile.php"
+      },
+      {
+        "href": "http://company.mbn.co.kr/",
+        "type": null,
+        "rel": null,
+        "url": "http://company.mbn.co.kr/"
+      },
+      {
+        "href": "http://company.mbn.co.kr/pages/redir/online.php",
+        "type": null,
+        "rel": null,
+        "url": "http://company.mbn.co.kr/pages/redir/online.php"
+      },
+      {
+        "href": "//mbn.mk.co.kr/pages/customer/customerMain.php",
+        "type": null,
+        "rel": null,
+        "url": "https://mbn.mk.co.kr/pages/customer/customerMain.php"
+      },
+      {
+        "href": "//mbn.mk.co.kr/pages/customer/customerReport.php",
+        "type": null,
+        "rel": null,
+        "url": "https://mbn.mk.co.kr/pages/customer/customerReport.php"
+      },
+      {
+        "href": "http://company.mbn.co.kr/pages/company/coantactus.php",
+        "type": null,
+        "rel": null,
+        "url": "http://company.mbn.co.kr/pages/company/coantactus.php"
+      },
+      {
+        "href": "https://www.copyrightok.kr/ ",
+        "type": null,
+        "rel": null,
+        "url": "https://www.copyrightok.kr/ "
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.mbn.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.mbn.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.mbn.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.mbn.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "ytn",
+    "publisher": "YTN",
+    "reference": "https://www.ytn.co.kr/",
+    "checked_at": "2026-10-23T05:19:55.553473+00:00",
+    "links": [
+      {
+        "href": "https://www.ytn.co.kr/business/partnership_1.php",
+        "type": null,
+        "rel": null,
+        "url": "https://www.ytn.co.kr/business/partnership_1.php"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.ytn.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.ytn.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.ytn.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.ytn.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "etnews",
+    "publisher": "전자신문",
+    "reference": "https://www.etnews.com/rss/",
+    "checked_at": "2026-10-23T05:19:57.627275+00:00",
+    "links": [
+      {
+        "href": "http://rss.etnews.com/",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "http://rss.etnews.com/"
+      },
+      {
+        "href": "http://rss.etnews.com/Section901.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/Section901.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/Section902.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/Section902.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/Section903.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/Section903.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/Section904.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/Section904.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/02.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/02.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/02024.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/02024.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/02027.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/02027.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/17.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/17.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/17066.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/17066.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/03.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/03.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/03033.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/03033.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/03025.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/03025.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/03104.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/03104.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/06.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/06.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/06063.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/06063.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/06064.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/06064.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/06062.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/06062.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/06061.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/06061.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/06065.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/06065.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/04.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/04.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/04043.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/04043.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/04045.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/04045.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/04046.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/04046.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/20.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/20.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/20020.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/20020.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/20042.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/20042.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/60.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/60.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/60028.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/60028.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/60068.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/60068.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/22.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/22.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/22210.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/22210.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/22220.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/22220.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/22230.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/22230.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/22069.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/22069.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/25.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/25.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/12.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/12.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/11.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/11.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/11011.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/11011.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/11350.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/11350.xml"
+      },
+      {
+        "href": "http://rss.etnews.com/11351.xml",
+        "type": null,
+        "rel": null,
+        "url": "http://rss.etnews.com/11351.xml"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.etnews.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.etnews.com/robots.txt"
+      },
+      {
+        "url": "https://www.etnews.com/rss/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.etnews.com/rss/"
+      }
+    ]
+  },
+  {
+    "id": "dt",
+    "publisher": "디지털타임스",
+    "reference": "https://www.dt.co.kr/",
+    "checked_at": "2026-10-23T05:19:59.711252+00:00",
+    "links": [
+      {
+        "href": "https://www.dt.co.kr/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.dt.co.kr/company"
+      },
+      {
+        "href": "https://www.dt.co.kr/company",
+        "type": null,
+        "rel": null,
+        "url": "https://www.dt.co.kr/company"
+      },
+      {
+        "href": "https://www.dt.co.kr/feed",
+        "type": null,
+        "rel": null,
+        "url": "https://www.dt.co.kr/feed"
+      },
+      {
+        "href": "https://company.dt.co.kr/",
+        "type": null,
+        "rel": null,
+        "url": "https://company.dt.co.kr/"
+      },
+      {
+        "href": "https://company.dt.co.kr/?lcd=301",
+        "type": null,
+        "rel": null,
+        "url": "https://company.dt.co.kr/?lcd=301"
+      },
+      {
+        "href": "https://company.dt.co.kr/?lcd=302",
+        "type": null,
+        "rel": null,
+        "url": "https://company.dt.co.kr/?lcd=302"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.dt.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.dt.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.dt.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.dt.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "zdnet",
+    "publisher": "ZDNet Korea",
+    "reference": "https://zdnet.co.kr/",
+    "checked_at": "2026-10-23T05:20:01.832801+00:00",
+    "links": [
+      {
+        "href": "https://www.zdnet.com/article/samsung-galaxy-s24-smartphones-secure-record-1-21-million-pre-orders-in-south-korea/#ftag=RSSbaffb68",
+        "type": null,
+        "rel": null,
+        "url": "https://www.zdnet.com/article/samsung-galaxy-s24-smartphones-secure-record-1-21-million-pre-orders-in-south-korea/#ftag=RSSbaffb68"
+      },
+      {
+        "href": "https://www.zdnet.com/article/south-korea-chooses-c-v2x/#ftag=RSSbaffb68",
+        "type": null,
+        "rel": null,
+        "url": "https://www.zdnet.com/article/south-korea-chooses-c-v2x/#ftag=RSSbaffb68"
+      },
+      {
+        "href": "https://www.zdnet.com/article/sk-hynix-expects-memory-chip-market-to-begin-recovering-in-second-half/#ftag=RSSbaffb68",
+        "type": null,
+        "rel": null,
+        "url": "https://www.zdnet.com/article/sk-hynix-expects-memory-chip-market-to-begin-recovering-in-second-half/#ftag=RSSbaffb68"
+      },
+      {
+        "href": "https://www.zdnet.com/article/faced-with-likelihood-of-ransomware-attacks-businesses-still-choosing-to-pay-up/#ftag=RSSbaffb68",
+        "type": null,
+        "rel": null,
+        "url": "https://www.zdnet.com/article/faced-with-likelihood-of-ransomware-attacks-businesses-still-choosing-to-pay-up/#ftag=RSSbaffb68"
+      },
+      {
+        "href": "https://feeds.feedburner.com/zdkorea",
+        "type": null,
+        "rel": null,
+        "url": "https://feeds.feedburner.com/zdkorea"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://zdnet.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://zdnet.co.kr/robots.txt"
+      },
+      {
+        "url": "https://zdnet.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://zdnet.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "autotimes",
+    "publisher": "오토타임즈",
+    "reference": "https://autotimes.hankyung.com/",
+    "checked_at": "2026-10-23T05:20:03.942821+00:00",
+    "links": [],
+    "error": "FetchError: Policy unavailable: Network failure: <urlopen error [Errno 11001] getaddrinfo failed>",
+    "requests": []
+  },
+  {
+    "id": "motortrend",
+    "publisher": "모터트렌드",
+    "reference": "https://www.motortrendkorea.com/",
+    "checked_at": "2026-10-23T05:20:04.018351+00:00",
+    "links": [],
+    "error": "FetchError: Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+    "requests": []
+  },
+  {
+    "id": "motorgraph",
+    "publisher": "모터그래프",
+    "reference": "https://www.motorgraph.com/",
+    "checked_at": "2026-10-23T05:20:04.837335+00:00",
+    "links": [
+      {
+        "href": "https://cdn.motorgraph.com/rss/allArticle.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.motorgraph.com/rss/allArticle.xml"
+      },
+      {
+        "href": "https://cdn.motorgraph.com/rss/gns_allArticle.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.motorgraph.com/rss/gns_allArticle.xml"
+      },
+      {
+        "href": "https://cdn.motorgraph.com/rss/gns_S1N1.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.motorgraph.com/rss/gns_S1N1.xml"
+      },
+      {
+        "href": "https://cdn.motorgraph.com/rss/gns_S1N2.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.motorgraph.com/rss/gns_S1N2.xml"
+      },
+      {
+        "href": "https://cdn.motorgraph.com/rss/gns_S1N3.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.motorgraph.com/rss/gns_S1N3.xml"
+      },
+      {
+        "href": "https://cdn.motorgraph.com/rss/gns_S1N4.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.motorgraph.com/rss/gns_S1N4.xml"
+      },
+      {
+        "href": "/com/contactus.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.motorgraph.com/com/contactus.html"
+      },
+      {
+        "href": "/com/copyright.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.motorgraph.com/com/copyright.html"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.motorgraph.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.motorgraph.com/robots.txt"
+      },
+      {
+        "url": "https://www.motorgraph.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.motorgraph.com/"
+      }
+    ]
+  },
+  {
+    "id": "autodaily",
+    "publisher": "오토데일리",
+    "reference": "https://www.autodaily.co.kr/",
+    "checked_at": "2026-10-23T05:20:06.992219+00:00",
+    "links": [
+      {
+        "href": "https://cdn.autodaily.co.kr/rss/gn_rss_allArticle.xml",
+        "type": "application/rss+xml",
+        "rel": "alternate",
+        "url": "https://cdn.autodaily.co.kr/rss/gn_rss_allArticle.xml"
+      },
+      {
+        "href": "https://www.autodaily.co.kr/com/copyright.html",
+        "type": null,
+        "rel": null,
+        "url": "https://www.autodaily.co.kr/com/copyright.html"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.autodaily.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.autodaily.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.autodaily.co.kr/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.autodaily.co.kr/"
+      }
+    ]
+  },
+  {
+    "id": "dailycar",
+    "publisher": "데일리카",
+    "reference": "https://www.dailycar.co.kr/",
+    "checked_at": "2026-10-23T05:20:09.124212+00:00",
+    "links": [],
+    "error": "FetchError: robots.txt disallows feed access",
+    "requests": [
+      {
+        "url": "https://www.dailycar.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.dailycar.co.kr/robots.txt"
+      }
+    ]
+  },
+  {
+    "id": "etoday",
+    "publisher": "이투데이",
+    "reference": "https://www.etoday.co.kr/rss/",
+    "checked_at": "2026-10-23T05:20:09.529299+00:00",
+    "links": [
+      {
+        "href": "https://www.etoday.co.kr/rss/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.etoday.co.kr/rss/"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/etoday_news_all.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/etoday_news_all.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/market_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/market_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/finance_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/finance_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/land_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/land_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/industry_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/industry_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/economy_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/economy_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/global_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/global_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/politics_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/politics_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/society_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/society_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/opinion_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/opinion_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/culture-life_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/culture-life_news.xml"
+      },
+      {
+        "href": "https://rss.etoday.co.kr/eto/news-factory_news.xml",
+        "type": null,
+        "rel": null,
+        "url": "https://rss.etoday.co.kr/eto/news-factory_news.xml"
+      },
+      {
+        "href": "https://company.etoday.co.kr/",
+        "type": null,
+        "rel": null,
+        "url": "https://company.etoday.co.kr/"
+      },
+      {
+        "href": "https://company.etoday.co.kr/company_info/location",
+        "type": null,
+        "rel": null,
+        "url": "https://company.etoday.co.kr/company_info/location"
+      },
+      {
+        "href": "https://www.etoday.co.kr/rss/",
+        "type": null,
+        "rel": null,
+        "url": "https://www.etoday.co.kr/rss/"
+      },
+      {
+        "href": "https://company.etoday.co.kr/company_info/ethics_code_press",
+        "type": null,
+        "rel": null,
+        "url": "https://company.etoday.co.kr/company_info/ethics_code_press"
+      },
+      {
+        "href": "https://company.etoday.co.kr/company_info/ethics_code_journalists",
+        "type": null,
+        "rel": null,
+        "url": "https://company.etoday.co.kr/company_info/ethics_code_journalists"
+      },
+      {
+        "href": "https://company.etoday.co.kr/company_info/ethics_code_employees",
+        "type": null,
+        "rel": null,
+        "url": "https://company.etoday.co.kr/company_info/ethics_code_employees"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.etoday.co.kr/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.etoday.co.kr/robots.txt"
+      },
+      {
+        "url": "https://www.etoday.co.kr/rss/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.etoday.co.kr/rss/"
+      }
+    ]
+  },
+  {
+    "id": "itdonga",
+    "publisher": "IT동아",
+    "reference": "https://it.donga.com/rss/",
+    "checked_at": "2026-10-23T05:20:11.608076+00:00",
+    "links": [
+      {
+        "href": "/feeds/rss/",
+        "type": null,
+        "rel": null,
+        "url": "https://it.donga.com/feeds/rss/"
+      },
+      {
+        "href": "/feeds/rss/news/",
+        "type": null,
+        "rel": null,
+        "url": "https://it.donga.com/feeds/rss/news/"
+      },
+      {
+        "href": "/feeds/rss/review/",
+        "type": null,
+        "rel": null,
+        "url": "https://it.donga.com/feeds/rss/review/"
+      },
+      {
+        "href": "/feeds/rss/lecture/",
+        "type": null,
+        "rel": null,
+        "url": "https://it.donga.com/feeds/rss/lecture/"
+      },
+      {
+        "href": "/rss/",
+        "type": null,
+        "rel": null,
+        "url": "https://it.donga.com/rss/"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://it.donga.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://it.donga.com/robots.txt"
+      },
+      {
+        "url": "https://it.donga.com/rss/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://it.donga.com/rss/"
+      }
+    ]
+  },
+  {
+    "id": "nocut",
+    "publisher": "노컷뉴스",
+    "reference": "https://www.nocutnews.co.kr/",
+    "checked_at": "2026-10-23T05:20:13.684761+00:00",
+    "links": [],
+    "error": "FetchError: Policy unavailable: HTTP 406: https://www.nocutnews.co.kr/robots.txt",
+    "requests": [
+      {
+        "url": "https://www.nocutnews.co.kr/robots.txt",
+        "status": 406,
+        "phase": "robots"
+      }
+    ]
+  },
+  {
+    "id": "ohmy",
+    "publisher": "오마이뉴스",
+    "reference": "https://www.ohmynews.com/",
+    "checked_at": "2026-10-23T05:20:13.749948+00:00",
+    "links": [
+      {
+        "href": "/NWS_Web/Company/guide_main.aspx",
+        "type": null,
+        "rel": null,
+        "url": "https://www.ohmynews.com/NWS_Web/Company/guide_main.aspx"
+      },
+      {
+        "href": "https://www.ohmynews.com/NWS_Web/Company/guide_main.aspx#section1",
+        "type": null,
+        "rel": null,
+        "url": "https://www.ohmynews.com/NWS_Web/Company/guide_main.aspx#section1"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.ohmynews.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.ohmynews.com/robots.txt"
+      },
+      {
+        "url": "https://www.ohmynews.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.ohmynews.com/"
+      }
+    ]
+  },
+  {
+    "id": "pressian",
+    "publisher": "프레시안",
+    "reference": "https://www.pressian.com/",
+    "checked_at": "2026-10-23T05:20:15.929293+00:00",
+    "links": [
+      {
+        "href": "http://www.pressian.com/company",
+        "type": null,
+        "rel": null,
+        "url": "http://www.pressian.com/company"
+      },
+      {
+        "href": "/rss",
+        "type": null,
+        "rel": null,
+        "url": "https://www.pressian.com/rss"
+      }
+    ],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://www.pressian.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://www.pressian.com/robots.txt"
+      },
+      {
+        "url": "https://www.pressian.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://www.pressian.com/"
+      }
+    ]
+  },
+  {
+    "id": "tvchosun",
+    "publisher": "TV조선",
+    "reference": "https://news.tvchosun.com/",
+    "checked_at": "2026-10-23T05:20:18.029871+00:00",
+    "links": [],
+    "error": null,
+    "requests": [
+      {
+        "url": "https://news.tvchosun.com/robots.txt",
+        "status": 200,
+        "phase": "robots",
+        "final_url": "https://news.tvchosun.com/robots.txt"
+      },
+      {
+        "url": "https://news.tvchosun.com/",
+        "status": 200,
+        "phase": "feed",
+        "final_url": "https://news.tvchosun.com/"
+      }
+    ]
+  }
+]
