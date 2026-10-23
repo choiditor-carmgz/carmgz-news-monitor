@@ -125,7 +125,7 @@ python -m http.server 8766 --bind 127.0.0.1 --directory site
 
 Windows 로컬: Python 전체 **70개 통과**(기존 56개 유지+신규 14개), cp1252 strict 전체도 70개 통과. Node **5개 통과**(기존 3+신규 2), `node --check web/app.js` 통과. 네트워크를 가상으로 통과 처리하는 테스트는 운영 실측과 구분했다. 최초 코드 커밋의 GitHub CI는 Ubuntu/Windows/macOS 모두 실제 성공했으며 최종 커밋 결과는 아래 후속 기록에서 확인한다.
 
-확장 기능 코드 `78b4dab`의 [CI 39918511563](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/39918511563)은 Ubuntu·Windows·macOS 모두 실제 성공했다. Windows의 cp1252 전체 회귀 단계도 포함한다. 이후 문맥 보완 커밋의 최종 CI도 별도로 확인한다.
+최종 문맥 보완 코드 `2c17d03`의 [CI 39919112862](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/39919112862)은 Ubuntu·Windows·macOS 모두 실제 성공했다. Windows의 cp1252 전체 회귀 단계도 성공했다. 이후 보고서 결과 기록 커밋은 기능 코드 변경이 없다.
 
 실제 이슈별 TOP 10·기사 수·매체 수·선정 근거는 로컬 `data/implementation/LIVE_RESULTS.md`, JSON/CSV는 `data/implementation/analysis/`에 내보냈다. 기사 제목이 Git 이력에 남지 않도록 커밋하지 않았다.
 
