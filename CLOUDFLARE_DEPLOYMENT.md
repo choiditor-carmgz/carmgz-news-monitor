@@ -50,7 +50,8 @@
 - rankings: 주요 10, 확산 10, 산업 10, 급상승 2. 급상승을 임의로 10개로 채우지 않는다.
 - 위 최신 실데이터를 외부에 공개하지 않고 **127.0.0.1 전용** 서버에서 브라우저 검증. `수집 결과 확인됨`, 기사 191·이슈 155, 주요 TOP 10 10개 표시. 첫 이슈 ‘발리 전기버스 공급·충전 사업’ 12기사/10매체의 상세·그래프·기사 링크와 CARMGZ 판정 근거가 표시된다. 브라우저 console error 0.
 - CARMGZ 실제 상태는 `확인 불가`. ‘검색 응답 검증 실패 또는 접근 불가: 미보도로 판정하지 않음’이 표시된다. 표시 기능의 성공과 CARMGZ 검색 자체의 성공을 구분한다. 배포 수정으로 이를 보도 완료/미보도로 조작하지 않았다.
-- 로컬 Python/Node 및 CI 결과는 변경 완료 보고에 기록한다. 인증 회귀 테스트는 테스트용 RSA 키로 정상·위조·만료·다른 issuer/audience·미래 nbf·설정 누락과 모든 경로 접근 차단을 확인한다. 실사용 인증 토큰을 수집/저장하지 않았다.
+- 로컬 Python **81개 통과**(Windows cp1252 strict 포함), Node **10개 통과**, JS 구문 검사와 esbuild Worker 번들 생성 성공. 인증 회귀 테스트는 테스트용 RSA 키로 정상·위조·만료·다른 issuer/audience·미래 nbf·설정 누락과 모든 경로 접근 차단을 확인한다. 실사용 인증 토큰을 수집/저장하지 않았다.
+- 코드 커밋 `2154875`의 [CI 39957254002](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/39957254002): **Windows·macOS·Ubuntu 전부 성공**. 각 OS에서 Python 81개, Node 10개, Worker 번들 생성 검증. Windows cp1252 strict 검사도 성공.
 - 현재 GitHub Secrets/Variables 목록은 비어 있다. Cloudflare 관리자 인증/API 권한도 제공되지 않았다. 따라서 **실제 Cloudflare 업로드와 업로드 후 로그인 HTTP 200 검증은 미완료**다. 기존 사이트가 이미 수정됐다고 보고하지 않는다.
 
 공식 참고: [CI Direct Upload](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/), [Access JWT 검증](https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/validating-json/), [Git integration에서 Wrangler 사용](https://developers.cloudflare.com/pages/get-started/git-integration/), [preview 보호 범위](https://developers.cloudflare.com/pages/configuration/preview-deployments/).
