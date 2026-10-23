@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -q
+      - name: Strict Windows cp1252 console regression
+        if: runner.os == 'Windows'
+        env:
+          PYTHONIOENCODING: cp1252:strict
+        run: python -m unittest discover -s tests -q
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

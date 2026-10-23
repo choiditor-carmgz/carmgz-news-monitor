@@ -260,7 +260,7 @@ def main():
             pass
         raise
     print(json.dumps(dict(articles=len(payload['articles']), issues=len(payload['issues']),
-                         briefings=len(payload['briefings']), last_collection_at=payload['last_collection_at'])))
+                         briefings=len(payload['briefings']), last_collection_at=payload['last_collection_at']),ensure_ascii=True))
 
 
 if __name__ == '__main__':
