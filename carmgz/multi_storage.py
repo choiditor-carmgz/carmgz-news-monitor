@@ -56,6 +56,12 @@ class MultiStorage(Storage):
                 aid=row[0] if row else hashlib.sha256((a.publisher+'\x1f'+canonical_url(a.url)).encode()).hexdigest()
                 old=self.db.execute('SELECT title,published_at,url FROM articles WHERE id=?',(aid,)).fetchone()
                 if old:
+                    # Retention uses the earliest known publication time, not revised RSS dates.
+                    if old[1] and a.published_at:
+                        from .analysis import timestamp
+                        if timestamp(old[1]) and timestamp(a.published_at) and timestamp(old[1]) < timestamp(a.published_at):
+                            from dataclasses import replace
+                            a=replace(a,published_at=old[1])
                     if tuple(old)!=(a.title,a.published_at,a.url):
                         self.db.execute('INSERT INTO article_revisions(article_id,observed_at,title,published_at,url) VALUES(?,?,?,?,?)',
                                         (aid,stamp,*old))

@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 data/
 logs/
+site/
+reports/analysis/
+reports/*pass.json
+reports/latest.json
+reports/operation*.json
+reports/operations-live.md

@@ -1,5 +1,6 @@
 """Multi-publisher collection and reproducible verification report."""
 import json
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from .locking import collector_lock
@@ -28,6 +29,7 @@ def collect_publishers(cfg,db_path,sources,report_path=None,client_factory=Polic
             store.register(sources)
             run=store.start(cfg)
             results=[]
+            deadline=time.monotonic()+cfg.get('max_run_seconds',float('inf'))
             for source in sources:
                 result=dict(id=source['id'],publisher=source['publisher'],feed_url=source.get('feed_url'),
                     rss_status=source['rss_status'],permission=source['permission'],status='not_verified',
@@ -39,13 +41,28 @@ def collect_publishers(cfg,db_path,sources,report_path=None,client_factory=Polic
                 elif not source.get('enabled'):
                     result['status']='held' if source.get('feed_url') else 'no_confirmed_feed'
                     result['error']=source.get('alternative') or '이용 조건 검토/허가 필요; RSS 요청하지 않음'
+                elif time.monotonic() >= deadline:
+                    result['status']='deferred_budget'
+                    result['error']='이번 실행 요청 시간 예산 초과: 다음 실행에서 재시도'
                 else:
                     client=client_factory(cfg['interval_seconds'],cfg['timeout_seconds'],cfg['retries'])
+                    if cfg.get('max_run_seconds') and hasattr(client,'sleep'):
+                        original_sleep=client.sleep
+                        def budget_sleep(seconds, sleeper=original_sleep):
+                            if time.monotonic()+seconds>=deadline:
+                                raise RuntimeError('Request budget exceeded; defer without ignoring crawl delay')
+                            sleeper(seconds)
+                        client.sleep=budget_sleep
                     try:
                         articles=PublisherRSS(source).parse(client.fetch(source['feed_url']))
                         result.update(parsed=True,fetched=len(articles))
                         cutoff=datetime.now(timezone.utc)-timedelta(days=cfg.get('lookback_days',7))
                         recent=[a for a in articles if a.published_at is None or datetime.fromisoformat(a.published_at)>=cutoff]
+                        if cfg.get('retention_policy'):
+                            # Unknown dates cannot safely be re-imported after expiry.
+                            result['unknown_date_skipped']=sum(a.published_at is None for a in recent)
+                            upper=datetime.now(timezone.utc)
+                            recent=[a for a in recent if a.published_at is not None and datetime.fromisoformat(a.published_at)<=upper]
                         result['outside_lookback']=len(articles)-len(recent)
                         relevant=[a for a in recent if matching_keywords(a,cfg['keywords'])]
                         result['relevant']=len(relevant)
