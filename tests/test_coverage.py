@@ -146,7 +146,7 @@ class CoverageTests(unittest.TestCase):
     def test_registry_has_no_fake_active_or_excluded_collectors(self):
         sources=json.loads(Path('publishers.json').read_text(encoding='utf-8'))
         self.assertEqual(len({s['id'] for s in sources}),len(sources))
-        self.assertEqual(sum(s['status']!='EXCLUDED' for s in sources),120)
+        self.assertEqual(sum(s['status']!='EXCLUDED' for s in sources),122)
         self.assertNotIn('carmgz',{s['id'] for s in sources})
         for s in sources:
             if s['status']=='ACTIVE':

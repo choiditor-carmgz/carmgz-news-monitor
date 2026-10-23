@@ -120,3 +120,5 @@
 119,IT조선,IT산업,https://it.chosun.com/,https://cdn.it.chosun.com/rss/gns_allArticle.xml,https://it.chosun.com/,ACTIVE,True,2026-10-23T07:16:40.203127+00:00,200,True,
 120,헬로티,IT산업,https://www.hellot.net/,https://www.hellot.net/data/rss/news.xml,https://www.hellot.net/,ACTIVE,True,2026-10-23T07:16:40.262947+00:00,200,True,
 121,산업일보,IT산업,https://www.kidd.co.kr/,,https://www.kidd.co.kr/,ERROR,False,2026-10-23T07:16:40.554586+00:00,,False,Policy unavailable: Cross-host robots redirect requires manual review
+122,삼프로TV,경제,https://apps.3protv.com/,,https://apps.3protv.com/,PENDING,False,2026-10-23T07:49:49.140885+00:00,200,False,공식 홈페이지 HTTP 200 및 뉴스/방송 공개 메타데이터 확인. 공식 RSS·허가된 제공 API·재이용 조건 미확보. 내부 앱 API 호출 및 영상 다운로드 미실행.
+123,동행미디어 시대,경제,https://www.sidae.com/,,https://www.sidae.com/corp/terms,UNSUPPORTED,False,2026-10-23T07:49:49.141966+00:00,200,False,"공식 이용약관 제13조: 자동 수집·소프트웨어 개발 활용은 사전 서면 합의 필요. RSS 미확보, 기사 수집 미실행."

@@ -2797,5 +2797,74 @@
       "address_source": null,
       "policy": "unavailable"
     }
+  },
+  {
+    "id": "3protv",
+    "publisher": "삼프로TV",
+    "category": "경제",
+    "homepage": "https://apps.3protv.com/",
+    "aliases": [
+      "삼프로TV 3PROTV"
+    ],
+    "domains": [
+      "apps.3protv.com"
+    ],
+    "status": "PENDING",
+    "permission": "not_confirmed",
+    "alternative": "공식 홈페이지 HTTP 200 및 뉴스/방송 공개 메타데이터 확인. 공식 RSS·허가된 제공 API·재이용 조건 미확보. 내부 앱 API 호출 및 영상 다운로드 미실행.",
+    "content_types": [
+      "news_article",
+      "video",
+      "audio"
+    ],
+    "official_reference": "https://apps.3protv.com/",
+    "feed_url": null,
+    "enabled": false,
+    "rss_status": "not_confirmed",
+    "verification": {
+      "checked_at": "2026-10-23T07:49:49.140885+00:00",
+      "http_status": 200,
+      "parsed": false,
+      "status": "PENDING",
+      "address_source": "https://apps.3protv.com/",
+      "policy": "allowed",
+      "error": "공식 홈페이지 HTTP 200 및 뉴스/방송 공개 메타데이터 확인. 공식 RSS·허가된 제공 API·재이용 조건 미확보. 내부 앱 API 호출 및 영상 다운로드 미실행."
+    }
+  },
+  {
+    "id": "sidae",
+    "publisher": "동행미디어 시대",
+    "category": "경제",
+    "homepage": "https://www.sidae.com/",
+    "aliases": [
+      "머니S",
+      "머니에스",
+      "시대"
+    ],
+    "domains": [
+      "www.sidae.com",
+      "sidae.com",
+      "www.moneys.co.kr",
+      "moneys.co.kr"
+    ],
+    "status": "UNSUPPORTED",
+    "permission": "contract_required",
+    "alternative": "공식 이용약관 제13조: 자동 수집·소프트웨어 개발 활용은 사전 서면 합의 필요. RSS 미확보, 기사 수집 미실행.",
+    "content_types": [
+      "news_article"
+    ],
+    "official_reference": "https://www.sidae.com/corp/terms",
+    "feed_url": null,
+    "enabled": false,
+    "rss_status": "not_confirmed",
+    "verification": {
+      "checked_at": "2026-10-23T07:49:49.141966+00:00",
+      "http_status": 200,
+      "parsed": false,
+      "status": "UNSUPPORTED",
+      "address_source": "https://www.sidae.com/corp/terms",
+      "policy": "allowed",
+      "error": "공식 이용약관 제13조: 자동 수집·소프트웨어 개발 활용은 사전 서면 합의 필요. RSS 미확보, 기사 수집 미실행."
+    }
   }
 ]
