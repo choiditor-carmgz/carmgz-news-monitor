@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="CARMGZ 자동차·모빌리티 뉴스 브리핑과 보도 확산 분석">
+  <meta name="color-scheme" content="light">
+  <title>CARMGZ | 오토 모빌리티 뉴스 모니터</title>
+  <link rel="stylesheet" href="style.css"><script defer src="app.js"></script>
+</head>
+<body>
+  <header><div class="brand">CARMGZ<span>AUTO MOBILITY INTELLIGENCE</span></div><a href="#sources">수집 현황 <span aria-hidden="true">↗</span></a></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">오토 모빌리티 뉴스 모니터</p><h1>산업의 움직임을,<br>한눈에.</h1><p class="lead">국내 언론의 자동차·모빌리티 보도를 이슈 중심으로 정리합니다.</p></div><div class="stamp"><span id="status" role="status">데이터 불러오는 중</span><p id="updated">최신 갱신 시각 확인 중</p><p id="last-success"></p><button id="reload" type="button">새로고침 ↻</button></div></section>
+    <div id="notice" role="status"></div>
+    <section class="stats" aria-label="수집 요약" id="stats"></section>
+    <section class="section-head"><div><p class="eyebrow">NEWS RADAR</p><h2>오늘의 뉴스 흐름</h2></div><span>보도 표본 기준 · 한국시간</span></section>
+    <nav class="tabs" aria-label="뉴스 순위 선택">
+      <button data-ranking="major" aria-pressed="true">오늘의 주요 뉴스</button><button data-ranking="spread" aria-pressed="false">언론 확산도</button><button data-ranking="rising" aria-pressed="false">급상승 이슈</button><button data-ranking="industry" aria-pressed="false">산업 중요도</button>
+    </nav>
+    <p class="caption" id="ranking-note"></p><div id="rankings" class="rankings"></div>
+    <section class="section-head"><div><p class="eyebrow">LATEST COVERAGE</p><h2>최신 기사</h2></div><span id="article-count"></span></section>
+    <form id="filters" class="filters" role="search"><label>제목·키워드<input id="query" type="search" placeholder="전기차, 현대차, 자율주행…"></label><label>언론사<select id="publisher"><option value="">전체 언론사</option></select></label><label>날짜 (KST)<input id="date" type="date"></label><button type="reset">필터 초기화</button></form>
+    <div id="articles" class="articles"></div><button id="more" class="more" type="button">기사 더 보기</button>
+    <div class="lower-grid"><section><div class="section-head"><div><p class="eyebrow">DAILY BRIEFING</p><h2>지난 브리핑</h2></div></div><p class="caption">평일 09:00 · 매일 17:00 / 최근 7일</p><div id="briefings"></div></section><section><div class="section-head"><div><p class="eyebrow">ISSUE WATCH</p><h2>긴급 이슈 후보</h2></div></div><p class="caption">수집 시점에 평가 · 알림 채널 미연결</p><div id="alerts"></div></section></div>
+    <section id="sources"><div class="section-head"><div><p class="eyebrow">SOURCE HEALTH</p><h2>언론사별 수집 현황</h2></div></div><div id="publishers" class="publishers"></div></section>
+    <details class="method"><summary>순위 산정 기준과 데이터의 한계</summary><p>확산도는 서로 다른 매체 수 × 10 + 기사 수입니다. 매체 수는 소유관계나 자체 취재의 독립성을 보증하지 않습니다. 급상승도는 최근 1시간과 직전 2시간의 시간당 보도량을 비교합니다. 산업 중요도는 안전 30, 정책 25, 생산·실적 20, 핵심 기술 20, 해외 확장 5점으로, 기사 수와 별도로 평가합니다.</p><p>전재율은 본문·배포 출처가 없어 데이터 없음입니다. 제목 유사 기사 비율은 전재율이 아닙니다. 댓글·조회수는 공개 관측이 있을 때만 표시합니다. 전문은 게시하지 않습니다. 현재 RSS에서 사라진 누락 기사는 복구할 수 없으며 예약 실행은 지연될 수 있습니다.</p><p id="catchup"></p><div id="errors"></div></details>
+  </main>
+  <footer><strong>CARMGZ</strong><span>뉴스의 양을 넘어, 산업의 맥락으로.</span><span>RSS 제목·출처 링크 제공 · AI 문맥 분석은 향후 확장</span></footer>
+  <dialog id="detail"><button id="close" class="close" type="button" aria-label="닫기">닫기 ✕</button><div id="detail-body"></div></dialog>
+</body></html>

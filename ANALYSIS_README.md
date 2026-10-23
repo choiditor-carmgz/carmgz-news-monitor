@@ -1,5 +1,7 @@
 # 뉴스 관심도 분석
 
+자동 운영 및 7일 보관 정책은 [OPERATIONS.md](OPERATIONS.md)를 우선 참고한다. 아래 수동 JSON/CSV 내보내기 결과는 로컬 분석용이며 Git 추적과 Pages 배포에서 제외한다.
+
 기존 Python 표준 라이브러리·SQLite 수집 엔진을 유지한다. 분석은 DB를 읽기 전용으로 열며 원본 기사와 수집 기록을 변경하지 않는다.
 
 ```powershell

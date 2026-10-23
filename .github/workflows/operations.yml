@@ -1,0 +1,90 @@
+name: News operations
+on:
+  schedule:
+    # Asia/Seoul weekday 01:15..23:15 (UTC crosses the previous day).
+    - cron: '15 16,18,20,22 * * 0-4'
+    - cron: '15 0,2,4,6,8,10,12,14 * * 1-5'
+    # Asia/Seoul weekend 00:15,06:15,12:15,18:15.
+    - cron: '15 15,21 * * 5,6'
+    - cron: '15 3,9 * * 0,6'
+    # Briefing wakeups: weekday 09:00, every day 17:00 KST.
+    - cron: '0 0 * * 1-5'
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    inputs:
+      initialize:
+        description: '첫 실행/보존 기한 경과 후 명시적 새 상태 시작 (기존 아티팩트가 있으면 복원 우선)'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: write
+  pages: write
+  id-token: write
+concurrency:
+  group: carmgz-production-state
+  cancel-in-progress: false
+jobs:
+  operate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      PYTHONUNBUFFERED: '1'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore persisted state (fail closed)
+        id: restore
+        env:
+          INITIALIZE: ${{ inputs.initialize }}
+        run: |
+          if [ "$INITIALIZE" = "true" ]; then
+            python scripts/actions_state.py restore --allow-empty
+          else
+            python scripts/actions_state.py restore
+          fi
+      - name: Collect, expire, analyze, brief and build dashboard
+        id: operate
+        run: python -m carmgz.operations
+      - name: Validate snapshot before upload
+        if: always() && steps.restore.outcome == 'success'
+        id: validate
+        run: python scripts/actions_state.py validate
+      - name: Persist SQLite independently of deployment
+        if: always() && steps.validate.outcome == 'success'
+        id: persist
+        uses: actions/upload-artifact@v4
+        with:
+          name: carmgz-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/news.sqlite3
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 6
+      - name: Delete older state snapshots only after successful upload
+        if: always() && steps.persist.outcome == 'success'
+        run: python scripts/actions_state.py rotate
+      - uses: actions/configure-pages@v5
+        if: steps.operate.outcome == 'success'
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.operate.outcome == 'success'
+        with:
+          path: site
+          retention-days: 1
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        if: steps.operate.outcome == 'success'
+      - name: Remove page deployment archive after deployment
+        if: always() && steps.deployment.outcome == 'success'
+        run: python scripts/actions_state.py clean-pages
+      - name: Record failure summary (no article data or credentials)
+        if: failure()
+        run: echo 'Operation failed. Inspect the failed step; previous state is preserved unless a newer verified snapshot was uploaded.' >> "$GITHUB_STEP_SUMMARY"
