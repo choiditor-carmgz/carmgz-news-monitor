@@ -79,7 +79,8 @@ def collect_publishers(cfg,db_path,sources,report_path=None,client_factory=Polic
                     result['http_status']=feed_requests[-1]['status'] if feed_requests else None
                 store.check(run,source,result)
                 results.append(result)
-                print(json.dumps(result,ensure_ascii=False),flush=True)
+                # Console streams may use cp1252/ASCII; files below remain UTF-8.
+                print(json.dumps(result,ensure_ascii=True),flush=True)
             summary=store.finish(run)
             report=dict(checked_at=now(),run_id=run,summary=summary,publishers=results)
             if report_path:

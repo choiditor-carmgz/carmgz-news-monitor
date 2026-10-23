@@ -6,6 +6,7 @@ from pathlib import Path
 from .multi import load_sources
 from .policy_http import PolicyClient
 from .storage import now
+from .console import ascii_console
 
 class Links(HTMLParser):
     def __init__(self):
@@ -30,7 +31,7 @@ def audit(sources=None, output="reports/discovery.json"):
             row['error']=f'{type(exc).__name__}: {exc}'
         row['requests']=client.evidence
         rows.append(row)
-        print(source['id'],len(row['links']),row['error'],flush=True)
+        print(ascii_console(f"{source['id']} {len(row['links'])} {row['error']}"),flush=True)
     Path(output).write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
 if __name__=='__main__': audit()
