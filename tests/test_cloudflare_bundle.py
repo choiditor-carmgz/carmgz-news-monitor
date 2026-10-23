@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from scripts.prepare_cloudflare import prepare
-from scripts.check_cloudflare import main as check_cloudflare
+from scripts.check_cloudflare import main as check_cloudflare, PreflightError, EXPECTED_ACCOUNT
 
 
 class CloudflareBundleTests(unittest.TestCase):
@@ -27,14 +27,13 @@ class CloudflareBundleTests(unittest.TestCase):
             with self.assertRaises(ValueError):prepare(source,Path(d)/'rejected')
 
     def test_deploy_preflight_rejects_wrong_branch_and_missing_access_binding(self):
-        from io import BytesIO
-        config={'production_branch':'main','deployment_configs':{'production':{'env_vars':{
+        config={'name':'carmgz-news-monitor','production_branch':'main','deployment_configs':{'production':{'env_vars':{
             'CF_ACCESS_TEAM_DOMAIN':{'value':'https://test.cloudflareaccess.com'},'CF_ACCESS_AUD':{'value':'test'}}}}}
-        with patch.dict('os.environ',{'CLOUDFLARE_ACCOUNT_ID':'a'*32,'CLOUDFLARE_API_TOKEN':'synthetic'}):
+        with patch.dict('os.environ',{'CLOUDFLARE_ACCOUNT_ID':EXPECTED_ACCOUNT,'CLOUDFLARE_API_TOKEN':'synthetic'}):
             for branch,has_aud,allowed in [('main',True,True),('other',True,False),('main',False,False)]:
                 config['production_branch']=branch
                 config['deployment_configs']['production']['env_vars']['CF_ACCESS_AUD']={'value':'test' if has_aud else ''}
-                with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps({'success':True,'result':config}).encode())):
+                with patch('scripts.check_cloudflare.query',side_effect=[(200,{'success':True,'result':{'status':'active'}}),(200,{'success':True,'result':config})]):
                     if allowed:check_cloudflare()
                     else:
-                        with self.assertRaises(ValueError):check_cloudflare()
+                        with self.assertRaises(PreflightError):check_cloudflare()

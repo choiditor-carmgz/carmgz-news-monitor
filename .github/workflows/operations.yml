@@ -12,6 +12,10 @@ on:
     - cron: '0 8 * * *'
   workflow_dispatch:
     inputs:
+      diagnose_auth:
+        description: '읽기 전용 Cloudflare API 인증 진단만 실행 (수집·배포 없음)'
+        type: boolean
+        default: false
       initialize:
         description: '첫 실행/보존 기한 경과 후 명시적 새 상태 시작 (기존 아티팩트가 있으면 복원 우선)'
         type: boolean
@@ -32,8 +36,27 @@ concurrency:
   group: carmgz-production-state
   cancel-in-progress: false
 jobs:
+  diagnose-cloudflare-auth:
+    if: github.event_name == 'workflow_dispatch' && inputs.diagnose_auth
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: read
+    environment: cloudflare-pages
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read-only token verification and Pages project lookup
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python scripts/check_cloudflare.py
   operate:
-    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch') && !inputs.diagnose_auth
     runs-on: ubuntu-latest
     # RSS budget 8 min + CARMGZ 3 min + state/deployment overhead.
     timeout-minutes: 15
