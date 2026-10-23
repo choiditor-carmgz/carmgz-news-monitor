@@ -69,6 +69,10 @@ class CoverageTests(unittest.TestCase):
         self.assertNotEqual(compare(issue('현대차 발리 전기버스 50대 공급'),a)[0],'보도 완료')
         a['published_at']=(NOW-timedelta(days=200)).isoformat()
         self.assertNotEqual(compare(issue(),a)[0],'보도 완료')
+        a.update(title='현대차 발리 전기버스 공급',published_at=NOW.isoformat(),_content='이번 사업에서 11대 공급')
+        self.assertNotEqual(compare(issue('현대차 발리 전기버스 50대 공급'),a)[0],'보도 완료')
+        a.update(title='현대차 발리 전기버스 화재')
+        self.assertNotEqual(compare(issue(),a)[0],'보도 완료')
 
     def test_material_change_is_followup_not_rewording(self):
         a=dict(title='현대차 발리 전기버스 11대 공급 발표',published_at=(NOW-timedelta(days=4)).isoformat())

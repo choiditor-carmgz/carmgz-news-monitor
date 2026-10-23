@@ -26,7 +26,11 @@ function coverageMatches(i, status) {
 }
 function coverageDetail(i) {
  const c=i.carmgz||{status:'확인 불가',reason:'검색 결과 없음',matches:[]};
- return `<h3>CARMGZ: ${esc(c.status)}</h3><p>${esc(c.reason)}<br><span class="meta">마지막 확인 ${fmt(c.checked_at)} · 과거 검색 날짜 제한 없음<br>${esc(c.scope)}</span></p><ul>${(c.matches||[]).map(a=>`<li><a href="${link(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a><div class="meta">${fmt(a.published_at)} · ${esc(a.reason)}</div></li>`).join('')}</ul>`;
+ return `<h3>CARMGZ: ${esc(c.status)}</h3><p>${esc(c.reason)}<br><span class="meta">마지막 확인 ${fmt(c.checked_at)} · 과거 검색 날짜 제한 없음<br>${esc(c.scope)}</span></p><ul>${(c.matches||[]).map(a=>`<li><a href="${link(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a><div class="meta">${fmt(a.published_at)} · ${esc(a.assessment)} · ${esc(a.reason)}</div></li>`).join('')}</ul>`;
+}
+function renderCoverage() {
+ const items=[...issueMap.values()].filter(i=>coverageMatches(i,$('#coverage-filter').value)).sort((a,b)=>b.importance_score-a.importance_score||a.id.localeCompare(b.id));
+ $('#coverage-issues').innerHTML=items.map(i=>`<button class="brief" data-issue="${esc(i.id)}"><strong>${esc(i.label)}</strong><span class="meta">${esc(i.carmgz?.status||'확인 불가')} · ${i.article_ids.length}기사 / ${i.independent_publishers}매체 · ${esc(i.carmgz?.reason||'검색 결과 없음')}</span></button>`).join('')||empty('조건에 맞는 이슈 없음');
 }
 function renderRankings() {
   document.querySelectorAll('[data-ranking]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.ranking===ranking)));
@@ -77,7 +81,7 @@ function render() {
   $('#stats').innerHTML=[['최근 7일 관련 기사',data.articles.length],['추적 중인 이슈',data.issues.length],['정상 응답 매체',normal],['긴급 이슈 후보',data.alerts.length]].map(([l,v])=>`<div class="stat"><span>${l}</span><strong>${v.toLocaleString()}</strong></div>`).join('');
   const selected=$('#publisher').value;
   $('#publisher').innerHTML='<option value="">전체 언론사</option>'+[...new Set(data.articles.map(a=>a.publisher))].sort().map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');$('#publisher').value=selected;
-  renderRankings();renderArticles();
+  renderRankings();renderArticles();renderCoverage();
   for(const [id,status] of [['uncovered','미보도'],['followups','후속 보도 검토']]) {
     const items=[...issueMap.values()].filter(i=>i.carmgz?.status===status).sort((a,b)=>b.importance_score-a.importance_score).slice(0,10);
     $('#'+id).innerHTML=items.map(i=>`<button class="brief" data-issue="${esc(i.id)}">${esc(i.label)}</button>`).join('')||empty('확인된 해당 이슈 없음. 검색 불완전은 미보도로 판정하지 않습니다.');
@@ -95,7 +99,7 @@ async function load() {
   catch(error){$('#status').textContent='데이터를 불러오지 못했습니다';$('#notice').textContent='dashboard.json이 아직 생성되지 않았거나 네트워크 오류가 있습니다. 운영 명령을 실행한 뒤 다시 시도하세요.';}
 }
 document.addEventListener('click', e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.ranking){ranking=b.dataset.ranking;renderRankings();}if(b.dataset.issue){if($('#detail').open)$('#detail').close();showIssue(b.dataset.issue);}if(b.dataset.brief!==undefined)showBrief(Number(b.dataset.brief));});
-$('#coverage-filter').addEventListener('change',renderRankings);
+$('#coverage-filter').addEventListener('change',()=>{renderRankings();renderCoverage();});
 $('#close').addEventListener('click',()=>$('#detail').close());
 $('#reload').addEventListener('click',load);
 $('#filters').addEventListener('input',()=>{page=30;renderArticles();});

@@ -14,6 +14,7 @@ from .policy_http import PolicyClient
 from .rss import normalized_title
 
 STATUSES = ('보도 완료', '미보도', '후속 보도 검토', '확인 필요', '확인 불가')
+RULE_VERSION = 'v1'
 HOSTS = {'carmgz.kr', 'www.carmgz.kr'}
 
 
@@ -102,6 +103,14 @@ def compare(issue, article):
                        set(re.findall(p, title)) != set(re.findall(p, old))
                        for p in (r'20\d{2}년', r'\d+\s*대', r'\d+\s*억',
                                  r'발리|수라바야|서울|부산|대구|인천|광주|대전|울산|제주'))
+        conflict = conflict or any(bool(re.search(p,title)) != bool(re.search(p,old))
+                                   for p in (r'리콜|결함',r'사망|사고',r'생산\s*중단',r'화재'))
+        # Where the source title omits a quantity, consult transient body evidence.
+        for pattern in (r'\d+\s*대', r'\d+\s*억'):
+            claimed=set(re.findall(pattern,title)); stated=set(re.findall(pattern,old))
+            body_facts=set(re.findall(pattern,article.get('_content','')))
+            if claimed and not stated and body_facts and claimed.isdisjoint(body_facts):
+                conflict=True
         anchors = next((a for _,_,a in EVENTS if all(re.search(p,title,re.I) and re.search(p,old,re.I) for p in a)), None)
         exact = normalized_title(title) == normalized_title(old)
         action = re.search(r'공급|출시|공개|계약|리콜|제휴|발표|평가|초청|개최', title)
@@ -126,6 +135,13 @@ class Checker:
         self.config = config
         self.client = client or PolicyClient(config.get('interval_seconds',2),config.get('timeout_seconds',8),0)
         self.deadline = time.monotonic()+config.get('max_seconds',180)
+        if hasattr(self.client,'sleep'):
+            original_sleep = self.client.sleep
+            def bounded_sleep(seconds):
+                if time.monotonic()+seconds >= self.deadline:
+                    raise TimeoutError('CARMGZ request budget: defer, never bypass crawl delay')
+                original_sleep(seconds)
+            self.client.sleep = bounded_sleep
         self.article_cache = {}
         self.search_cache = {}
 
@@ -135,7 +151,7 @@ class Checker:
         return self.client.fetch(own_url(url))
 
     def check(self, issue, at):
-        result = dict(status='확인 불가', checked_at=datetime.now(timezone.utc).isoformat(), search_success=False,
+        result = dict(status='확인 불가', rule_version=RULE_VERSION, checked_at=datetime.now(timezone.utc).isoformat(), search_success=False,
                       queries=[], searches=[], matches=[], scope=self.config.get('scope_note',''),
                       date_limit=None, complete=False, reason='검색 범위 불완전', errors=[])
         related = []; all_totals = []
@@ -145,6 +161,7 @@ class Checker:
             result['searches'].append(search)
             try:
                 url = 'https://www.carmgz.kr/news/articleList.html?'+urlencode(dict(sc_area='A',view_type='sm',sc_word=query))
+                search['cached_in_run'] = query in self.search_cache
                 if query not in self.search_cache:
                     self.search_cache[query] = parse_search(self.fetch(url))
                 urls, total = self.search_cache[query]; all_totals.append(total)
@@ -189,7 +206,7 @@ def verify_issues(db, report, at, config, force=False, checker=None):
         row = db.execute('SELECT checked_at,fingerprint,payload FROM carmgz_checks WHERE issue_id=?',(issue['id'],)).fetchone()
         cached = json.loads(row[2]) if row else None
         fresh = row and timestamp(row[0]) and at-timestamp(row[0]) < timedelta(hours=config.get('cache_hours',6))
-        if fresh and row[1]==signature and not force:
+        if fresh and row[1]==signature and cached.get('rule_version','v1')==RULE_VERSION and not force:
             issue['carmgz'] = dict(cached, cached=True)
         else:
             issue['carmgz'] = dict(status='확인 불가',checked_at=None,search_success=False,matches=[],queries=[],
