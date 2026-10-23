@@ -1,5 +1,7 @@
 # 비공개 Cloudflare 배포 및 진단 결과 (2026-10-23 KST)
 
+후속 상태: API Secrets 등록 후 실제 인증과 Pages 조회 HTTP 200을 확인했다. 현재 남은 실패는 Cloudflare Production 런타임 변수 누락이다. 아래 최초 진단 이후의 변경 사항은 [401 후속 진단](CLOUDFLARE_AUTH_DIAGNOSIS.md)을 우선 참고한다.
+
 ## 확인된 원인
 
 - [최근 News operations 39949145526](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/39949145526): main, 성공. 수집·분석·SQLite 저장·dashboard-preview 업로드 성공. publish=false여서 기존 deploy job은 skipped.
