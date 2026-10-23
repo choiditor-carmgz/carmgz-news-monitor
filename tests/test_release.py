@@ -42,6 +42,9 @@ class ReleaseTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d,redirect_stdout(io.StringIO()):
             result=collect_publishers(CFG,Path(d)/'db',sources,client_factory=Forbidden)
             self.assertEqual(result['inserted'],0)
+        from scripts.verify_publishers import verify
+        with patch('scripts.verify_publishers.PolicyClient',side_effect=AssertionError('Unapproved discovery')):
+            self.assertEqual(verify(next(s for s in sources if s['id']=='sidae'),['자동차'])['status'],'UNSUPPORTED')
 
     def test_era_aliases_count_as_one_without_rewriting_stored_evidence(self):
         with tempfile.TemporaryDirectory() as d:
