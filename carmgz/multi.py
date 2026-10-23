@@ -19,6 +19,8 @@ def load_sources(path):
         ids.add(s['id'])
         if s.get('enabled') and not s.get('feed_url'):
             raise ValueError('Enabled publisher requires feed_url')
+        if s.get('enabled') and s.get('permission') in ('contract_required','not_confirmed'):
+            raise ValueError('Publisher collection permission is not confirmed')
     return sources
 
 

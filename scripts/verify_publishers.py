@@ -34,6 +34,8 @@ def verify(source, keywords):
                   relevant=0, parsed=False, error=None, http_status=None)
     if source['status'] == 'EXCLUDED':
         return dict(result, status='EXCLUDED')
+    if source.get('permission') == 'contract_required':
+        return dict(result, status='UNSUPPORTED',error=source.get('alternative','사전 계약 필요: 요청하지 않음'),policy='permission_required')
     client = PolicyClient(2, 8, 0)
     deadline = time.monotonic()+45
     original_sleep = client.sleep

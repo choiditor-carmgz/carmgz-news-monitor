@@ -6,7 +6,7 @@ import tempfile
 import time
 import unittest
 
-from carmgz.coverage import Checker, compare, own_url, parse_search, verify_issues
+from carmgz.coverage import Checker, compare, own_url, parse_search, verify_issues, RULE_VERSION
 from carmgz.operations import run, track, enrich
 from carmgz.analysis import analyze
 from carmgz.relevance import automotive_terms
@@ -25,7 +25,7 @@ class FakeChecker:
     def __init__(self): self.calls=[]
     def check(self, item, at):
         self.calls.append(item['id'])
-        return dict(status='보도 완료', checked_at=at.isoformat(), search_success=True,
+        return dict(status='보도 완료', rule_version=RULE_VERSION, checked_at=at.isoformat(), search_success=True,
                     matches=[], queries=['가상 검색어'], reason='가상 사건 검증', date_limit=None)
 
 
@@ -48,10 +48,21 @@ class CoverageTests(unittest.TestCase):
         class Client:
             def fetch(self,url):
                 assert 'sc_sdate' not in url and 'sc_edate' not in url
-                return b'''<article id="section-list"></article><script>params['total']="0";</script>'''
+                from urllib.parse import urlsplit,parse_qs
+                query=parse_qs(urlsplit(url).query)['sc_word'][0]
+                return ('''<article id="section-list"></article><script>params['total']="0";params['sc_word']='''+json.dumps(query)+''';</script>''').encode()
         result=Checker({},Client()).check(issue(),NOW)
         self.assertTrue(result['search_success']);self.assertEqual(result['status'],'확인 불가')
         self.assertIsNone(result['date_limit'])
+
+    def test_http_200_unfiltered_archive_is_not_a_successful_search(self):
+        body=b'''<article id="section-list"></article><script>params['total']="19995";params['sc_word']="";</script>'''
+        with self.assertRaises(ValueError):parse_search(body,query='fixture event')
+        class Client:
+            def fetch(self,url):return body
+        result=Checker({},Client()).check(issue(),NOW)
+        self.assertFalse(result['search_success'])
+        self.assertEqual(result['status'],'확인 불가')
 
     def test_failure_never_means_uncovered(self):
         class Client:
@@ -146,7 +157,7 @@ class CoverageTests(unittest.TestCase):
     def test_registry_has_no_fake_active_or_excluded_collectors(self):
         sources=json.loads(Path('publishers.json').read_text(encoding='utf-8'))
         self.assertEqual(len({s['id'] for s in sources}),len(sources))
-        self.assertEqual(sum(s['status']!='EXCLUDED' for s in sources),120)
+        self.assertEqual(sum(s['status']!='EXCLUDED' for s in sources),122)
         self.assertNotIn('carmgz',{s['id'] for s in sources})
         for s in sources:
             if s['status']=='ACTIVE':

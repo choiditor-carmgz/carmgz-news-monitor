@@ -2,6 +2,7 @@
 import argparse
 from contextlib import closing
 import io
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -12,6 +13,15 @@ import urllib.error
 import zipfile
 
 PREFIX = 'carmgz-state-'
+
+
+def branch():
+    return os.environ.get('STATE_BRANCH','main')
+
+
+def prefix():
+    # Preview state must never replace or rotate production state.
+    return PREFIX if branch()=='main' else 'carmgz-preview-'+hashlib.sha256(branch().encode()).hexdigest()[:12]+'-'
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -83,13 +93,13 @@ def unpack(content, destination):
 
 
 def restore(destination, allow_empty=False):
-    rows = [a for a in artifacts() if a['name'].startswith(PREFIX)]
+    rows = [a for a in artifacts() if a['name'].startswith(prefix())]
     for a in sorted(rows, key=lambda a:a['created_at'], reverse=True):
         if a['expired']:
             continue
         run = api('actions/runs/'+str(a['workflow_run']['id']))
         # Trust only this production workflow from the default branch.
-        if run['head_branch'] != 'main' or run['path'].split('@')[0] != '.github/workflows/operations.yml' or run['event'] not in ('schedule','workflow_dispatch'):
+        if run['head_branch'] != branch() or run['path'].split('@')[0] != '.github/workflows/operations.yml' or run['event'] not in ('schedule','workflow_dispatch'):
             continue
         try:
             api(f"actions/artifacts/{a['id']}/zip")
@@ -113,11 +123,11 @@ def restore(destination, allow_empty=False):
 
 def rotate():
     rows = artifacts()
-    current = [a for a in rows if a['name'] == PREFIX+os.environ['GITHUB_RUN_ID']+'-'+os.environ['GITHUB_RUN_ATTEMPT'] and not a['expired']]
+    current = [a for a in rows if a['name'] == prefix()+os.environ['GITHUB_RUN_ID']+'-'+os.environ['GITHUB_RUN_ATTEMPT'] and not a['expired']]
     if len(current) != 1:
         raise RuntimeError('New state upload not confirmed; old artifacts preserved')
     for a in rows:
-        if a['name'].startswith(PREFIX) and a['id'] != current[0]['id']:
+        if a['name'].startswith(prefix()) and a['id'] != current[0]['id']:
             api(f"actions/artifacts/{a['id']}", 'DELETE')
     print('Rotated state; only latest snapshot retained')
 
@@ -125,13 +135,13 @@ def rotate():
 def clean_pages():
     # Only this workflow's page archives, after deployment. State never uses this name.
     for a in artifacts():
-        if a['name'] == 'github-pages':
+        if a['name'] == 'github-pages' and str(a.get('workflow_run',{}).get('id')) == os.environ.get('GITHUB_RUN_ID'):
             api(f"actions/artifacts/{a['id']}", 'DELETE')
 
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('command', choices=['restore','validate','rotate','clean-pages'])
+    p.add_argument('command', choices=['restore','validate','rotate','clean-pages','namespace'])
     p.add_argument('--database', default='data/news.sqlite3')
     p.add_argument('--allow-empty', action='store_true')
     args = p.parse_args()
@@ -141,5 +151,7 @@ if __name__ == '__main__':
         prepare(args.database)
     elif args.command == 'rotate':
         rotate()
-    else:
+    elif args.command == 'clean-pages':
         clean_pages()
+    else:
+        print(prefix())

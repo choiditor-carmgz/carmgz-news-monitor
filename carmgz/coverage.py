@@ -14,7 +14,7 @@ from .policy_http import PolicyClient
 from .rss import normalized_title
 
 STATUSES = ('보도 완료', '미보도', '후속 보도 검토', '확인 필요', '확인 불가')
-RULE_VERSION = 'v1'
+RULE_VERSION = 'v2-query-validated'
 HOSTS = {'carmgz.kr', 'www.carmgz.kr'}
 
 
@@ -48,8 +48,16 @@ def parse_article(body, url):
     return dict(title=unescape(title), published_at=published, url=own_url(url), _content=content[:30000])
 
 
-def parse_search(body):
+def parse_search(body, query=None):
     text = body.decode('utf-8-sig')
+    if query is not None:
+        echo = re.search(r'''params\[['"]sc_word['"]\]\s*=\s*(['"])(.*?)\1''',text,re.S)
+        actual = unescape(echo.group(2)) if echo else None
+        if echo and echo.group(1)=='"':
+            try: actual=json.loads('"'+echo.group(2)+'"')
+            except ValueError: actual=None
+        if actual is None or ' '.join(actual.split()) != ' '.join(query.split()):
+            raise ValueError('Search query was not applied/echoed; unfiltered archive is not a valid search result')
     main = re.search(r'<article\b[^>]*id=["\']section-list["\'][^>]*>(.*?)</article>', text, re.S|re.I)
     total = re.search(r"params\[['\"]total['\"]\]\s*=\s*['\"]?(\d+)", text)
     if not main or not total:
@@ -163,7 +171,7 @@ class Checker:
                 url = 'https://www.carmgz.kr/news/articleList.html?'+urlencode(dict(sc_area='A',view_type='sm',sc_word=query))
                 search['cached_in_run'] = query in self.search_cache
                 if query not in self.search_cache:
-                    self.search_cache[query] = parse_search(self.fetch(url))
+                    self.search_cache[query] = parse_search(self.fetch(url), query=query)
                 urls, total = self.search_cache[query]; all_totals.append(total)
                 search.update(success=True,total=total,returned=len(urls),url=url,
                               http_status=getattr(self.client,'last_status',None))
@@ -186,6 +194,8 @@ class Checker:
         if related:
             status, reason = min(related, key=lambda r: ['후속 보도 검토','보도 완료','확인 필요'].index(r[0]))
             result.update(status=status, reason=reason)
+        elif not result['search_success']:
+            result['reason']='검색 응답 검증 실패 또는 접근 불가: 미보도로 판정하지 않음'
         # No finite first-page keyword search proves absence from the whole archive.
         # The '미보도' state is reserved for a future verified exhaustive adapter.
         return result

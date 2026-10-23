@@ -136,6 +136,10 @@ def analyze(database, sources, as_of):
         metrics = [dict(r) for r in db.execute('SELECT * FROM article_metrics')]
         successes = dict(db.execute("SELECT publisher_id,max(checked_at) FROM feed_checks WHERE parsed=1 GROUP BY publisher_id"))
     for a in articles:
+        canonical = next((s['publisher'] for s in sources if a['publisher'] in s.get('aliases',[])), None)
+        if canonical:
+            a['original_publisher'] = a['publisher']
+            a['publisher'] = canonical
         a['classification'], a['classification_reason'] = classify(a)
         a['missing_fields'] = [k for k in ('publisher', 'title', 'published_at', 'url') if not a[k]]
         a['invalid_date'] = bool(a['published_at'] and not timestamp(a['published_at']))

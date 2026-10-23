@@ -65,7 +65,7 @@ function showIssue(id) {
 function showBrief(n) {
   const b=data.briefings[n]; if(!b)return;
   $('#detail').dataset.expires=String(Date.parse(b.expires_at));
-  $('#detail-body').innerHTML=`<p class="eyebrow">DAILY BRIEFING</p><h2>${fmt(b.scheduled_at)} ${b.kind==='am'?'오전':'오후'} 브리핑</h2><p class="meta">실제 생성 ${fmt(b.generated_at)} · 마지막 정상 수집 ${fmt(b.last_collection_at)}<br>지연 ${Math.round(b.delayed_minutes)}분 · 전일 기준이 없으면 변화는 비교 불가로 표시합니다.</p>${Object.entries(b.rankings).map(([k,ids])=>`<h3>${labels[k]}</h3><ol>${ids.map(id=>({id,...(b.entries?.[id]||{label:issueMap.get(id)?.label||'만료 이슈',article_count:issueMap.get(id)?.article_count||0,publishers:issueMap.get(id)?.independent_publishers||0})})).map(i=>`<li><button class="brief" data-issue="${esc(i.id)}">${esc(i.label)} <span class="meta">생성 당시 ${i.article_count}건 / ${i.publishers}매체</span></button></li>`).join('')||'<li>확보한 이슈 없음</li>'}</ol>`).join('')}<h3>전일 대비 변화</h3><ul>${b.changes.map(c=>`<li>${esc(c.label)} · ${c.comparison==='전일 기준 데이터 없음'?'전일 기준 데이터 없음':`${c.new?'새 이슈 · ':''}기사 증감 ${c.article_delta>0?'+':''}${c.article_delta}`}</li>`).join('')||'<li>비교할 이슈 없음</li>'}</ul><h3>후속 확인 필요</h3><ul>${b.follow_up.map(f=>`<li>${esc(issueMap.get(f.issue_id)?.label||'만료 이슈')} · ${esc(f.reason)}</li>`).join('')||'<li>해당 이슈 없음</li>'}</ul>`;
+  $('#detail-body').innerHTML=`<p class="eyebrow">DAILY BRIEFING</p><h2>${fmt(b.scheduled_at)} ${b.kind==='am'?'오전':'오후'} 브리핑</h2><p class="meta">실제 생성 ${fmt(b.generated_at)} · 마지막 정상 수집 ${fmt(b.last_collection_at)}<br>지연 ${Math.round(b.delayed_minutes)}분 · 전일 기준이 없으면 변화는 비교 불가로 표시합니다.</p>${Object.entries(b.rankings).map(([k,ids])=>`<h3>${labels[k]}</h3><ol>${ids.map(id=>({id,...(b.entries?.[id]||{label:issueMap.get(id)?.label||'만료 이슈',article_count:issueMap.get(id)?.article_count||0,publishers:issueMap.get(id)?.independent_publishers||0})})).map(i=>`<li><button class="brief" data-issue="${esc(i.id)}">${esc(i.label)} <span class="meta">생성 당시 ${i.article_count}건 / ${i.publishers}매체</span></button></li>`).join('')||'<li>확보한 이슈 없음</li>'}</ol>`).join('')}${Object.entries(b.coverage_lists||{}).map(([status,ids])=>`<h3>CARMGZ ${esc(status)}</h3><ul>${ids.map(id=>`<li>${esc(b.entries?.[id]?.label||issueMap.get(id)?.label||'만료 이슈')}</li>`).join('')||'<li>확인된 해당 이슈 없음</li>'}</ul>`).join('')}<h3>전일 대비 변화</h3><ul>${b.changes.map(c=>`<li>${esc(c.label)} · ${c.comparison==='전일 기준 데이터 없음'?'전일 기준 데이터 없음':`${c.new?'새 이슈 · ':''}기사 증감 ${c.article_delta>0?'+':''}${c.article_delta}`}</li>`).join('')||'<li>비교할 이슈 없음</li>'}</ul><h3>후속 확인 필요</h3><ul>${b.follow_up.map(f=>`<li>${esc(issueMap.get(f.issue_id)?.label||'만료 이슈')} · ${esc(f.reason)}</li>`).join('')||'<li>해당 이슈 없음</li>'}</ul>`;
   $('#detail').showModal();
 }
 
@@ -107,4 +107,13 @@ $('#filters').addEventListener('reset',()=>setTimeout(()=>{page=30;renderArticle
 $('#more').addEventListener('click',()=>{page+=30;renderArticles();});
 setInterval(()=>{if(data)render();},60000);
 setInterval(()=>{if(!document.hidden)load();},300000);
+function applyTheme(theme) {
+ document.documentElement.dataset.theme=theme;
+ $('#theme').setAttribute('aria-pressed',String(theme==='dark'));
+ $('#theme').textContent=theme==='dark'?'밝은 모드':'다크 모드';
+}
+let preferred;
+try {preferred=localStorage.getItem('carmgz-theme');} catch {}
+applyTheme(preferred==='dark'||preferred==='light'?preferred:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+$('#theme').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);try{localStorage.setItem('carmgz-theme',next);}catch{}});
 load();

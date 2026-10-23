@@ -128,6 +128,7 @@ def briefing(db, report, kind, scheduled, at, last_collection):
                    delayed_minutes=max(0, (at-scheduled).total_seconds()/60),
                    expires_at=min(deadlines+[at+timedelta(hours=168)]).isoformat(),
                    rankings=ranking_ids,
+                   coverage_lists={status:[i['id'] for i in sorted(current,key=lambda i:(-i['importance_score'],i['id'])) if i.get('carmgz',{}).get('status')==status][:10] for status in ('미보도','후속 보도 검토')},
                    entries={i['id']:dict(label=i['label'],article_count=i['article_count'],publishers=i['independent_publishers'],carmgz=i.get('carmgz')) for i in current},
                    changes=changes,
                    follow_up=[dict(issue_id=i['id'], reason='원문·정책/안전 영향 확인 필요') for i in current if i['importance_score'] >= 25])
@@ -143,7 +144,8 @@ def public_payload(db, report, at, data_kind='real_rss'):
             continue
         words = [r[0] for r in db.execute('SELECT keyword FROM article_keywords WHERE article_id=?', (a['id'],))]
         articles.append({**{k: a[k] for k in ('id','title','publisher','published_at','url','first_collected_at')}, 'keywords': words})
-    issues = [{k: v for k,v in i.items() if k != 'articles'} | {'article_ids': [a['id'] for a in i['articles']]} for i in report['issues']]
+    public_fields = set('id label article_count independent_publishers publishers independence_basis first_published_at volume_1h volume_3h volume_24h growth_per_hour syndication_ratio syndication_status views comments importance_score importance_reasons spread_score rising_score grouping_basis views_coverage comments_coverage publishers_3h previous_3h growth_ratio_3h growth_status timeliness_hours similar_title_pair_ratio similarity_basis hourly_volumes carmgz'.split())
+    issues = [{k: v for k,v in i.items() if k in public_fields} | {'article_ids': [a['id'] for a in i['articles']]} for i in report['issues']]
     rankings = {k: [i['id'] for i in v] for k,v in report['rankings'].items()}
     today = at.astimezone(KST).date()
     major = [i for i in report['issues'] if any(timestamp(a['published_at']) and timestamp(a['published_at']).astimezone(KST).date() == today for a in i['articles'])]
@@ -154,7 +156,7 @@ def public_payload(db, report, at, data_kind='real_rss'):
                 articles=articles, issues=issues, rankings=rankings, publishers=report['publishers'],
                 briefings=[json.loads(r[0]) for r in db.execute('SELECT payload FROM briefings ORDER BY generated_at DESC')],
                 alerts=[dict(issue_id=r[0], created_at=r[1], reasons=json.loads(r[2]), delivery_status=r[3]) for r in db.execute('SELECT issue_id,created_at,reasons,delivery_status FROM alert_candidates ORDER BY created_at DESC')],
-                errors=[dict(created_at=r[0], phase=r[1], message=r[2]) for r in db.execute('SELECT created_at,phase,message FROM operation_errors ORDER BY created_at DESC LIMIT 30')])
+                errors=[dict(created_at=r[0], phase=r[1], message='운영 오류 기록됨. 상세 원인은 내부 실행 로그에서 확인') for r in db.execute('SELECT created_at,phase,message FROM operation_errors ORDER BY created_at DESC LIMIT 30')])
 
 
 def run(cfg, database, sources, output, mode='scheduled', at=None, client_factory=None, coverage_checker=None):

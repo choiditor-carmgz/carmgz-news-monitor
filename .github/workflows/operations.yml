@@ -16,25 +16,30 @@ on:
         description: '첫 실행/보존 기한 경과 후 명시적 새 상태 시작 (기존 아티팩트가 있으면 복원 우선)'
         type: boolean
         default: false
+      mode:
+        description: 'scheduled=수집·브리핑, refresh=저장 데이터 분석·검색·화면 갱신'
+        type: choice
+        options: [scheduled, collect, am, pm, refresh]
+        default: scheduled
+      publish:
+        description: '공개 Pages 배포 (Pages 및 환경 설정을 승인·완료한 뒤 선택)'
+        type: boolean
+        default: false
 permissions:
   contents: read
   actions: write
-  pages: write
-  id-token: write
 concurrency:
   group: carmgz-production-state
   cancel-in-progress: false
 jobs:
   operate:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     # RSS budget 8 min + CARMGZ 3 min + state/deployment overhead.
     timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     env:
       PYTHONUNBUFFERED: '1'
+      STATE_BRANCH: ${{ github.ref_name }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +48,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Select isolated state namespace
+        run: echo "STATE_PREFIX=$(python scripts/actions_state.py namespace)" >> "$GITHUB_ENV"
       - name: Restore persisted state (fail closed)
         id: restore
         env:
@@ -55,7 +62,9 @@ jobs:
           fi
       - name: Collect, expire, analyze, brief and build dashboard
         id: operate
-        run: python -m carmgz.operations
+        env:
+          OPERATION_MODE: ${{ inputs.mode || 'scheduled' }}
+        run: python -m carmgz.operations --mode "$OPERATION_MODE"
       - name: Validate snapshot before upload
         if: always() && steps.restore.outcome == 'success'
         id: validate
@@ -65,7 +74,7 @@ jobs:
         id: persist
         uses: actions/upload-artifact@v4
         with:
-          name: carmgz-state-${{ github.run_id }}-${{ github.run_attempt }}
+          name: ${{ env.STATE_PREFIX }}${{ github.run_id }}-${{ github.run_attempt }}
           path: data/news.sqlite3
           if-no-files-found: error
           retention-days: 1
@@ -73,19 +82,44 @@ jobs:
       - name: Delete older state snapshots only after successful upload
         if: always() && steps.persist.outcome == 'success'
         run: python scripts/actions_state.py rotate
-      - uses: actions/configure-pages@v5
+      - name: Upload dashboard for review
         if: steps.operate.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-preview
+          path: site
+          retention-days: 1
       - uses: actions/upload-pages-artifact@v3
-        if: steps.operate.outcome == 'success'
+        if: steps.operate.outcome == 'success' && (github.event_name == 'schedule' || inputs.publish)
         with:
           path: site
           retention-days: 1
-      - uses: actions/deploy-pages@v4
-        id: deployment
-        if: steps.operate.outcome == 'success'
-      - name: Remove page deployment archive after deployment
-        if: always() && steps.deployment.outcome == 'success'
-        run: python scripts/actions_state.py clean-pages
       - name: Record failure summary (no article data or credentials)
         if: failure()
         run: echo 'Operation failed. Inspect the failed step; previous state is preserved unless a newer verified snapshot was uploaded.' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: operate
+    if: github.event_name == 'schedule' || inputs.publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Remove this run's page deployment archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/actions_state.py clean-pages

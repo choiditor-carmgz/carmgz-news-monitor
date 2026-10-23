@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="CARMGZ 자동차·모빌리티 뉴스 브리핑과 보도 확산 분석">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>CARMGZ | 오토 모빌리티 뉴스 모니터</title>
   <link rel="stylesheet" href="style.css"><script defer src="app.js"></script>
 </head>
 <body>
-  <header><div class="brand">CARMGZ<span>AUTO MOBILITY INTELLIGENCE</span></div><a href="#sources">수집 현황 <span aria-hidden="true">↗</span></a></header>
+  <header><div class="brand">CARMGZ<span>AUTO MOBILITY INTELLIGENCE</span></div><button id="theme" type="button" aria-pressed="false">다크 모드</button><a href="#sources">수집 현황 <span aria-hidden="true">↗</span></a></header>
   <main>
     <section class="intro"><div><p class="eyebrow">오토 모빌리티 뉴스 모니터</p><h1>산업의 움직임을,<br>한눈에.</h1><p class="lead">국내 언론의 자동차·모빌리티 보도를 이슈 중심으로 정리합니다.</p></div><div class="stamp"><span id="status" role="status">데이터 불러오는 중</span><p id="updated">최신 갱신 시각 확인 중</p><p id="last-success"></p><button id="reload" type="button">새로고침 ↻</button></div></section>
     <div id="notice" role="status"></div>

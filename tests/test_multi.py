@@ -63,7 +63,7 @@ class MultiTests(unittest.TestCase):
     def test_registry(self):
         sources=load_sources('publishers.json')
         self.assertGreaterEqual(len(sources),30)
-        self.assertEqual(len([s for s in sources if s.get('status')!='EXCLUDED']),120)
+        self.assertEqual(len([s for s in sources if s.get('status')!='EXCLUDED']),122)
 
 class AdditionalTests(unittest.TestCase):
     def test_two_publishers_failure_isolation_and_repeated_collection(self):
