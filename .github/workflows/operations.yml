@@ -16,6 +16,11 @@ on:
         description: '첫 실행/보존 기한 경과 후 명시적 새 상태 시작 (기존 아티팩트가 있으면 복원 우선)'
         type: boolean
         default: false
+      mode:
+        description: 'scheduled=수집·브리핑, refresh=저장 데이터 분석·검색·화면 갱신'
+        type: choice
+        options: [scheduled, collect, am, pm, refresh]
+        default: scheduled
       publish:
         description: '공개 Pages 배포 (Pages 및 환경 설정을 승인·완료한 뒤 선택)'
         type: boolean
@@ -57,7 +62,9 @@ jobs:
           fi
       - name: Collect, expire, analyze, brief and build dashboard
         id: operate
-        run: python -m carmgz.operations
+        env:
+          OPERATION_MODE: ${{ inputs.mode || 'scheduled' }}
+        run: python -m carmgz.operations --mode "$OPERATION_MODE"
       - name: Validate snapshot before upload
         if: always() && steps.restore.outcome == 'success'
         id: validate
