@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "base_url": "https://www.carmgz.kr",
+  "official_search": "https://www.carmgz.kr/news/articleList.html",
+  "official_reference": "https://www.carmgz.kr/",
+  "cache_hours": 6,
+  "max_seconds": 180,
+  "max_issues": 20,
+  "max_queries": 2,
+  "max_articles_per_issue": 2,
+  "interval_seconds": 2,
+  "timeout_seconds": 8,
+  "archive_completeness_verified": false,
+  "scope_note": "공식 전체기사 검색, 날짜 필터 없음. 검색어별 첫 페이지이며 전체 아카이브의 완전성은 미검증. 부정 결과로 미보도 판정 금지."
+}

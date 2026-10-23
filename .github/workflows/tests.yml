@@ -2,7 +2,7 @@ name: Code tests
 on:
   push:
     branches: ['main', 'codex/**']
-    paths: ['carmgz/**', 'tests/**', 'scripts/**', 'web/**', '.github/workflows/**']
+    paths: ['carmgz/**', 'tests/**', 'scripts/**', 'web/**', 'publishers.json', 'coverage.json', '.github/workflows/**']
   pull_request:
 permissions:
   contents: read

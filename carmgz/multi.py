@@ -30,7 +30,10 @@ def collect_publishers(cfg,db_path,sources,report_path=None,client_factory=Polic
             run=store.start(cfg)
             results=[]
             deadline=time.monotonic()+cfg.get('max_run_seconds',float('inf'))
-            for source in sources:
+            # Oldest actual request first: newly added feeds and budget-deferred feeds
+            # cannot be perpetually starved by the first publishers in the registry.
+            attempted=dict(store.db.execute("SELECT publisher_id,max(checked_at) FROM feed_checks WHERE status IN ('collected','empty_feed','stale_feed','failed') GROUP BY publisher_id"))
+            for source in sorted(sources,key=lambda s:attempted.get(s['id'],'')):
                 result=dict(id=source['id'],publisher=source['publisher'],feed_url=source.get('feed_url'),
                     rss_status=source['rss_status'],permission=source['permission'],status='not_verified',
                     http_status=None,policy='not_checked',parsed=False,fetched=0,relevant=0,inserted=0,error=None,requests=[])

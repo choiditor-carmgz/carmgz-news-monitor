@@ -65,6 +65,9 @@ class PublisherRSS:
 
 
 def matching_keywords(article, keywords):
+    from .relevance import HUNGER, automotive_terms
     title = unicodedata.normalize('NFKC',article.title).casefold()
-    # 기아(飢餓) 등 동음이의어는 제목만으로 완전히 구분할 수 없음.
-    return [w for w in keywords if unicodedata.normalize('NFKC',w).casefold() in title]
+    if HUNGER.search(article.title):
+        return []
+    return list(dict.fromkeys([w for w in keywords if unicodedata.normalize('NFKC',w).casefold() in title]
+                              + automotive_terms(article.title)))

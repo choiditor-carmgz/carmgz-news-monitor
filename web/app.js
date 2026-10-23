@@ -20,12 +20,20 @@ function sanitize(raw, now=Date.now()) {
   return {...raw,articles,issues,briefings,alerts,errors,publishers};
 }
 
+function coverageMatches(i, status) {
+  const current=i.carmgz?.status||'확인 불가';
+  return !status || (status==='uncertain'?['확인 필요','확인 불가'].includes(current):current===status);
+}
+function coverageDetail(i) {
+ const c=i.carmgz||{status:'확인 불가',reason:'검색 결과 없음',matches:[]};
+ return `<h3>CARMGZ: ${esc(c.status)}</h3><p>${esc(c.reason)}<br><span class="meta">마지막 확인 ${fmt(c.checked_at)} · 과거 검색 날짜 제한 없음<br>${esc(c.scope)}</span></p><ul>${(c.matches||[]).map(a=>`<li><a href="${link(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a><div class="meta">${fmt(a.published_at)} · ${esc(a.reason)}</div></li>`).join('')}</ul>`;
+}
 function renderRankings() {
   document.querySelectorAll('[data-ranking]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.ranking===ranking)));
   const notes={major:'오늘 발행된 기사 중 산업 중요도·24시간 보도량 순입니다.',spread:'서로 다른 매체 수 × 10 + 기사 수. 자체 취재 독립성은 미검증입니다.',rising:'최근 1시간 보도가 있고 직전 2시간 대비 시간당 보도량이 증가한 이슈입니다.',industry:'안전·정책·생산·핵심 기술·해외 확장 규칙 점수입니다. 기사 수와 별개입니다.'};
   $('#ranking-note').textContent=notes[ranking]+` 집계 시각 ${fmt(data.generated_at)}.`;
-  const items=(data.rankings[ranking]||[]).map(id=>issueMap.get(id)).filter(Boolean);
-  $('#rankings').innerHTML=items.map((i,n)=>`<button type="button" class="issue" data-issue="${esc(i.id)}"><span class="number">${String(n+1).padStart(2,'0')}</span><div><h3>${esc(i.label)}</h3><div class="meta">관련 기사 <b>${i.article_ids.length}</b> · 매체 <b>${new Set(i.article_ids.map(id=>articleMap.get(id)?.publisher)).size}</b>곳 · 3시간 ${i.volume_3h}건</div><span class="score">${ranking==='industry'||ranking==='major'?`산업 중요도 ${i.importance_score}점`:ranking==='rising'?`시간당 증가 ${i.growth_per_hour}건`:`확산 점수 ${i.spread_score}`}</span></div></button>`).join('')||empty('선정 조건에 맞는 이슈가 없습니다. TOP 10을 임의로 채우지 않습니다.');
+  const items=(data.rankings[ranking]||[]).map(id=>issueMap.get(id)).filter(Boolean).filter(i=>coverageMatches(i,$('#coverage-filter').value));
+  $('#rankings').innerHTML=items.map((i,n)=>`<button type="button" class="issue" data-issue="${esc(i.id)}"><span class="number">${String(n+1).padStart(2,'0')}</span><div><h3>${esc(i.label)}</h3><span class="badge">CARMGZ ${esc(i.carmgz?.status||'확인 불가')}</span><div class="meta">관련 기사 <b>${i.article_ids.length}</b> · 매체 <b>${new Set(i.article_ids.map(id=>articleMap.get(id)?.publisher)).size}</b>곳 · 3시간 ${i.volume_3h}건</div><span class="score">${ranking==='industry'||ranking==='major'?`산업 중요도 ${i.importance_score}점`:ranking==='rising'?`시간당 증가 ${i.growth_per_hour}건`:`확산 점수 ${i.spread_score}`}</span></div></button>`).join('')||empty('선정 조건에 맞는 이슈가 없습니다. TOP 10을 임의로 채우지 않습니다.');
 }
 
 function renderArticles() {
@@ -46,7 +54,7 @@ function showIssue(id) {
   $('#detail').dataset.expires=String(Math.min(...i.article_ids.map(id=>Date.parse(articleMap.get(id).published_at||articleMap.get(id).first_collected_at)+168*3600000)));
   const reaction = field => i[field]===null?'데이터 없음':`${i[field].toLocaleString()} (${i[field+'_coverage']}/${i.article_count}건 확보)`;
   const ratio=i.growth_ratio_3h===null?'기준 보도량 없음':`${i.growth_ratio_3h.toFixed(2)}배`;
-  $('#detail-body').innerHTML=`<p class="eyebrow">ISSUE DETAIL</p><h2>${esc(i.label)}</h2><p class="meta">표본 내 최초 ${fmt(i.first_published_at)} · ${esc(i.publishers.join(', '))}</p><div class="metrics"><span>1시간 <b>${i.volume_1h}</b>건</span><span>3시간 <b>${i.volume_3h}</b>건</span><span>24시간 <b>${i.volume_24h}</b>건</span><span>직전 3시간 대비 ${ratio}</span><span>산업 중요도 ${i.importance_score}점</span></div><h3>시간별 보도량</h3>${chart(i)}<p class="caption">${fmt(data.generated_at)} 기준 · 실제 독자 관심도를 의미하지 않습니다.</p><p class="meta">전재율: 데이터 없음 · 유사 제목 쌍 비율: ${i.similar_title_pair_ratio===null?'데이터 없음':(i.similar_title_pair_ratio*100).toFixed(1)+'%'}<br>조회수: ${reaction('views')} · 댓글: ${reaction('comments')}</p><p class="meta">통합 근거: ${esc(i.grouping_basis)}<br>산업 중요도: ${esc(i.importance_reasons.map(r=>`${r.criterion} ${r.points}점`).join(' / ')||'해당 규칙 없음')}</p><h3>관련 기사 ${i.article_ids.length}건</h3><ul>${i.article_ids.map(id=>articleMap.get(id)).filter(Boolean).map(a=>`<li><a href="${link(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a><div class="meta">${esc(a.publisher)} · ${fmt(a.published_at)}</div></li>`).join('')}</ul>`;
+  $('#detail-body').innerHTML=`<p class="eyebrow">ISSUE DETAIL</p><h2>${esc(i.label)}</h2><p class="meta">표본 내 최초 ${fmt(i.first_published_at)} · ${esc(i.publishers.join(', '))}</p><div class="metrics"><span>1시간 <b>${i.volume_1h}</b>건</span><span>3시간 <b>${i.volume_3h}</b>건</span><span>24시간 <b>${i.volume_24h}</b>건</span><span>직전 3시간 대비 ${ratio}</span><span>산업 중요도 ${i.importance_score}점</span></div><h3>시간별 보도량</h3>${chart(i)}<p class="caption">${fmt(data.generated_at)} 기준 · 실제 독자 관심도를 의미하지 않습니다.</p><p class="meta">전재율: 데이터 없음 · 유사 제목 쌍 비율: ${i.similar_title_pair_ratio===null?'데이터 없음':(i.similar_title_pair_ratio*100).toFixed(1)+'%'}<br>조회수: ${reaction('views')} · 댓글: ${reaction('comments')}</p><p class="meta">통합 근거: ${esc(i.grouping_basis)}<br>산업 중요도: ${esc(i.importance_reasons.map(r=>`${r.criterion} ${r.points}점`).join(' / ')||'해당 규칙 없음')}</p>${coverageDetail(i)}<h3>관련 기사 ${i.article_ids.length}건</h3><ul>${i.article_ids.map(id=>articleMap.get(id)).filter(Boolean).map(a=>`<li><a href="${link(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a><div class="meta">${esc(a.publisher)} · ${fmt(a.published_at)}</div></li>`).join('')}</ul>`;
   $('#detail').showModal();
 }
 
@@ -70,6 +78,10 @@ function render() {
   const selected=$('#publisher').value;
   $('#publisher').innerHTML='<option value="">전체 언론사</option>'+[...new Set(data.articles.map(a=>a.publisher))].sort().map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');$('#publisher').value=selected;
   renderRankings();renderArticles();
+  for(const [id,status] of [['uncovered','미보도'],['followups','후속 보도 검토']]) {
+    const items=[...issueMap.values()].filter(i=>i.carmgz?.status===status).sort((a,b)=>b.importance_score-a.importance_score).slice(0,10);
+    $('#'+id).innerHTML=items.map(i=>`<button class="brief" data-issue="${esc(i.id)}">${esc(i.label)}</button>`).join('')||empty('확인된 해당 이슈 없음. 검색 불완전은 미보도로 판정하지 않습니다.');
+  }
   $('#briefings').innerHTML=data.briefings.map((b,n)=>`<button class="brief" data-brief="${n}"><strong>${fmt(b.scheduled_at)} ${b.kind==='am'?'오전':'오후'} 브리핑 ↗</strong><span class="meta">생성 ${fmt(b.generated_at)} · ${Math.round(b.delayed_minutes)}분 지연</span></button>`).join('')||empty('저장된 브리핑이 없습니다.');
   $('#alerts').innerHTML=data.alerts.slice(0,10).map(a=>`<button class="brief" data-issue="${esc(a.issue_id)}"><strong>${esc(issueMap.get(a.issue_id)?.label)}</strong><span class="meta">${fmt(a.created_at)} · 후보 저장 / 미발송<br>${esc(a.reasons.join(' · '))}</span></button>`).join('')||empty('탐지 조건에 맞는 긴급 이슈 후보가 없습니다.');
   const status={deferred_budget:'시간 예산 보류',collected:'정상',empty_feed:'빈 피드',failed:'실패',held:'권한 보류',no_confirmed_feed:'RSS 미확인',stale_feed:'오래된 피드',not_verified:'미검증',excluded:'제외'};
@@ -83,6 +95,7 @@ async function load() {
   catch(error){$('#status').textContent='데이터를 불러오지 못했습니다';$('#notice').textContent='dashboard.json이 아직 생성되지 않았거나 네트워크 오류가 있습니다. 운영 명령을 실행한 뒤 다시 시도하세요.';}
 }
 document.addEventListener('click', e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.ranking){ranking=b.dataset.ranking;renderRankings();}if(b.dataset.issue){if($('#detail').open)$('#detail').close();showIssue(b.dataset.issue);}if(b.dataset.brief!==undefined)showBrief(Number(b.dataset.brief));});
+$('#coverage-filter').addEventListener('change',renderRankings);
 $('#close').addEventListener('click',()=>$('#detail').close());
 $('#reload').addEventListener('click',load);
 $('#filters').addEventListener('input',()=>{page=30;renderArticles();});
