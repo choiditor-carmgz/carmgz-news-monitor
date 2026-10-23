@@ -10,7 +10,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#yna",
-    "homepage": "https://www.yna.co.kr/rss/index",
+    "homepage": "https://www.yna.co.kr/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:43.108116+00:00",
@@ -57,7 +57,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#newsis",
-    "homepage": "https://nwww.newsis.com/RSS/",
+    "homepage": "https://www.newsis.com/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:43.109118+00:00",
@@ -149,7 +149,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#khan",
-    "homepage": "https://www.khan.co.kr/company/sub03_2.html",
+    "homepage": "https://www.khan.co.kr/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:45.319870+00:00",
@@ -267,7 +267,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#mk",
-    "homepage": "https://www.mk.co.kr/rss",
+    "homepage": "https://www.mk.co.kr/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:46.099665+00:00",
@@ -290,7 +290,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#hankyung",
-    "homepage": "https://www.hankyung.com/feed",
+    "homepage": "https://www.hankyung.com/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:47.466044+00:00",
@@ -316,7 +316,7 @@
     "previous_candidates": [
       "https://www.sedaily.com/RSS/All"
     ],
-    "homepage": "https://www.sedaily.com/rss",
+    "homepage": "https://www.sedaily.com/",
     "status": "UNSUPPORTED",
     "verification": {
       "checked_at": "2026-10-23T07:15:47.607909+00:00",
@@ -342,7 +342,7 @@
     "previous_candidates": [
       "https://www.fnnews.com/rss/fn_realnews_all.xml"
     ],
-    "homepage": "https://busan.fnnews.com/rss",
+    "homepage": "https://www.fnnews.com/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:47.790611+00:00",
@@ -526,7 +526,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#sbs",
-    "homepage": "https://news.sbs.co.kr/news/rss.do",
+    "homepage": "https://news.sbs.co.kr/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:50.186904+00:00",
@@ -618,7 +618,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#etnews",
-    "homepage": "https://www.etnews.com/rss/",
+    "homepage": "https://www.etnews.com/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:52.125137+00:00",
@@ -808,7 +808,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#etoday",
-    "homepage": "https://www.etoday.co.kr/rss/",
+    "homepage": "https://www.etoday.co.kr/",
     "status": "ACTIVE",
     "verification": {
       "checked_at": "2026-10-23T07:15:54.322763+00:00",
@@ -831,7 +831,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#itdonga",
-    "homepage": "https://it.donga.com/rss/",
+    "homepage": "https://it.donga.com/",
     "status": "ERROR",
     "verification": {
       "checked_at": "2026-10-23T07:15:54.366635+00:00",
@@ -900,7 +900,7 @@
     "permission": "public_feed_policy_check",
     "alternative": null,
     "investigation_reference": "reports/discovery.json#pressian",
-    "homepage": "https://www.pressian.com/rss",
+    "homepage": "https://www.pressian.com/",
     "status": "UNSUPPORTED",
     "verification": {
       "checked_at": "2026-10-23T07:15:54.528777+00:00",

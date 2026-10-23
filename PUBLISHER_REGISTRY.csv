@@ -1,19 +1,19 @@
 ﻿번호,언론사,유형,공식주소,수집주소,주소확인출처,상태,수집설정,확인시각,HTTP,파싱,제한원인
-1,연합뉴스,통신,https://www.yna.co.kr/rss/index,https://www.yna.co.kr/rss/news.xml,https://www.yna.co.kr/rss/index,ACTIVE,True,2026-10-23T07:15:43.108116+00:00,200,True,
+1,연합뉴스,통신,https://www.yna.co.kr/,https://www.yna.co.kr/rss/news.xml,https://www.yna.co.kr/rss/index,ACTIVE,True,2026-10-23T07:15:43.108116+00:00,200,True,
 2,뉴스1,통신,https://www.news1.kr/,,https://www.news1.kr/,UNSUPPORTED,False,2026-10-23T07:15:43.109118+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
-3,뉴시스,통신,https://nwww.newsis.com/RSS/,https://www.newsis.com/RSS/industry.xml,https://nwww.newsis.com/RSS/,ACTIVE,True,2026-10-23T07:15:43.109118+00:00,200,True,
+3,뉴시스,통신,https://www.newsis.com/,https://www.newsis.com/RSS/industry.xml,https://nwww.newsis.com/RSS/,ACTIVE,True,2026-10-23T07:15:43.109118+00:00,200,True,
 4,조선일보,종합,https://www.chosun.com/,https://www.chosun.com/arc/outboundfeeds/rss/?outputType=xml,https://www.chosun.com/,UNSUPPORTED,False,2026-10-23T07:15:43.110124+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 5,중앙일보,종합,https://www.joongang.co.kr/,,https://www.joongang.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:43.110124+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 6,동아일보,종합,https://www.donga.com/,https://rss.donga.com/total.xml,https://www.donga.com/,ACTIVE,True,2026-10-23T07:15:43.111126+00:00,200,True,
-7,경향신문,종합,https://www.khan.co.kr/company/sub03_2.html,https://www.khan.co.kr/rss/rssdata/total_news.xml,https://www.khan.co.kr/company/sub03_2.html,ACTIVE,True,2026-10-23T07:15:45.319870+00:00,200,True,
+7,경향신문,종합,https://www.khan.co.kr/,https://www.khan.co.kr/rss/rssdata/total_news.xml,https://www.khan.co.kr/company/sub03_2.html,ACTIVE,True,2026-10-23T07:15:45.319870+00:00,200,True,
 8,한겨레,종합,https://www.hani.co.kr/,https://www.hani.co.kr/rss/,https://www.hani.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:45.417114+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 9,한국일보,종합,https://www.hankookilbo.com/,,https://www.hankookilbo.com/,UNSUPPORTED,False,2026-10-23T07:15:45.461892+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 10,서울신문,종합,https://www.seoul.co.kr/,https://www.seoul.co.kr/xml/rss/google_flash_seoul.xml,https://www.seoul.co.kr/,ACTIVE,True,2026-10-23T07:15:45.608034+00:00,200,True,
 11,국민일보,종합,https://www.kmib.co.kr/,https://www.kmib.co.kr/rss/data/kmibRssAll.xml,https://www.kmib.co.kr/,ACTIVE,True,2026-10-23T07:15:45.971846+00:00,200,True,
-12,매일경제,경제,https://www.mk.co.kr/rss,https://www.mk.co.kr/rss/40300001/,https://www.mk.co.kr/rss,ACTIVE,True,2026-10-23T07:15:46.099665+00:00,200,True,
-13,한국경제,경제,https://www.hankyung.com/feed,https://www.hankyung.com/feed/all-news,https://www.hankyung.com/feed,ACTIVE,True,2026-10-23T07:15:47.466044+00:00,200,True,
-14,서울경제,경제,https://www.sedaily.com/rss,https://www.sedaily.com/rss/newsall,https://www.sedaily.com/rss,UNSUPPORTED,True,2026-10-23T07:15:47.607909+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
-15,파이낸셜뉴스,경제,https://busan.fnnews.com/rss,https://www.fnnews.com/rss/r20/fn_realnews_all.xml,https://busan.fnnews.com/rss,ACTIVE,True,2026-10-23T07:15:47.790611+00:00,200,True,
+12,매일경제,경제,https://www.mk.co.kr/,https://www.mk.co.kr/rss/40300001/,https://www.mk.co.kr/rss,ACTIVE,True,2026-10-23T07:15:46.099665+00:00,200,True,
+13,한국경제,경제,https://www.hankyung.com/,https://www.hankyung.com/feed/all-news,https://www.hankyung.com/feed,ACTIVE,True,2026-10-23T07:15:47.466044+00:00,200,True,
+14,서울경제,경제,https://www.sedaily.com/,https://www.sedaily.com/rss/newsall,https://www.sedaily.com/rss,UNSUPPORTED,True,2026-10-23T07:15:47.607909+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
+15,파이낸셜뉴스,경제,https://www.fnnews.com/,https://www.fnnews.com/rss/r20/fn_realnews_all.xml,https://busan.fnnews.com/rss,ACTIVE,True,2026-10-23T07:15:47.790611+00:00,200,True,
 16,헤럴드경제,경제,https://biz.heraldcorp.com/,https://biz.heraldcorp.com/rss/google/newsAll,https://biz.heraldcorp.com/,ACTIVE,True,2026-10-23T07:15:48.202753+00:00,200,True,
 17,이데일리,경제,https://www.edaily.co.kr/,https://rss.edaily.co.kr/edaily_news.xml,https://www.edaily.co.kr/,ERROR,False,2026-10-23T07:15:49.619833+00:00,200,False,'utf-8' codec can't decode byte 0xc0 in position 623: invalid start byte
 18,아시아경제,경제,https://www.asiae.co.kr/,https://www.asiae.co.kr/rss/all.htm,https://www.asiae.co.kr/,ERROR,False,2026-10-23T07:15:49.736823+00:00,200,False,robots.txt disallows feed access
@@ -21,11 +21,11 @@
 20,연합뉴스TV,방송,https://www.yonhapnewstv.co.kr/,https://www.yonhapnewstv.co.kr/browse/feed/,https://www.yonhapnewstv.co.kr/,ACTIVE,True,2026-10-23T07:15:49.846044+00:00,200,True,
 21,KBS,방송,https://news.kbs.co.kr/,,https://news.kbs.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:49.970906+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 22,MBC,방송,https://imnews.imbc.com/,,https://imnews.imbc.com/,ERROR,False,2026-10-23T07:15:50.108650+00:00,200,False,robots.txt disallows feed access
-23,SBS,방송,https://news.sbs.co.kr/news/rss.do,https://news.sbs.co.kr/news/newsflashRssFeed.do,https://news.sbs.co.kr/news/rss.do,ACTIVE,True,2026-10-23T07:15:50.186904+00:00,200,True,
+23,SBS,방송,https://news.sbs.co.kr/,https://news.sbs.co.kr/news/newsflashRssFeed.do,https://news.sbs.co.kr/news/rss.do,ACTIVE,True,2026-10-23T07:15:50.186904+00:00,200,True,
 24,JTBC,방송,https://news.jtbc.co.kr/,https://fs.jtbc.co.kr/RSS/newsflash.xml,https://news.jtbc.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:51.944629+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 25,MBN,방송,https://www.mbn.co.kr/,https://www.mbn.co.kr/rss/economy/,https://www.mbn.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:51.999204+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 26,YTN,방송,https://www.ytn.co.kr/,,https://www.ytn.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:52.019452+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
-27,전자신문,IT산업,https://www.etnews.com/rss/,https://rss.etnews.com/17.xml,https://www.etnews.com/rss/,ACTIVE,True,2026-10-23T07:15:52.125137+00:00,200,True,
+27,전자신문,IT산업,https://www.etnews.com/,https://rss.etnews.com/17.xml,https://www.etnews.com/rss/,ACTIVE,True,2026-10-23T07:15:52.125137+00:00,200,True,
 28,디지털타임스,IT산업,https://www.dt.co.kr/,https://www.dt.co.kr/feed,https://www.dt.co.kr/,UNSUPPORTED,True,2026-10-23T07:15:52.359168+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 29,ZDNet Korea,IT산업,https://zdnet.co.kr/,https://feeds.feedburner.com/zdkorea,https://zdnet.co.kr/,ERROR,False,2026-10-23T07:15:52.413618+00:00,,False,Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>
 30,오토타임즈,자동차,https://autotimes.co.kr/,,https://autotimes.co.kr/,ERROR,False,2026-10-23T07:15:54.136270+00:00,,False,Policy unavailable: Network failure: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)>
@@ -33,11 +33,11 @@
 32,모터그래프,자동차,https://www.motorgraph.com/,https://cdn.motorgraph.com/rss/allArticle.xml,https://www.motorgraph.com/,EXCLUDED,False,2026-10-23T07:15:54.231723+00:00,,False,
 33,오토데일리,자동차,https://www.autodaily.co.kr/,https://cdn.autodaily.co.kr/rss/gn_rss_allArticle.xml,https://www.autodaily.co.kr/,ACTIVE,True,2026-10-23T07:15:54.231723+00:00,200,True,
 34,데일리카,자동차,https://www.dailycar.co.kr/,,https://www.dailycar.co.kr/,ERROR,False,2026-10-23T07:15:54.280618+00:00,200,False,robots.txt disallows feed access
-35,이투데이,경제,https://www.etoday.co.kr/rss/,https://rss.etoday.co.kr/eto/industry_news.xml,https://www.etoday.co.kr/rss/,ACTIVE,True,2026-10-23T07:15:54.322763+00:00,200,True,
-36,IT동아,IT산업,https://it.donga.com/rss/,https://it.donga.com/feeds/rss/,https://it.donga.com/rss/,ERROR,True,2026-10-23T07:15:54.366635+00:00,200,False,robots.txt disallows feed access
+35,이투데이,경제,https://www.etoday.co.kr/,https://rss.etoday.co.kr/eto/industry_news.xml,https://www.etoday.co.kr/rss/,ACTIVE,True,2026-10-23T07:15:54.322763+00:00,200,True,
+36,IT동아,IT산업,https://it.donga.com/,https://it.donga.com/feeds/rss/,https://it.donga.com/rss/,ERROR,True,2026-10-23T07:15:54.366635+00:00,200,False,robots.txt disallows feed access
 37,노컷뉴스,종합,https://www.nocutnews.co.kr/,https://www.nocutnews.co.kr/rss/all.xml,https://www.nocutnews.co.kr/,ERROR,False,2026-10-23T07:15:54.424383+00:00,406,False,Policy unavailable: HTTP 406: https://www.nocutnews.co.kr/robots.txt
 38,오마이뉴스,종합,https://www.ohmynews.com/,,https://www.ohmynews.com/,UNSUPPORTED,False,2026-10-23T07:15:54.514218+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
-39,프레시안,종합,https://www.pressian.com/rss,https://www.pressian.com/api/v3/site/rss/news,https://www.pressian.com/rss,UNSUPPORTED,True,2026-10-23T07:15:54.528777+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
+39,프레시안,종합,https://www.pressian.com/,https://www.pressian.com/api/v3/site/rss/news,https://www.pressian.com/rss,UNSUPPORTED,True,2026-10-23T07:15:54.528777+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 40,TV조선,방송,https://news.tvchosun.com/,https://news.tvchosun.com/site/data/rss/rss.xml,https://news.tvchosun.com/,UNSUPPORTED,False,2026-10-23T07:15:56.412577+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 41,세계일보,종합,https://www.segye.com/,https://www.segye.com/Articles/RSSList/segye_recent.xml,https://www.segye.com/,ACTIVE,True,2026-10-23T07:15:56.618897+00:00,200,True,
 42,문화일보,종합,https://www.munhwa.com/,,https://www.munhwa.com/,UNSUPPORTED,False,2026-10-23T07:15:57.111328+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보

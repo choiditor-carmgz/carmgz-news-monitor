@@ -125,4 +125,8 @@ python -m http.server 8766 --bind 127.0.0.1 --directory site
 
 Windows 로컬: Python 전체 **70개 통과**(기존 56개 유지+신규 14개), cp1252 strict 전체도 70개 통과. Node **5개 통과**(기존 3+신규 2), `node --check web/app.js` 통과. 네트워크를 가상으로 통과 처리하는 테스트는 운영 실측과 구분했다. 최초 코드 커밋의 GitHub CI는 Ubuntu/Windows/macOS 모두 실제 성공했으며 최종 커밋 결과는 아래 후속 기록에서 확인한다.
 
+최종 기능 코드 `78b4dab`의 [CI 39918511563](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/39918511563)은 Ubuntu·Windows·macOS 모두 실제 성공했다. Windows의 cp1252 전체 회귀 단계도 포함한다. 이후 홈페이지 메타데이터/문서 정리 커밋은 기능 코드가 같으며 해당 CI는 후속 확인한다.
+
+실제 이슈별 TOP 10·기사 수·매체 수·선정 근거는 로컬 `data/implementation/LIVE_RESULTS.md`, JSON/CSV는 `data/implementation/analysis/`에 내보냈다. 기사 제목이 Git 이력에 남지 않도록 커밋하지 않았다.
+
 핵심 변경: `publishers.json`, `coverage.json`, `carmgz/coverage.py`, `carmgz/relevance.py`, `carmgz/rss.py`, `carmgz/multi.py`, `carmgz/analysis.py`, `carmgz/operations.py`, `carmgz/retention.py`, `scripts/verify_publishers.py`, `web/app.js`, `web/index.html`, `tests/test_coverage.py`, `tests/test_multi.py`, `tests/test_dashboard.cjs`, 두 Actions 워크플로. `PUBLISHER_REGISTRY.csv`는 기사 데이터를 포함하지 않는 매체 설정·검증 목록이다.
