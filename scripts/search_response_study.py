@@ -119,6 +119,14 @@ def focused_plan(query):
             for n,(group,q,mode) in enumerate(cases,1)]
 
 
+def fresh_first_plan(nonce):
+    fresh = 'CARMGZDIAG'+nonce
+    cases = [('new',fresh,'normal'),('known','마이홈차저','normal'),
+             ('new',fresh,'normal'),('known','마이홈차저','normal'),('new',fresh,'revalidate')]
+    return [dict(gap=6,mode=mode,group=group,query=q,repeat=n)
+            for n,(group,q,mode) in enumerate(cases,1)]
+
+
 def study(client, cases):
     rows = []
     consecutive_invalid = 0
@@ -182,7 +190,13 @@ def main():
     focus = os.environ.get('FOCUS_QUERY','').strip()
     if len(focus)>80 or any(ord(c)<32 for c in focus):
         raise ValueError('Focus must be a short public search phrase')
-    result = study(StudyClient(load_config()),focused_plan(focus) if focus else plan(str(time.time_ns())))
+    order = os.environ.get('STUDY_ORDER', 'focused' if focus else 'spacing')
+    if order not in ('focused','spacing','fresh-first') or (order=='focused' and not focus):
+        raise ValueError('Choose a supported study order and a nonempty focused phrase')
+    nonce = str(time.time_ns())
+    cases = focused_plan(focus) if order=='focused' else fresh_first_plan(nonce) if order=='fresh-first' else plan(nonce)
+    result = study(StudyClient(load_config()),cases)
+    result['profile'] = order
     Path(sys.argv[1]).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({k:v for k,v in result.items() if k!='rows'}))
     return 0 if result['stop_reason']=='plan_completed' else 1

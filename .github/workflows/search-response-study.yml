@@ -2,6 +2,11 @@ name: CARMGZ bounded response study
 on:
   workflow_dispatch:
     inputs:
+      order:
+        description: 'Bounded comparison order'
+        type: choice
+        options: [spacing, focused, fresh-first]
+        default: spacing
       focus_query:
         description: 'Optional short public phrase for normal / revalidation / normal comparison; blank selects spacing study'
         type: string
@@ -24,8 +29,9 @@ jobs:
           python-version: '3.12'
       - name: Bounded spacing and standard cache-revalidation controls
         env:
-          # Recheck the exact failed public probe on branch pushes; manual runs can select a phrase.
-          FOCUS_QUERY: ${{ github.event_name == 'push' && 'CARMGZDIAG1792821673991091348' || inputs.focus_query }}
+          # Counterbalance the first failing study's known-first request order.
+          STUDY_ORDER: ${{ github.event_name == 'push' && 'fresh-first' || inputs.order }}
+          FOCUS_QUERY: ${{ inputs.focus_query }}
         run: python scripts/search_response_study.py response-study.json
       - uses: actions/upload-artifact@v4
         if: always()
