@@ -11,7 +11,7 @@
 - 정규화 후 **503은 해결됐다.** 이후 `assertion_present=true`, `jwt_error=ERR_JWT_CLAIM_VALIDATION_FAILED`, `claim=aud`가 확인됐다.
 - `audience_original_hex_tag=false`, `audience_normalized_hex_tag=false`: 현재 Production AUD는 단순 JSON 따옴표 정규화 후에도 64자리 hex 태그 형식이 아니며 실제 로그인 JWT의 aud와도 다르다. Secret 값·JWT·실제 claim 값은 출력하지 않았다.
 
-따라서 503의 원인은 Secret 미등록이 아니라 **팀 도메인 형식에 대한 코드의 지나치게 엄격한 가정**이었다. 추가로 **기존 Production AUD 값 불일치**가 드러났다. 토큰의 aud를 자동 신뢰하거나 audience 검증을 제거하여 이를 우회하지 않는다. 현재 인증된 요청은 이 불일치 때문에 HTTP 403이며, 전체 서비스 정상화를 완료했다고 주장하지 않는다.
+따라서 503의 원인은 Secret 미등록이 아니라 **팀 도메인 형식에 대한 코드의 지나치게 엄격한 가정**이었다. 추가로 **기존 Production AUD 값 불일치**가 드러났다. 토큰의 aud를 자동 신뢰하거나 audience 검증을 제거하여 이를 우회하지 않았다. 이후 사용자가 기존 AUD 태그를 다시 확인하여 Production CF_ACCESS_AUD를 수정했고, 재배포 후 실제 JWT 검증과 HTML/JSON 로딩 모두 성공했다. 위 불일치 진단은 수정 전의 실측 기록이다.
 
 ## 실제 조사한 배포 경로
 
@@ -19,8 +19,8 @@
 - 기존 인증 Worker는 deploy job에서 `pnpm run build:guard`로 생성되므로 원래 dashboard-preview에는 들어 있지 않았다. Wrangler에는 생성한 Worker를 포함한 `cloudflare-dist/`를 전달했다. 원래 503 고유 문구 자체도 Worker 실행의 증거다.
 - 저장소에 별도 Wrangler 설정 파일은 없다. 실제 명령은 `wrangler pages deploy cloudflare-dist --project-name carmgz-news-monitor --branch main`이며 기존 프로젝트의 Production branch가 main이므로 Production binding을 선택한다. Workers의 별도 프로젝트로 배포하는 경로가 아니다.
 - [읽기 전용 진단 40050103904](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40050103904): 프로젝트 Production 설정, canonical 배포, deployment 상세에 두 Secret 이름이 모두 존재한다. canonical environment=production, branch=main. Preview binding은 없었다. Preview Access 정책과 Preview 런타임 binding은 서로 별개다.
-- [최종 런타임 배포 40050685330](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40050685330)은 새 브랜치의 Worker와 **기존 #18 아티팩트**를 사용했다. operate·DB 복원·수집·상태 회전은 모두 실행하지 않았다. main Git 코드는 변경/병합하지 않았다. 같은 기존 Production 프로젝트에 런타임 수정본을 배포했다.
-- 실제 배포 URL은 `https://ee3b49de.carmgz-news-monitor.pages.dev`이며 배포 후 대표 주소의 런타임에서 수정본을 확인했다.
+- [최종 런타임 배포 40050995328](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40050995328)은 사용자 AUD 수정 후 새 브랜치의 Worker와 **기존 #18 아티팩트**를 사용했다. operate·DB 복원·수집·상태 회전은 모두 실행하지 않았다. main Git 코드는 변경/병합하지 않았다. 같은 기존 Production 프로젝트에 런타임 수정본을 배포했다.
+- 최종 배포 URL은 `https://441105d0.carmgz-news-monitor.pages.dev`이며 배포 후 대표 주소의 런타임에서 수정본을 확인했다.
 - 새 `cloudflare-deployment-bundle` 아티팩트에는 `_worker.js`, `_routes.json`, HTML/JS/CSS, `dashboard.json` 전부가 포함된다. `_routes.json`은 `include=["/*"]`, `exclude=[]`이다.
 - 원본 #18과 최종 업로드 JSON의 SHA-256은 둘 다 `a6b29bbde6319383f118e475d33e432b0ac7bd4cc8425e4df0c44cf87166860e`로 동일하다. 뉴스 데이터를 수정하거나 새로 생성하지 않았다.
 
@@ -39,15 +39,19 @@
 | 대표 주소, 익명 HTML | HTTP 302, Access 로그인으로 차단 |
 | 대표 주소 `/dashboard.json`, 익명 | HTTP 302, 데이터 미제공 |
 | 대표 주소 JSON, 위조 Cf-Access-Jwt-Assertion | HTTP 302, 데이터 미제공 |
-| 로그인 브라우저, 수정본 진단 경로 | HTTP 403, 실제 JWT aud와 설정값 불일치 확인 |
+| 최종 hash 주소 HTML·JSON, 익명 | 각각 HTTP 302, 데이터 미제공 |
+| 로그인 브라우저, 수정 전 AUD 진단 | HTTP 403, 실제 JWT aud와 설정값 불일치 확인 |
+| 사용자 AUD 수정·재배포 후 로그인 진단 | authenticated=true, team/audience/ASSETS 존재, 정규화와 서명·issuer·audience 검증 성공 |
+| 로그인 브라우저, 대표 주소 HTML | 수집 결과 확인됨. 실제 기사 213건·이슈 177개·주요 TOP 10 10개 표시. console error 0 |
+| 로그인 브라우저, `/dashboard.json` 직접 탐색 | 실제 JSON 반환: real_rss, 168시간 보존, 기사 213·이슈 177, 주요/확산/산업 각 10, 급상승 0 |
 
-CI 녹색은 업로드 성공의 증거이며 위 표의 인증된 요청 성공을 대신하지 않는다. 현재 인증된 HTML·JSON HTTP 200은 **미완료**다.
+CI 녹색과 별개로 위 실제 운영 브라우저·직접 JSON 요청까지 검증했다. 대시보드 스크린샷은 로컬 `logs/cloudflare-runtime-fixed.jpg`에 보관했다. CARMGZ 상태는 원본 데이터의 `확인 불가`를 표시하며 배포 복구 과정에서 판정을 변경하지 않았다.
 
-## 추가로 필요한 사용자 작업
+## 사용자 설정 및 남은 작업
 
-Cloudflare Pages → 기존 `carmgz-news-monitor` → Production의 **CF_ACCESS_AUD 값만** 기존 대표 주소 Access 앱의 **Application Audience (AUD) Tag**와 대조·수정한다. 토큰 식별 ID, 앱 ID, 변수 이름, Bearer 문자열을 넣지 않는다. 실제 값은 채팅·로그에 보내지 않는다. 기존 허용 이메일·Access 정책·GitHub Secrets를 바꿀 필요는 없다.
+**완료:** 사용자가 Cloudflare Pages → 기존 `carmgz-news-monitor` → Production의 CF_ACCESS_AUD를 기존 Access 앱의 AUD 태그로 수정했다고 알렸고, 새 배포에서 실제 일치를 확인했다. 값은 채팅·로그·코드에 남기지 않았다. 추가적인 Secret 재등록이나 Access 정책 변경은 필요하지 않다.
 
-Secret 변경은 다음 배포부터 적용될 수 있으므로, 수정 후 이 브랜치의 News operations에서 `redeploy_run_id=40049548784`로 기존 데이터만 재배포한다. Secret 변경을 확인하지 못한 상태에서 자동으로 재등록하거나 정책을 변경하지 않았다. 해당 아티팩트가 만료됐으면 다른 성공한 main 실행의 아티팩트 ID를 선택해야 한다.
+Secret 변경 반영을 위해 이 브랜치의 News operations에서 `redeploy_run_id=40049548784`로 기존 데이터를 재배포했다. 향후 이 수동 모드를 사용할 때 아티팩트가 만료됐다면 다른 성공한 main 실행을 선택해야 한다.
 
 수정 브랜치는 main에 병합하지 않았다. main의 기존 Worker가 예약 배포되면 런타임 수정본이 다시 덮어써질 수 있으므로, PR 검토 후 사용자가 병합해야 이후 자동 배포에도 코드 수정이 유지된다.
 
