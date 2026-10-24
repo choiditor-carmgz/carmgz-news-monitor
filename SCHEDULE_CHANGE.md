@@ -36,3 +36,5 @@
 14일을 UTC 분 단위로 순회하며 실제 workflow cron의 KST 변환과 내부 슬롯 집합을 대조하고, 각 시각에 정확히 하나의 트리거만 있는지 검사했다. 금요일 00/22시, 토요일 09시, 일요일 21시, 월요일 00/08시의 UTC 날짜를 별도로 검증했다. 평일·주말 가상 RSS 통합 테스트는 야간 신규 기사 회수·재수집 중복 방지·브리핑 시 RSS 호출 금지·마지막 정상 수집 시각·dashboard.json 생성을 검증했다.
 
 로컬 전체 Python **95개**, Node **13개** 통과. 실제 예약 실행은 default branch에 병합한 후 적용되며 개발 브랜치의 테스트 성공을 새 일정의 실제 정기 실행 이력으로 주장하지 않는다. 운영 데이터에 테스트 기사를 넣거나 실제 수집·배포를 시험 실행하지 않았다.
+
+GitHub 서버가 새 timezone 문법을 파싱한 [읽기 전용 기존 진단 실행 40056400701](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40056400701)은 성공했고, 수집·배포 job은 skipped다. 최종 테스트 보강 커밋 `8a5410c`의 [push CI 40056600769](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40056600769)와 [PR CI 40056604163](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40056604163)는 Windows·macOS·Ubuntu 모두 성공했다. 각 OS Python 95개·Node 13개·Worker 번들 생성, Windows cp1252 strict 검사까지 통과했다.
