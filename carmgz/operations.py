@@ -131,7 +131,7 @@ def briefing(db, report, kind, scheduled, at, last_collection):
                    delayed_minutes=max(0, (at-scheduled).total_seconds()/60),
                    expires_at=min(deadlines+[at+timedelta(hours=168)]).isoformat(),
                    rankings=ranking_ids,
-                   coverage_lists={status:[i['id'] for i in rank(current) if i.get('carmgz',{}).get('display_status',i.get('carmgz',{}).get('status'))==status] for status in ('검색 범위 내 미발견','후속 보도 검토')},
+                   coverage_lists={status:[i['id'] for i in sorted(current,key=lambda i:(-i['importance_score'],i['id'])) if i.get('carmgz',{}).get('display_status',i.get('carmgz',{}).get('status'))==status][:10] for status in ('검색 범위 내 미발견','후속 보도 검토')},
                    entries={i['id']:dict(label=i['label'],article_count=i['article_count'],publishers=i['independent_publishers'],carmgz=i.get('carmgz')) for i in current},
                    changes=changes,
                    follow_up=[dict(issue_id=i['id'], reason='원문·정책/안전 영향 확인 필요') for i in current if i.get('score_components',{}).get('impact',i['importance_score']) >= 25])
