@@ -50,6 +50,7 @@ test('Pages Secret bare team domain and surrounding whitespace normalize to the 
     assert.equal(response.status,200);
     assert.equal((await response.json()).data_kind,'real_rss');
   }
+  assert.equal((await handler(request('/',jwt),{...env,CF_ACCESS_AUD:'"test-aud"'})).status,200);
 });
 
 test('normalization rejects other origins, protocols and URL paths without serving assets',async()=>{

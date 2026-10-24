@@ -8,11 +8,18 @@ export function accessConfig(env) {
   const team = rawTeam.trim().replace(/\/$/, '');
   const issuer = team.startsWith('https://') ? team : `https://${team}`;
   const valid = /^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(issuer);
-  return {issuer, audience: rawAudience.trim(), flags: {
+  let audience = rawAudience.trim();
+  // Accept a JSON-quoted copy of the configured tag, never infer an audience from a JWT.
+  if (audience.startsWith('"')) {
+    try { const parsed = JSON.parse(audience); if (typeof parsed === 'string') audience = parsed.trim(); } catch {}
+  }
+  return {issuer, audience, flags: {
     team_present: Boolean(rawTeam), audience_present: Boolean(rawAudience),
     team_original_format_valid: /^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com\/?$/.test(rawTeam),
     team_normalized_valid: valid, audience_nonempty: Boolean(rawAudience.trim()),
     audience_json_array: rawAudience.trim().startsWith('['),
+    audience_original_hex_tag: /^[a-f0-9]{64}$/i.test(rawAudience.trim()),
+    audience_normalized_hex_tag: /^[a-f0-9]{64}$/i.test(audience),
     assets_present: typeof env.ASSETS?.fetch === 'function',
   }};
 }
