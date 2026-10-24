@@ -1,15 +1,16 @@
 name: News operations
 on:
   schedule:
-    # Asia/Seoul weekday 01:15..23:15 (UTC crosses the previous day).
-    - cron: '15 16,18,20,22 * * 0-4'
-    - cron: '15 0,2,4,6,8,10,12,14 * * 1-5'
-    # Asia/Seoul weekend 00:15,06:15,12:15,18:15.
-    - cron: '15 15,21 * * 5,6'
-    - cron: '15 3,9 * * 0,6'
-    # Briefing wakeups: weekday 09:00, every day 17:00 KST.
-    - cron: '0 0 * * 1-5'
-    - cron: '0 8 * * *'
+    # Collection start targets; dashboard updates after collection/analysis/deployment.
+    - cron: '0 0,8,10,12,14,16,18,20,22 * * 1-5'
+      timezone: 'Asia/Seoul'
+    - cron: '0 9,15,21 * * 0,6'
+      timezone: 'Asia/Seoul'
+    # Preserve briefing times without adding RSS collection runs.
+    - cron: '0 9 * * 1-5'
+      timezone: 'Asia/Seoul'
+    - cron: '0 17 * * *'
+      timezone: 'Asia/Seoul'
   workflow_dispatch:
     inputs:
       redeploy_run_id:
@@ -95,7 +96,7 @@ jobs:
       - name: Collect, expire, analyze, brief and build dashboard
         id: operate
         env:
-          OPERATION_MODE: ${{ inputs.mode || 'scheduled' }}
+          OPERATION_MODE: ${{ github.event_name == 'schedule' && contains(fromJSON('["0 9 * * 1-5","0 17 * * *"]'), github.event.schedule) && 'refresh' || inputs.mode || 'scheduled' }}
         run: python -m carmgz.operations --mode "$OPERATION_MODE"
       - name: Validate snapshot before upload
         if: always() && steps.restore.outcome == 'success'

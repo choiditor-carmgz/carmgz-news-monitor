@@ -46,25 +46,58 @@ class ScheduleTests(unittest.TestCase):
             due=slots(a-timedelta(microseconds=1),b)
             collect=[t.astimezone(KST).strftime('%H:%M') for t,k in due if k=='collect']
             weekday=a.weekday()<5
-            self.assertEqual(collect,[f'{h:02}:15' for h in (range(1,24,2) if weekday else (0,6,12,18))])
+            self.assertEqual(collect,[f'{h:02}:00' for h in ((0,8,10,12,14,16,18,20,22) if weekday else (9,15,21))])
             self.assertEqual([t.astimezone(KST).strftime('%H:%M') for t,k in due if k=='am'], ['09:00'] if weekday else [])
             self.assertEqual([t.astimezone(KST).strftime('%H:%M') for t,k in due if k=='pm'], ['17:00'])
 
-    def test_utc_workflow_cron_matches_schedule(self):
+    def test_timezone_workflow_cron_matches_schedule_and_utc_boundaries(self):
         import re
         cron=re.findall(r"cron: '([^']+)'",Path('.github/workflows/operations.yml').read_text(encoding='utf-8'))
+        self.assertEqual(Path('.github/workflows/operations.yml').read_text(encoding='utf-8').count("timezone: 'Asia/Seoul'"),len(cron))
         def match(spec,value):
             return spec=='*' or any(value in range(int(part.split('-')[0]),int(part.split('-')[-1])+1) if '-' in part else value==int(part) for part in spec.split(','))
         start=datetime(2026,10,18,tzinfo=timezone.utc)
         expected={t for t,k in slots(start-timedelta(microseconds=1),start+timedelta(days=14)-timedelta(microseconds=1))}
         observed=set()
+        trigger_counts={}
         for minute in range(14*24*60):
             t=start+timedelta(minutes=minute)
+            local=t.astimezone(KST)
             for spec in cron:
                 m,h,_,_,dow=spec.split()
-                if match(m,t.minute) and match(h,t.hour) and match(dow,(t.weekday()+1)%7):
+                if match(m,local.minute) and match(h,local.hour) and match(dow,(local.weekday()+1)%7):
                     observed.add(t)
+                    trigger_counts[t]=trigger_counts.get(t,0)+1
         self.assertEqual(observed,expected)
+        self.assertTrue(all(n==1 for n in trigger_counts.values()), 'Duplicate schedule triggers')
+
+    def test_friday_to_monday_utc_boundaries_and_no_overnight_collection(self):
+        for local_text,utc_text in [
+            ('2026-10-23T00:00','2026-10-22T15:00'),
+            ('2026-10-23T22:00','2026-10-23T13:00'),
+            ('2026-10-24T09:00','2026-10-24T00:00'),
+            ('2026-10-25T21:00','2026-10-25T12:00'),
+            ('2026-10-26T00:00','2026-10-25T15:00'),
+            ('2026-10-26T08:00','2026-10-25T23:00')]:
+            t=datetime.fromisoformat(local_text).replace(tzinfo=KST)
+            self.assertEqual(t.astimezone(timezone.utc),datetime.fromisoformat(utc_text).replace(tzinfo=timezone.utc))
+            self.assertIn((t.astimezone(timezone.utc),'collect'),slots(t-timedelta(microseconds=1),t))
+        for day in (23,24,25,26):
+            for hour in range(1,8):
+                t=datetime(2026,10,day,hour,tzinfo=KST)
+                self.assertFalse(any(k=='collect' for _,k in slots(t-timedelta(microseconds=1),t)))
+        for day in (24,25):
+            t=datetime(2026,10,day,tzinfo=KST)
+            self.assertFalse(any(k=='collect' for _,k in slots(t-timedelta(microseconds=1),t)))
+
+    def test_workflow_briefing_only_refresh_keeps_manual_modes_and_deployment(self):
+        text=Path('.github/workflows/operations.yml').read_text(encoding='utf-8')
+        self.assertIn('github.event_name == \'schedule\' && contains(fromJSON(\'["0 9 * * 1-5","0 17 * * *"]\'), github.event.schedule)',text)
+        self.assertIn("&& 'refresh' || inputs.mode || 'scheduled'",text)
+        for feature in ('workflow_dispatch:', 'initialize:', 'diagnose_auth:', 'redeploy_run_id:',
+                        'options: [scheduled, collect, am, pm, refresh]',
+                        'wrangler pages deploy cloudflare-dist --project-name carmgz-news-monitor --branch main'):
+            self.assertIn(feature,text)
 
 
 class RetentionTests(unittest.TestCase):
@@ -134,6 +167,37 @@ class RuntimeTests(unittest.TestCase):
         def __init__(self,*args): self.evidence=[];self.policy_result='allowed'
         def fetch(self,url):
             return f'<rss><channel><item><title>현대차 전기차 공급</title><link>https://example.org/new</link><pubDate>{NOW.isoformat()}</pubDate><guid>new</guid></item><item><title>현대차 날짜 없음</title><link>https://example.org/unknown</link></item></channel></rss>'.encode()
+
+    def test_morning_feed_catchup_and_briefing_refresh_without_extra_collection(self):
+        for weekend in (False,True):
+            morning=NOW.astimezone(KST).replace(hour=9 if weekend else 8,minute=0,second=0,microsecond=0)
+            while morning>NOW or (morning.weekday()>=5)!=weekend:
+                morning-=timedelta(days=1)
+            previous=morning.replace(hour=0) if not weekend else (morning-timedelta(days=1)).replace(hour=22 if morning.weekday()==5 else 21)
+            published=[previous-timedelta(minutes=10),morning-timedelta(hours=2)]
+            class NightClient:
+                count=1
+                def __init__(self,*args): self.evidence=[];self.policy_result='allowed'
+                def fetch(self,url):
+                    items=''.join(f'<item><title>현대차 전기차 기사 {i}</title><link>https://example.org/night/{i}</link><guid>night-{i}</guid><pubDate>{published[i].isoformat()}</pubDate></item>' for i in range(self.count))
+                    return ('<rss><channel>'+items+'</channel></rss>').encode()
+            class NoRSS:
+                def __init__(self,*args): raise AssertionError('Briefing-only refresh must not collect RSS')
+            with tempfile.TemporaryDirectory() as d:
+                path=Path(d)/'db';out=Path(d)/'site'
+                first=run(CFG,path,[SOURCE],out,'scheduled',previous,NightClient)
+                NightClient.count=2
+                second=run(CFG,path,[SOURCE],out,'scheduled',morning,NightClient)
+                self.assertEqual(len(second['articles']),2)
+                self.assertEqual(second['catchup']['since'],first['last_collection_at'])
+                self.assertIn('RSS',second['catchup']['limitation'])
+                again=run(CFG,path,[SOURCE],out,'scheduled',morning,NightClient)
+                self.assertEqual(len(again['articles']),2)
+                brief_at=morning.replace(hour=17 if weekend else 9)
+                refreshed=run(CFG,path,[SOURCE],out,'refresh',brief_at,NoRSS)
+                self.assertEqual(refreshed['last_collection_at'],again['last_collection_at'])
+                self.assertTrue(any(b['kind']==('pm' if weekend else 'am') and b['scheduled_at']==brief_at.astimezone(timezone.utc).isoformat() for b in refreshed['briefings']))
+                self.assertTrue((out/'dashboard.json').exists())
     def test_restart_new_runner_backup_and_no_duplicates(self):
         with tempfile.TemporaryDirectory() as d:
             path=Path(d)/'db';out=Path(d)/'site'
