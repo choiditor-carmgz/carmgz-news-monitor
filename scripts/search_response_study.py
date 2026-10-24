@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -110,6 +111,14 @@ def plan(nonce):
     return result
 
 
+def focused_plan(query):
+    # Same URL across normal/revalidation/normal requests; do not rotate hosts or identity.
+    cases = [('known','마이홈차저','normal'),('probe',query,'normal'),
+             ('probe',query,'revalidate'),('probe',query,'normal'),('known','마이홈차저','normal')]
+    return [dict(gap=6,mode=mode,group=group,query=q,repeat=n)
+            for n,(group,q,mode) in enumerate(cases,1)]
+
+
 def study(client, cases):
     rows = []
     consecutive_invalid = 0
@@ -170,7 +179,10 @@ def study(client, cases):
 
 
 def main():
-    result = study(StudyClient(load_config()),plan(str(time.time_ns())))
+    focus = os.environ.get('FOCUS_QUERY','').strip()
+    if len(focus)>80 or any(ord(c)<32 for c in focus):
+        raise ValueError('Focus must be a short public search phrase')
+    result = study(StudyClient(load_config()),focused_plan(focus) if focus else plan(str(time.time_ns())))
     Path(sys.argv[1]).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({k:v for k,v in result.items() if k!='rows'}))
     return 0 if result['stop_reason']=='plan_completed' else 1
