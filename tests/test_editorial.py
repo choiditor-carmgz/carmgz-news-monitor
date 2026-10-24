@@ -150,5 +150,35 @@ class EditorialTests(unittest.TestCase):
         self.assertEqual(display_status(dict(checked_at=NOW.isoformat(),search_success=False)),'검색 실패')
         self.assertEqual(display_status(dict(checked_at=NOW.isoformat(),search_success=True)),'검색 범위 내 미발견')
 
+    def test_unanticipated_events_group_without_hand_written_rules(self):
+        import carmgz.analysis as analysis
+        with patch.object(analysis,'EVENTS',[]):
+            rows=[story("마세라티코리아, 국내 단 1대 '그레칼레 크리스탈로' 출시",'a',publisher='매체A'),
+                  story('마세라티 ‘그레칼레 크리스탈로’ 국내 단 1대 출시⋯330마력·제로백 5.3초','b',publisher='매체B'),
+                  story('마세라티, 돌로미티 담은 그레칼레 크리스탈로 국내 한 대 한정 출시','c',publisher='매체C'),
+                  story('지커, 7X 국내 인도 시작…1호 고객은 SK온','d',publisher='매체A'),
+                  story('지커, SK온 1호 고객 맞이하며 7X 국내 인도 개시','e',publisher='매체B')]
+            sizes=sorted(i['article_count'] for i in build_issues(rows,NOW))
+            self.assertEqual(sizes,[2,3])
+
+    def test_generic_grouping_keeps_conflicting_facts_apart(self):
+        for left,right in [('현대차 발리 전기버스 11대 공급','현대차 발리 전기차 공급'),
+                           ('현대차 신차 20번째 소식','현대차 신차 21번째 소식'),
+                           ('한국타이어 윈터 아이셉트 에보4 독일 겨울 타이어 1위','한국타이어 봄 타이어 독일 판매 1위'),
+                           ('볼보 2500명 감원 추진 발표','볼보 2000명 감원 추진 발표'),
+                           ('현대차 미국 공장 투자 승인','현대차 미국 공장 투자 취소'),
+                           ('현대차, 미국 조지아 공장 1조원 투자 확정','현대차, 미국 조지아 공장 1조원 투자 철회'),
+                           ('정부, 전기차 보조금 확대 검토','정부, 전기차 보조금 확대 확정')]:
+            self.assertIsNone(same_event(story(left),story(right,'b')),(left,right))
+        # Same decision, different wording still groups.
+        self.assertTrue(same_event(story('현대차 미국 공장 투자 승인'),story('현대차, 美 공장 투자 최종 승인','b')))
+
+    def test_opposite_decisions_change_coverage_fingerprint(self):
+        approve=dict(label='x',articles=[story('현대차 미국 공장 투자 승인')])
+        cancel=dict(label='x',articles=[story('현대차 미국 공장 투자 취소')])
+        self.assertNotEqual(material_signature(approve),material_signature(cancel))
+        reprint=dict(label='x',articles=[story('현대차 미국 공장 투자 승인'),story('현대차 미국 공장 투자 승인','b',publisher='매체B')])
+        self.assertEqual(material_signature(approve),material_signature(reprint))
+
 
 if __name__=='__main__':unittest.main()

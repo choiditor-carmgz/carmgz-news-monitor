@@ -92,8 +92,25 @@ def unpack(content, destination):
         raise
 
 
+def download(artifact):
+    try:
+        api(f"actions/artifacts/{artifact['id']}/zip")
+        raise RuntimeError('Expected signed artifact download redirect')
+    except urllib.error.HTTPError as exc:
+        if exc.code != 302:
+            raise
+        signed = exc.headers['Location']
+    # Do not forward the GitHub token to signed object storage URLs.
+    with urllib.request.urlopen(signed, timeout=60) as response:
+        content = response.read(100_000_001)
+    if len(content) > 100_000_000:
+        raise ValueError('State artifact exceeds budget')
+    return content
+
+
 def restore(destination, allow_empty=False):
     rows = [a for a in artifacts() if a['name'].startswith(prefix())]
+    corrupt = []
     for a in sorted(rows, key=lambda a:a['created_at'], reverse=True):
         if a['expired']:
             continue
@@ -101,21 +118,19 @@ def restore(destination, allow_empty=False):
         # Trust only this production workflow from the default branch.
         if run['head_branch'] != branch() or run['path'].split('@')[0] != '.github/workflows/operations.yml' or run['event'] not in ('schedule','workflow_dispatch'):
             continue
+        # Auth/network errors propagate: they affect every candidate and must not look like corruption.
+        content = download(a)
         try:
-            api(f"actions/artifacts/{a['id']}/zip")
-            raise RuntimeError('Expected signed artifact download redirect')
-        except urllib.error.HTTPError as exc:
-            if exc.code != 302:
-                raise
-            signed = exc.headers['Location']
-        # Do not forward the GitHub token to signed object storage URLs.
-        with urllib.request.urlopen(signed, timeout=60) as response:
-            content = response.read(100_000_001)
-        if len(content) > 100_000_000:
-            raise ValueError('State artifact exceeds budget')
-        unpack(content, destination)
-        print('Restored verified SQLite state')
+            unpack(content, destination)
+        except (ValueError, RuntimeError, zipfile.BadZipFile, sqlite3.DatabaseError) as exc:
+            # A damaged snapshot is skipped for the previous verified one; never replaced by an empty DB.
+            corrupt.append(a['name'])
+            print(f"Skipped damaged state {a['name']}: {type(exc).__name__}")
+            continue
+        print('Restored verified SQLite state'+(f' (skipped damaged: {", ".join(corrupt)})' if corrupt else ''))
         return
+    if corrupt:
+        raise RuntimeError('Every available state snapshot failed verification; refusing to start empty. Inspect artifacts before initialize=true.')
     if not allow_empty:
         raise RuntimeError('No valid persisted state. Explicit workflow_dispatch initialize=true is required; never silently reset.')
     print('Explicit empty-state initialization requested')
@@ -126,10 +141,12 @@ def rotate():
     current = [a for a in rows if a['name'] == prefix()+os.environ['GITHUB_RUN_ID']+'-'+os.environ['GITHUB_RUN_ATTEMPT'] and not a['expired']]
     if len(current) != 1:
         raise RuntimeError('New state upload not confirmed; old artifacts preserved')
-    for a in rows:
-        if a['name'].startswith(prefix()) and a['id'] != current[0]['id']:
-            api(f"actions/artifacts/{a['id']}", 'DELETE')
-    print('Rotated state; only latest snapshot retained')
+    # Keep the newest earlier snapshot as a fallback for a damaged latest one (1-day retention still applies).
+    older = sorted((a for a in rows if a['name'].startswith(prefix()) and a['id'] != current[0]['id']),
+                   key=lambda a:(a.get('created_at',''), a['id']), reverse=True)
+    for a in older[1:]:
+        api(f"actions/artifacts/{a['id']}", 'DELETE')
+    print('Rotated state; latest and one previous snapshot retained')
 
 
 def clean_pages():

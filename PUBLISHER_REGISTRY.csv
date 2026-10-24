@@ -1,18 +1,18 @@
 ﻿번호,언론사,유형,공식주소,수집주소,주소확인출처,상태,수집설정,확인시각,HTTP,파싱,제한원인
-1,연합뉴스,통신,https://www.yna.co.kr/,https://www.yna.co.kr/rss/news.xml,https://www.yna.co.kr/rss/index,ACTIVE,True,2026-10-23T07:15:43.108116+00:00,200,True,
+1,연합뉴스,통신,https://www.yna.co.kr/,https://www.yna.co.kr/rss/industry.xml,https://www.yna.co.kr/rss/index,ACTIVE,True,2026-10-23T07:15:43.108116+00:00,200,True,
 2,뉴스1,통신,https://www.news1.kr/,,https://www.news1.kr/,UNSUPPORTED,False,2026-10-23T07:15:43.109118+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 3,뉴시스,통신,https://www.newsis.com/,https://www.newsis.com/RSS/industry.xml,https://nwww.newsis.com/RSS/,ACTIVE,True,2026-10-23T07:15:43.109118+00:00,200,True,
 4,조선일보,종합,https://www.chosun.com/,https://www.chosun.com/arc/outboundfeeds/rss/?outputType=xml,https://www.chosun.com/,UNSUPPORTED,False,2026-10-23T07:15:43.110124+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 5,중앙일보,종합,https://www.joongang.co.kr/,,https://www.joongang.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:43.110124+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
-6,동아일보,종합,https://www.donga.com/,https://rss.donga.com/total.xml,https://www.donga.com/,ACTIVE,True,2026-10-23T07:15:43.111126+00:00,200,True,
-7,경향신문,종합,https://www.khan.co.kr/,https://www.khan.co.kr/rss/rssdata/total_news.xml,https://www.khan.co.kr/company/sub03_2.html,ACTIVE,True,2026-10-23T07:15:45.319870+00:00,200,True,
+6,동아일보,종합,https://www.donga.com/,https://rss.donga.com/economy.xml,https://www.donga.com/,ACTIVE,True,2026-10-23T07:15:43.111126+00:00,200,True,
+7,경향신문,종합,https://www.khan.co.kr/,https://www.khan.co.kr/rss/rssdata/economy_news.xml,https://www.khan.co.kr/company/sub03_2.html,ACTIVE,True,2026-10-23T07:15:45.319870+00:00,200,True,
 8,한겨레,종합,https://www.hani.co.kr/,https://www.hani.co.kr/rss/,https://www.hani.co.kr/,UNSUPPORTED,False,2026-10-23T07:15:45.417114+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 9,한국일보,종합,https://www.hankookilbo.com/,,https://www.hankookilbo.com/,UNSUPPORTED,False,2026-10-23T07:15:45.461892+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 10,서울신문,종합,https://www.seoul.co.kr/,https://www.seoul.co.kr/xml/rss/google_flash_seoul.xml,https://www.seoul.co.kr/,ACTIVE,True,2026-10-23T07:15:45.608034+00:00,200,True,
 11,국민일보,종합,https://www.kmib.co.kr/,https://www.kmib.co.kr/rss/data/kmibRssAll.xml,https://www.kmib.co.kr/,ACTIVE,True,2026-10-23T07:15:45.971846+00:00,200,True,
 12,매일경제,경제,https://www.mk.co.kr/,https://www.mk.co.kr/rss/40300001/,https://www.mk.co.kr/rss,ACTIVE,True,2026-10-23T07:15:46.099665+00:00,200,True,
-13,한국경제,경제,https://www.hankyung.com/,https://www.hankyung.com/feed/all-news,https://www.hankyung.com/feed,ACTIVE,True,2026-10-23T07:15:47.466044+00:00,200,True,
-14,서울경제,경제,https://www.sedaily.com/,https://www.sedaily.com/rss/newsall,https://www.sedaily.com/rss,UNSUPPORTED,True,2026-10-23T07:15:47.607909+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
+13,한국경제,경제,https://www.hankyung.com/,https://www.hankyung.com/feed/economy,https://www.hankyung.com/feed,ACTIVE,True,2026-10-23T07:15:47.466044+00:00,200,True,
+14,서울경제,경제,https://www.sedaily.com/,https://www.sedaily.com/rss/economy,https://www.sedaily.com/rss,UNSUPPORTED,True,2026-10-23T07:15:47.607909+00:00,,False,공식 페이지에서 검증 가능한 RSS alternate 미확보
 15,파이낸셜뉴스,경제,https://www.fnnews.com/,https://www.fnnews.com/rss/r20/fn_realnews_all.xml,https://busan.fnnews.com/rss,ACTIVE,True,2026-10-23T07:15:47.790611+00:00,200,True,
 16,헤럴드경제,경제,https://biz.heraldcorp.com/,https://biz.heraldcorp.com/rss/google/newsAll,https://biz.heraldcorp.com/,ACTIVE,True,2026-10-23T07:15:48.202753+00:00,200,True,
 17,이데일리,경제,https://www.edaily.co.kr/,https://rss.edaily.co.kr/edaily_news.xml,https://www.edaily.co.kr/,ERROR,False,2026-10-23T07:15:49.619833+00:00,200,False,'utf-8' codec can't decode byte 0xc0 in position 623: invalid start byte

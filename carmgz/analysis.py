@@ -69,50 +69,77 @@ def classify(article):
 
 
 def same_event(a, b):
-    da, db = timestamp(a['published_at']), timestamp(b['published_at'])
-    if not da or not db or abs((da-db).total_seconds()) > 72*3600:
+    if vetoed(a, b):
         return None
-    from .editorial import facts
-    left,right=facts(a['title']),facts(b['title'])
-    if left['years'] and right['years'] and not set(left['years']) & set(right['years']):
-        return None
-    if all(re.search(r'공급|투입',x['title']) for x in (a,b)):
-        counts=[{v for unit,v in p['quantities'] if unit=='대'} for p in (left,right)]
-        if all(counts) and not counts[0] & counts[1]:
-            return None
-    # Materially different actions or explicit locations/numbers veto broad anchors.
-    for facet in (r'리콜|결함', r'사망|사고', r'생산\s*중단', r'화재'):
-        if bool(re.search(facet, a['title'])) != bool(re.search(facet, b['title'])):
-            return None
-    for pattern in (r'(\d+)\s*대\s*공급', r'(20\d{2})년'):
-        left, right = set(re.findall(pattern,a['title'])), set(re.findall(pattern,b['title']))
-        if left and right and left != right:
-            return None
     for key, label, anchors in EVENTS:
         if all(re.search(p, a['title'], re.I) and re.search(p, b['title'], re.I) for p in anchors):
-            # Conflicting explicit quantities/years can identify different events.
-            years = [set(re.findall(r'20\d{2}년', x['title'])) for x in (a, b)]
-            if all(years) and years[0] != years[1]:
-                return None
             return key, label
-    from .editorial import related_event
-    matched = related_event(a['title'],b['title'])
+    from .editorial import related_event, similar_event
+    matched = related_event(a['title'],b['title']) or similar_event(a['title'],b['title'])
     if matched:
         return matched[0], min(a['title'],b['title'])
     return None
 
 
+def vetoed(a, b):
+    """Explicit time/action/quantity conflicts that keep two titles apart regardless of wording."""
+    da, db = timestamp(a['published_at']), timestamp(b['published_at'])
+    if not da or not db or abs((da-db).total_seconds()) > 72*3600:
+        return True
+    from .editorial import decision, facts
+    # 투자 확정 vs 철회, 검토 vs 시행: a changed decision is a new event for the newsroom.
+    states = decision(a['title']), decision(b['title'])
+    if all(states) and states[0] != states[1]:
+        return True
+    left,right=facts(a['title']),facts(b['title'])
+    if left['years'] and right['years'] and not set(left['years']) & set(right['years']):
+        return True
+    # Different named vehicle/technology subjects (버스 vs 전기차) are different deliveries.
+    if left['subjects'] and right['subjects'] and not set(left['subjects']) & set(right['subjects']):
+        return True
+    # Different reporting quarters or named sites are different events.
+    for key in ('periods', 'locations'):
+        if left[key] and right[key] and not set(left[key]) & set(right[key]):
+            return True
+    from .editorial import close
+    for unit in {u for u, _ in left['quantities']} & {u for u, _ in right['quantities']}:
+        values = [[v for u, v in p['quantities'] if u == unit] for p in (left, right)]
+        if not any(close(x, y) for x in values[0] for y in values[1]):
+            return True
+    if all(re.search(r'공급|투입',x['title']) for x in (a,b)):
+        counts=[{v for unit,v in p['quantities'] if unit=='대'} for p in (left,right)]
+        if all(counts) and not counts[0] & counts[1]:
+            return True
+    # Materially different actions or explicit locations/numbers veto broad anchors.
+    for facet in (r'리콜|결함', r'사망|사고', r'생산\s*중단', r'화재'):
+        if bool(re.search(facet, a['title'])) != bool(re.search(facet, b['title'])):
+            return True
+    for pattern in (r'(\d+)\s*대\s*공급', r'(20\d{2})년'):
+        left, right = set(re.findall(pattern,a['title'])), set(re.findall(pattern,b['title']))
+        if left and right and left != right:
+            return True
+    return False
+
+
+def joins(article, group):
+    # No member may conflict; positive event evidence is needed with at least half of the
+    # members, so differently worded follow-ups join without one weak link chaining events.
+    if any(vetoed(article, x) for x in group):
+        return False
+    return 2*sum(bool(same_event(article, x)) for x in group) >= len(group)
+
+
 def build_issues(articles, as_of):
     groups = []
-    for article in sorted(articles, key=lambda a: a['id']):
-        group = next((g for g in groups if all(same_event(article, x) for x in g)), None)
+    for article in sorted(articles, key=lambda a: (a['published_at'] or '', a['id'])):
+        group = next((g for g in groups if joins(article, g)), None)
         if group is None:
             groups.append([article])
         else:
             group.append(article)
     issues = []
     for group in groups:
-        event = same_event(*group[:2]) if len(group) > 1 else None
+        event = next((e for x in group[1:] for e in [same_event(group[0], x)] if e), None) if len(group) > 1 else None
         times = [timestamp(a['published_at']) for a in group]
         times = [t for t in times if t and t <= as_of]
         count = lambda lo, hi: sum(lo <= (as_of-t).total_seconds()/3600 < hi for t in times)
@@ -130,7 +157,7 @@ def build_issues(articles, as_of):
             importance_score=0, importance_reasons=[],
             spread_score=len(publishers)*10+len(group),
             rising_score=max(0, growth)*3+n1,
-            grouping_basis='사건별 복수 앵커 + 72시간 + 그룹 전체 쌍 검증' if event else '병합 근거 부족: 단독 이슈'))
+            grouping_basis='사건 단서 + 72시간 + 그룹 전체 충돌 없음·과반 일치 검증' if event else '병합 근거 부족: 단독 이슈'))
     from .editorial import score
     for issue in issues:
         score(issue,as_of)

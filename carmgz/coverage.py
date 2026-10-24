@@ -14,7 +14,7 @@ from .policy_http import PolicyClient
 from .rss import normalized_title
 
 STATUSES = ('보도 완료', '미보도', '후속 보도 검토', '확인 필요', '확인 불가')
-RULE_VERSION = 'v2-query-validated'
+RULE_VERSION = 'v3-generic-title-evidence'
 HOSTS = {'carmgz.kr', 'www.carmgz.kr'}
 
 
@@ -134,7 +134,9 @@ def compare(issue, article):
         # Sufficient title facts; body confirms event terms when available.
         # A shared company/action is insufficient: generic matches stay uncertain.
         # Additional event rules can be reviewed and added without changing rank scores.
-        strong = bool(anchors or exact)
+        # Same generic evidence that groups RSS titles, so unanticipated events can be confirmed.
+        from .editorial import similar_event
+        strong = bool(anchors or exact or similar_event(title, old))
         near = prior and newest and abs((newest-prior).total_seconds()) <= 72*3600
         # Only an explicit change of an already identified event may be a follow-up.
         change = re.search(r'리콜\s*대상\s*확대|(?:투자|계획|출시\s*일정|정책|규제).*(?:변경|철회)|생산\s*재개', title)
