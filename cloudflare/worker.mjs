@@ -12,6 +12,7 @@ export function accessConfig(env) {
     team_present: Boolean(rawTeam), audience_present: Boolean(rawAudience),
     team_original_format_valid: /^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com\/?$/.test(rawTeam),
     team_normalized_valid: valid, audience_nonempty: Boolean(rawAudience.trim()),
+    audience_json_array: rawAudience.trim().startsWith('['),
     assets_present: typeof env.ASSETS?.fetch === 'function',
   }};
 }
@@ -26,11 +27,20 @@ export function createHandler(resolveKeys = issuer => {
     if (!flags.team_normalized_valid || !audience) {
       return new Response('Access verification is not configured\n'+JSON.stringify(flags), {status: 503, headers});
     }
+    const assertion = request.headers.get('Cf-Access-Jwt-Assertion') || '';
     try {
-      await jwtVerify(request.headers.get('Cf-Access-Jwt-Assertion') || '', resolveKeys(issuer), {
+      await jwtVerify(assertion, resolveKeys(issuer), {
         issuer, audience, algorithms: ['RS256'], requiredClaims: ['exp', 'iat', 'sub'],
       });
-    } catch {
+    } catch (error) {
+      if (new URL(request.url).pathname === '/__diagnostics/access-config') {
+        const allowedCodes = ['ERR_JWT_CLAIM_VALIDATION_FAILED','ERR_JWT_EXPIRED','ERR_JWS_SIGNATURE_VERIFICATION_FAILED',
+          'ERR_JWS_INVALID','ERR_JWKS_NO_MATCHING_KEY','ERR_JWKS_TIMEOUT'];
+        return Response.json({revision:'access-runtime-v2',authenticated:false,...flags,
+          assertion_present:Boolean(assertion),
+          jwt_error:allowedCodes.includes(error.code)?error.code:'verification_failed',
+          claim:['iss','aud','exp','nbf','iat','sub'].includes(error.claim)?error.claim:null}, {status:403,headers});
+      }
       return new Response('Forbidden', {status: 403, headers});
     }
     if (new URL(request.url).pathname === '/__diagnostics/access-config') {

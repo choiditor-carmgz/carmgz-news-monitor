@@ -73,4 +73,9 @@ test('runtime diagnostic requires valid Access JWT and exposes only boolean flag
   assert.equal(JSON.stringify(d).includes(env.CF_ACCESS_AUD),false);
   const flags=accessConfig({...env,CF_ACCESS_TEAM_DOMAIN:'test-team.cloudflareaccess.com'}).flags;
   assert.equal(flags.team_original_format_valid,false);assert.equal(flags.team_normalized_valid,true);
+  const failed=await handler(request('/__diagnostics/access-config',await token({aud:'other-app'})),env);
+  assert.equal(failed.status,403);
+  const diagnostics=await failed.json();
+  assert.equal(diagnostics.claim,'aud');assert.equal(diagnostics.assertion_present,true);
+  assert.equal(JSON.stringify(diagnostics).includes('other-app'),false);
 });
