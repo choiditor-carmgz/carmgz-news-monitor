@@ -1,10 +1,13 @@
 import json
+from pathlib import Path
+import tempfile
 import time
 import unittest
+from unittest.mock import patch
 from urllib.parse import urlsplit, parse_qs
 from urllib.request import Request
 
-from scripts.search_response_study import StudyClient, header_facts, plan, study
+from scripts.search_response_study import StudyClient, header_facts, plan, study, main
 
 
 class FakeClient:
@@ -32,6 +35,17 @@ class FakeClient:
 
 
 class ResponseStudyTests(unittest.TestCase):
+    def test_completed_diagnostic_with_invalid_response_is_not_a_green_health_check(self):
+        result = dict(stop_reason='plan_completed',rows=[dict(valid=False)])
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)/'facts.json'
+            with patch('scripts.search_response_study.study',return_value=result), \
+                 patch('scripts.search_response_study.StudyClient'), \
+                 patch.dict('os.environ',{'FOCUS_QUERY':'','STUDY_ORDER':'spacing'}), \
+                 patch('sys.argv',['study',str(output)]):
+                self.assertEqual(main(),1)
+            self.assertFalse(json.loads(output.read_text(encoding='utf-8'))['rows'][0]['valid'])
+
     def test_header_allowlist_never_serializes_arbitrary_values(self):
         facts = header_facts({'Age':'123','Date':'Sat, 24 Oct 2026 05:00:00 GMT',
             'Cache-Control':'private="PRIVATE", max-age=60', 'X-Cache':'HIT node=PRIVATE',

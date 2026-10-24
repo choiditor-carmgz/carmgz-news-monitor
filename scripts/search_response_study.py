@@ -199,7 +199,7 @@ def main():
     result['profile'] = order
     Path(sys.argv[1]).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({k:v for k,v in result.items() if k!='rows'}))
-    return 0 if result['stop_reason']=='plan_completed' else 1
+    return 0 if result['stop_reason']=='plan_completed' and all(r['valid'] for r in result['rows']) else 1
 
 
 if __name__=='__main__':

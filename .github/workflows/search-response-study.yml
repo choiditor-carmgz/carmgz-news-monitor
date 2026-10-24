@@ -11,9 +11,6 @@ on:
         description: 'Optional short public phrase for normal / revalidation / normal comparison; blank selects spacing study'
         type: string
         default: ''
-  push:
-    branches: ['codex/carmgz-operating-search-diagnosis']
-    paths: ['scripts/search_response_study.py', '.github/workflows/search-response-study.yml']
 permissions:
   contents: read
 jobs:
@@ -29,8 +26,8 @@ jobs:
           python-version: '3.12'
       - name: Bounded spacing and standard cache-revalidation controls
         env:
-          # Counterbalance the first failing study's known-first request order.
-          STUDY_ORDER: ${{ github.event_name == 'push' && 'fresh-first' || inputs.order }}
+          # Explicit opt-in only: commits must not repeatedly probe the official site.
+          STUDY_ORDER: ${{ inputs.order }}
           FOCUS_QUERY: ${{ inputs.focus_query }}
         run: python scripts/search_response_study.py response-study.json
       - uses: actions/upload-artifact@v4

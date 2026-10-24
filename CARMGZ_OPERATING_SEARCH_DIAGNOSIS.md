@@ -80,3 +80,80 @@ independently editorially confirmed identical events.
 
 Local verification: 101 Python tests and 13 Node tests passed. No changes were
 made to main, the production DB, scoring, collection, Access, or deployment.
+
+## Follow-up: spacing, repetition, and cache controls
+
+All times below are UTC on 2026-10-24 (add nine hours for Korea). These are
+explicit diagnostic requests, not RSS collection or operational retries.
+
+| Experiment | Search responses | HTTP requests including robots | Duration |
+| --- | --- | ---: | ---: |
+| Local spacing/revalidation, 05:59:50–06:00:48 | 14 valid, 0 invalid | 15 | 60.08 s |
+| [GitHub known-first 40068524773](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40068524773), 06:01:17–06:01:32 | 4 valid, 3 invalid | 8 | 19.52 s |
+| Local exact failed query, 06:03:44–06:03:55 | 3 valid, 0 invalid | 4 | 18.06 s |
+| [GitHub exact failed query 40068754705](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40068754705), 06:04:45–06:05:09 | 5 valid, 0 invalid (3 probe, 2 known controls) | 6 | 31.55 s |
+| [GitHub fresh-first 40068921167](https://github.com/choiditor-carmgz/carmgz-news-monitor/actions/runs/40068921167), 06:07:15–06:07:39 | 2 valid known controls, 3 invalid probes | 6 | 31.79 s |
+
+The local spacing study used six 2-second requests and eight 6-second requests.
+Four requests used standard `Cache-Control: no-cache` revalidation; the rest
+used normal headers. All query echoes/layouts/totals validated; known article
+22736 was found in every known control. Fresh timestamp phrases are zero-result
+controls, not claimed editorial candidate searches.
+
+In the GitHub known-first study, the first four requests succeeded. A fresh
+phrase then returned the unfiltered list twice, at measured 2-second spacing.
+One exact retry after a measured 6 seconds failed too. The study stopped rather
+than spend its remaining budget. That same URL subsequently validated locally
+and in a new GitHub job, under normal/revalidation/normal headers. The first
+normal request was already valid, so revalidation did not cause that recovery.
+
+The final study counterbalanced order: fresh / known / same fresh / known /
+same fresh with revalidation, all at measured 6-second spacing. The FIRST search
+already failed, both interleaved known controls found article 22736, and all
+three fresh-phrase responses failed, including the revalidation control. This
+does not support an explanation based solely on a fifth-request threshold or
+two-second bursts. It does not establish that every unseen query fails either.
+
+### Cache/proxy evidence versus hypotheses
+
+- All measured responses were HTTP 200 `text/html` with unchanged final URLs
+  and zero redirects. Invalid responses were 67,184 bytes, total 19,995, and
+  lacked both query echo and requested text; they are never valid search results.
+- Every invalid response advertised `no-cache, no-store, must-revalidate`.
+  Normal responses lacked those Cache-Control directives. Invalid response
+  body hashes and Date values changed between repeats; this was not simple
+  byte-for-byte replay of one body by Checker's query cache (which was bypassed).
+- Age, Via, ETag, cache HIT/MISS markers, cache keys and backend/server identifiers
+  were absent. Vary was `accept-encoding`. No configured http/https/all proxy
+  was reported, but that does not exclude transparent intermediaries.
+- These facts neither prove an HTTP cache fault nor exclude an intermediary,
+  an application cache or different backend behavior. A compliant HTTP cache
+  should respect no-store. An absent Age is not proof of origin contact:
+  see [RFC 9111 §5.1](https://www.rfc-editor.org/rfc/rfc9111.html#section-5.1).
+  No origin/backend trace identifiers or server logs are available to localize
+  the fault. Different jobs also differ in time and potentially egress routing;
+  those variables were not independently controlled.
+
+### Retry decision and safeguards
+
+A one-time delayed identical GET can fit inside the existing remaining budget,
+but the measured six-second retry failed and revalidation also failed during
+an actively failing episode. There is no evidence to recommend enabling either
+as an operational fix. Production request/parser rules and its two-error circuit
+remain unchanged; a future retry would have to consume an existing request slot,
+respect the same deadline/robots delay, and not reset or bypass the circuit.
+
+The opt-in study hard-caps ALL HTTP requests, including robots and redirects, at
+20 and caps network time at 180 seconds, with no transport retries. Access/server
+errors, Retry-After, robots denial, or budget exhaustion stop it. Two consecutive
+invalid responses allow only one delayed diagnostic retry; another failure stops
+the study. No IP/UA rotation, cookie acquisition, proxy disabling, or access
+restriction bypass is used. Only allowlisted header facts and structural hashes
+are saved. The new workflow is now manual-only to avoid repeated site probes
+on future commits.
+
+The first fresh-first experiment completed its plan and its initial CLI exit
+status did not flag invalid rows, although all three rows were correctly marked
+`valid:false`. The CLI now returns failure for ANY invalid row, with a regression
+test, so a completed diagnostic plan cannot be mistaken for healthy search.
+This changes diagnostic reporting only, not the production parser.
