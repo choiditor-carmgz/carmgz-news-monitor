@@ -18,6 +18,31 @@ RULE_VERSION = 'v2-query-validated'
 HOSTS = {'carmgz.kr', 'www.carmgz.kr'}
 
 
+def search_diagnostics(body, query):
+    """Allowlisted structural facts only; never persist response text or headers."""
+    text = body.decode('utf-8-sig', errors='replace')
+    echo = re.search(r'''params\[['"]sc_word['"]\]\s*=\s*(['"])(.*?)\1''', text, re.S)
+    total = re.search(r'''params\[['"]total['"]\]\s*=\s*['"]?(\d+)''', text)
+    return dict(body_bytes=len(body), body_sha256=hashlib.sha256(body).hexdigest(),
+                has_query_echo=bool(echo), has_query_text=query in text,
+                has_section_list=bool(re.search(r'''<article\b[^>]*id=['"]section-list['"]''', text, re.I)),
+                has_total=bool(total), total=int(total.group(1)) if total else None,
+                has_html=bool(re.search(r'<html\b', text, re.I)))
+
+
+def safe_response_url(actual, requested):
+    """Only repeat our own public request; redact unexpected redirect values."""
+    if actual == requested:
+        return actual
+    if not actual:
+        return None
+    u = urlsplit(actual)
+    if u.hostname not in HOSTS:
+        return '[non-CARMGZ destination]'
+    path = u.path if u.path in ('/news/articleList.html', '/news/articleView.html', '/robots.txt') else '/[other-path]'
+    return 'https://'+u.hostname+path+('?[redacted]' if u.query else '')
+
+
 class SearchResponseError(ValueError):
     def __init__(self, message, code, echoed_query=None):
         super().__init__(message)
@@ -194,14 +219,23 @@ class Checker:
             result['queries'].append(query)
             search = dict(query=query,at=datetime.now(timezone.utc).isoformat(),success=False)
             result['searches'].append(search)
+            evidence_start = len(getattr(self.client, 'evidence', []))
             try:
                 url = 'https://www.carmgz.kr/news/articleList.html?'+urlencode(dict(sc_area='A',view_type='sm',sc_word=query))
+                search['url'] = url
                 search['cached_in_run'] = query in self.search_cache
                 if query not in self.search_cache:
-                    self.search_cache[query] = parse_search(self.fetch(url), query=query)
+                    body = self.fetch(url)
+                    search['redirects'] = [dict(status=e['status'],
+                        source=safe_response_url(e['url'], url), destination=safe_response_url(e['location'], url))
+                        for e in getattr(self.client, 'evidence', [])[evidence_start:] if e.get('location')]
+                    search['diagnostics'] = search_diagnostics(body, query)
+                    search['content_type'] = getattr(self.client, 'last_content_type', None)
+                    search['request_profile'] = getattr(self.client, 'last_request_profile', None)
+                    self.search_cache[query] = parse_search(body, query=query)
                     evidence = getattr(self.client,'evidence',[])
                     self.search_metadata[query] = dict(http_status=getattr(self.client,'last_status',None),
-                        response_url=evidence[-1].get('final_url') if evidence else None)
+                        response_url=safe_response_url(evidence[-1].get('final_url'), url) if evidence else None)
                 urls, total = self.search_cache[query]; all_totals.append(total)
                 search.update(success=True,total=total,returned=len(urls),url=url,outcome='results' if total else 'empty',
                               **self.search_metadata[query])
@@ -212,10 +246,10 @@ class Checker:
                 search.update(outcome='error',error=type(exc).__name__+': '+str(exc),error_code=self.search_failure(exc),
                               http_status=getattr(self.client,'last_status',None))
                 if isinstance(exc, SearchResponseError):
-                    search['echoed_query'] = exc.echoed_query
+                    search['query_echo_present'] = exc.echoed_query is not None
                 evidence = getattr(self.client,'evidence',[])
                 if evidence:
-                    search['response_url'] = evidence[-1].get('final_url') or evidence[-1].get('url')
+                    search['response_url'] = safe_response_url(evidence[-1].get('final_url') or evidence[-1].get('url'), url)
                 result['errors'].append(search['error'])
                 continue
             for url in urls[:self.config.get('max_articles_per_issue',2)]:

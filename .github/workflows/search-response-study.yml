@@ -1,0 +1,38 @@
+name: CARMGZ bounded response study
+on:
+  workflow_dispatch:
+    inputs:
+      order:
+        description: 'Bounded comparison order'
+        type: choice
+        options: [spacing, focused, fresh-first]
+        default: spacing
+      focus_query:
+        description: 'Optional short public phrase for normal / revalidation / normal comparison; blank selects spacing study'
+        type: string
+        default: ''
+permissions:
+  contents: read
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bounded spacing and standard cache-revalidation controls
+        env:
+          # Explicit opt-in only: commits must not repeatedly probe the official site.
+          STUDY_ORDER: ${{ inputs.order }}
+          FOCUS_QUERY: ${{ inputs.focus_query }}
+        run: python scripts/search_response_study.py response-study.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carmgz-response-study
+          path: response-study.json
+          retention-days: 1

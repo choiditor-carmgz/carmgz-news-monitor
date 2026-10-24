@@ -6,7 +6,7 @@ import tempfile
 import time
 import unittest
 
-from carmgz.coverage import Checker, compare, own_url, parse_search, verify_issues, RULE_VERSION
+from carmgz.coverage import Checker, compare, own_url, parse_search, verify_issues, RULE_VERSION, search_diagnostics, safe_response_url
 from carmgz.operations import run, track, enrich
 from carmgz.analysis import analyze
 from carmgz.relevance import automotive_terms
@@ -30,6 +30,44 @@ class FakeChecker:
 
 
 class CoverageTests(unittest.TestCase):
+    def test_unexpected_redirect_values_are_redacted(self):
+        requested = 'https://www.carmgz.kr/news/articleList.html?sc_word=public'
+        self.assertEqual(safe_response_url(requested, requested), requested)
+        for actual in ('https://www.carmgz.kr/news/articleList.html?token=PRIVATE',
+                       'https://www.carmgz.kr/PRIVATE?token=PRIVATE',
+                       'https://PRIVATE.example/PRIVATE?token=PRIVATE'):
+            self.assertNotIn('PRIVATE', safe_response_url(actual, requested))
+
+    def test_diagnostics_store_only_structural_facts_not_response_secrets(self):
+        body = b'''<html><article id="section-list"></article>
+        <script>params['total']="0";params['sc_word']="fixture";</script>
+        <input value="PRIVATE_COOKIE_VALUE">PRIVATE_BODY_TEXT</html>'''
+        facts = search_diagnostics(body, 'fixture')
+        self.assertTrue(facts['has_query_echo'])
+        self.assertTrue(facts['has_query_text'])
+        self.assertTrue(facts['has_section_list'])
+        self.assertTrue(facts['has_total'])
+        self.assertEqual(facts['body_bytes'], len(body))
+        self.assertEqual(len(facts['body_sha256']), 64)
+        self.assertNotIn('PRIVATE', json.dumps(facts))
+        self.assertTrue(all(isinstance(v, (bool, int)) for k,v in facts.items() if k!='body_sha256'))
+
+    def test_failure_retains_response_shape_without_loosening_query_validation(self):
+        class Client:
+            last_status = 200
+            last_content_type = 'text/html'
+            def fetch(self, url):
+                return b'<html><article id="section-list"></article></html>'
+        result = Checker({}, Client()).check(issue(), NOW)
+        self.assertFalse(result['search_success'])
+        self.assertTrue(result['circuit_open'])
+        self.assertEqual(len(result['searches']), 2)
+        for search in result['searches']:
+            self.assertEqual(search['error_code'], 'query_echo_missing')
+            self.assertEqual(search['content_type'], 'text/html')
+            self.assertFalse(search['diagnostics']['has_query_echo'])
+            self.assertTrue(search['diagnostics']['has_section_list'])
+
     def test_domain_alias_and_lookalike(self):
         self.assertEqual(own_url('http://carmgz.kr/news/a'), 'https://www.carmgz.kr/news/a')
         for url in ('https://carmgz.kr.evil.test/a','javascript:alert(1)','https://carmgz.kr:443/a'):
