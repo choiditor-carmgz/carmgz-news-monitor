@@ -137,16 +137,21 @@ function showBrief(n) {
 }
 
 function nextRun(now=Date.now()) {
-  // Mirrors carmgz/schedule.py slots in KST (UTC+9, no DST): weekday odd hours :15 + 09:00, weekend 00/06/12/18:15, daily 17:00.
+  // Mirrors collection slots in carmgz/schedule.py (KST, UTC+9, no DST): weekday 00,08..22 even hours, weekend 09/15/21.
   for (let d=0; d<3; d++) {
     const base=new Date(now+9*3600000+d*86400000), wd=base.getUTCDay(), weekend=wd===0||wd===6;
-    const slots=(weekend?[0,6,12,18]:[1,3,5,7,9,11,13,15,17,19,21,23]).map(h=>h*60+15).concat(weekend?[17*60]:[9*60,17*60]).sort((a,b)=>a-b);
-    for (const m of slots) {
-      const t=Date.UTC(base.getUTCFullYear(),base.getUTCMonth(),base.getUTCDate(),0,m)-9*3600000;
+    for (const h of weekend?[9,15,21]:[0,8,10,12,14,16,18,20,22]) {
+      const t=Date.UTC(base.getUTCFullYear(),base.getUTCMonth(),base.getUTCDate(),h)-9*3600000;
       if (t>now) return t;
     }
   }
   return null;
+}
+
+function isStale(generated, now=Date.now()) {
+  // Overdue only when a scheduled collection passed more than 1 hour ago without a newer snapshot.
+  const due=nextRun(Date.parse(generated));
+  return !due || now>due+3600000;
 }
 
 function renderToday() {
@@ -160,13 +165,13 @@ function renderToday() {
 }
 
 function renderChrome() {
-  const stale=Date.now()-Date.parse(data.generated_at)>6*3600000;
+  const stale=isStale(data.generated_at);
   const s=$('#status'); s.textContent=stale?'갱신 지연':'최신'; s.className='fresh'+(stale?' stale':'');
   const next=nextRun();
   $('#updated').textContent=`수집 ${hm(data.last_collection_at)} · 분석 ${hm(data.generated_at)}${next?` · 다음 수집 예정 ${hm(next)}`:''}`;
   $('#today-label').textContent=new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',month:'long',day:'numeric',weekday:'long'}).format(new Date(data.generated_at));
   $('#last-success').textContent=`마지막 정상 RSS 수집 ${fmt(data.last_collection_at)}`;
-  $('#notice').textContent=stale?'6시간 이상 갱신되지 않았습니다. 지금 순위는 실시간이 아니며, 168시간이 지난 기사는 화면에서 숨깁니다.':(!data.last_collection_at?'아직 정상 수집 이력이 없습니다.':'');
+  $('#notice').textContent=stale?'예정된 수집 시각이 1시간 넘게 지났는데 갱신되지 않았습니다. 지금 순위는 실시간이 아니며, 168시간이 지난 기사는 화면에서 숨깁니다.':(!data.last_collection_at?'아직 정상 수집 이력이 없습니다.':'');
   const active=data.publishers.filter(p=>!p.excluded&&!['held','no_confirmed_feed','excluded'].includes(p.status));
   const normal=active.filter(p=>p.status==='collected'||p.status==='empty_feed');
   const failed=active.filter(p=>p.status==='failed').map(p=>p.publisher);

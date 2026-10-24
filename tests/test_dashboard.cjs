@@ -76,3 +76,15 @@ test('missing JSON and Pages HTML fallback show actionable diagnostics',async()=
     assert.ok(elements.get('#notice').textContent.includes(expected));
   }
 });
+
+test('next collection follows the KST schedule and staleness waits for an overdue slot',()=>{
+  const at=s=>vm.runInContext(`nextRun(Date.parse('${s}'))`,ctx);
+  // Mon 2026-10-26 00:30 KST -> 08:00 KST; Fri 22:30 KST -> Sat 09:00 KST; Sat 21:30 KST -> Sun 09:00 KST.
+  assert.equal(at('2026-10-25T15:30:00Z'),Date.parse('2026-10-25T23:00:00Z'));
+  assert.equal(at('2026-10-23T13:30:00Z'),Date.parse('2026-10-24T00:00:00Z'));
+  assert.equal(at('2026-10-24T12:30:00Z'),Date.parse('2026-10-25T00:00:00Z'));
+  const stale=(g,n)=>vm.runInContext(`isStale('${g}',Date.parse('${n}'))`,ctx);
+  // Saturday overnight gap (21:05 -> 09:00) is normal until 10:00 KST.
+  assert.equal(stale('2026-10-24T12:05:00Z','2026-10-24T23:30:00Z'),false);
+  assert.equal(stale('2026-10-24T12:05:00Z','2026-10-25T01:01:00Z'),true);
+});
