@@ -2,7 +2,7 @@ name: CARMGZ search validation
 on:
   workflow_dispatch:
   push:
-    branches: ['codex/carmgz-search-repair']
+    branches: ['codex/carmgz-search-repair', 'codex/carmgz-operating-search-diagnosis']
     paths: ['carmgz/coverage.py', 'scripts/check_carmgz_search.py', '.github/workflows/search-validation.yml']
 permissions:
   contents: read

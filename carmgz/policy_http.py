@@ -12,6 +12,7 @@ class PolicyClient(HttpClient):
         self.policies = {}
         self.evidence = []
         self.last_status = None
+        self.last_content_type = None
         self.policy_result = 'not_checked'
         self.checking_policy = False
         owner = self
@@ -31,6 +32,7 @@ class PolicyClient(HttpClient):
         try:
             response = self.transport(req, timeout=timeout)
             self.last_status = response.status
+            self.last_content_type = response.headers.get_content_type()
             self.evidence.append({'url':req.full_url,'status':response.status,'phase':'robots' if self.checking_policy else 'feed','final_url':response.geturl()})
             return response
         except HTTPError as exc:

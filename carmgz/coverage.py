@@ -18,6 +18,17 @@ RULE_VERSION = 'v2-query-validated'
 HOSTS = {'carmgz.kr', 'www.carmgz.kr'}
 
 
+def search_diagnostics(body, query):
+    """Allowlisted structural facts only; never persist response text or headers."""
+    text = body.decode('utf-8-sig', errors='replace')
+    echo = re.search(r'''params\[['"]sc_word['"]\]\s*=\s*(['"])(.*?)\1''', text, re.S)
+    return dict(body_bytes=len(body), body_sha256=hashlib.sha256(body).hexdigest(),
+                has_query_echo=bool(echo), has_query_text=query in text,
+                has_section_list=bool(re.search(r'''<article\b[^>]*id=['"]section-list['"]''', text, re.I)),
+                has_total=bool(re.search(r'''params\[['"]total['"]\]''', text)),
+                has_html=bool(re.search(r'<html\b', text, re.I)))
+
+
 class SearchResponseError(ValueError):
     def __init__(self, message, code, echoed_query=None):
         super().__init__(message)
@@ -198,7 +209,10 @@ class Checker:
                 url = 'https://www.carmgz.kr/news/articleList.html?'+urlencode(dict(sc_area='A',view_type='sm',sc_word=query))
                 search['cached_in_run'] = query in self.search_cache
                 if query not in self.search_cache:
-                    self.search_cache[query] = parse_search(self.fetch(url), query=query)
+                    body = self.fetch(url)
+                    search['diagnostics'] = search_diagnostics(body, query)
+                    search['content_type'] = getattr(self.client, 'last_content_type', None)
+                    self.search_cache[query] = parse_search(body, query=query)
                     evidence = getattr(self.client,'evidence',[])
                     self.search_metadata[query] = dict(http_status=getattr(self.client,'last_status',None),
                         response_url=evidence[-1].get('final_url') if evidence else None)
