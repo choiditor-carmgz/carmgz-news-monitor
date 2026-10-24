@@ -86,7 +86,11 @@ def vetoed(a, b):
     da, db = timestamp(a['published_at']), timestamp(b['published_at'])
     if not da or not db or abs((da-db).total_seconds()) > 72*3600:
         return True
-    from .editorial import facts
+    from .editorial import decision, facts
+    # 투자 확정 vs 철회, 검토 vs 시행: a changed decision is a new event for the newsroom.
+    states = decision(a['title']), decision(b['title'])
+    if all(states) and states[0] != states[1]:
+        return True
     left,right=facts(a['title']),facts(b['title'])
     if left['years'] and right['years'] and not set(left['years']) & set(right['years']):
         return True

@@ -30,6 +30,20 @@ ACTIONS = {
     'launch':r'출시|사전계약|계약\s*개시|신차|신형',
 }
 MATERIAL = r'확대|축소|추가|변경|철회|폐지|삭감|중단|재개|감원|감축'
+# Decision state of a plan/policy/deal. Different states are different news even with identical wording otherwise.
+DECISIONS = {
+    'confirmed': r'승인|확정|체결|시행|통과|가결|타결|결정(?!\s*(?:유보|보류))',
+    'cancelled': r'취소|철회|무산|백지화|불발|부결|부인|결렬|보류|유보',
+    'tentative': r'검토|추진|논의|협의|가능성|꺼내|저울질|예정|계획',
+}
+
+
+def decision(title):
+    """Most decisive state named in a title: cancelled > confirmed > tentative, or None."""
+    for state in ('cancelled', 'confirmed', 'tentative'):
+        if re.search(DECISIONS[state], title):
+            return state
+    return None
 CONCRETE = r'시행|확정|계약\s*체결|공급|양산|상용화|도입|출범|생산\s*중단|리콜|감원'
 DIRECT = r'관세|규제|법안|리콜|결함|공장|투자|감원|적자|양산|상용화|출시|사전계약|배터리|자율주행|신차|충전|전기차|엔진|구동계'
 SPORT = r'골프대회|골프\s*마케팅|LPGA|레이디스|챔피언십|e[ -]?스포츠|넷플릭스|앰버서더|축구|야구|후원|협찬|사회공헌|기부'
@@ -159,6 +173,8 @@ def material_signature(issue):
     value = {key:sorted(set(v for p in profiles for v in p[key]))
              for key in ('entities','actions','quantities','periods','models','locations','years','subjects')}
     value['changes'] = sorted(set(m.group(0) for a in issue['articles'] for m in re.finditer(MATERIAL,a['title'])))
+    # 승인 -> 취소 must invalidate a cached coverage result even when every other fact is equal.
+    value['decisions'] = sorted({d for a in issue['articles'] for d in [decision(a['title'])] if d})
     # Unknown event facts must not cause unrelated singleton titles to share a fingerprint.
     if not value['entities'] and not value['models']:
         from .rss import normalized_title

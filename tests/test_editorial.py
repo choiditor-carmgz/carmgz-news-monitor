@@ -165,8 +165,20 @@ class EditorialTests(unittest.TestCase):
         for left,right in [('현대차 발리 전기버스 11대 공급','현대차 발리 전기차 공급'),
                            ('현대차 신차 20번째 소식','현대차 신차 21번째 소식'),
                            ('한국타이어 윈터 아이셉트 에보4 독일 겨울 타이어 1위','한국타이어 봄 타이어 독일 판매 1위'),
-                           ('볼보 2500명 감원 추진 발표','볼보 2000명 감원 추진 발표')]:
+                           ('볼보 2500명 감원 추진 발표','볼보 2000명 감원 추진 발표'),
+                           ('현대차 미국 공장 투자 승인','현대차 미국 공장 투자 취소'),
+                           ('현대차, 미국 조지아 공장 1조원 투자 확정','현대차, 미국 조지아 공장 1조원 투자 철회'),
+                           ('정부, 전기차 보조금 확대 검토','정부, 전기차 보조금 확대 확정')]:
             self.assertIsNone(same_event(story(left),story(right,'b')),(left,right))
+        # Same decision, different wording still groups.
+        self.assertTrue(same_event(story('현대차 미국 공장 투자 승인'),story('현대차, 美 공장 투자 최종 승인','b')))
+
+    def test_opposite_decisions_change_coverage_fingerprint(self):
+        approve=dict(label='x',articles=[story('현대차 미국 공장 투자 승인')])
+        cancel=dict(label='x',articles=[story('현대차 미국 공장 투자 취소')])
+        self.assertNotEqual(material_signature(approve),material_signature(cancel))
+        reprint=dict(label='x',articles=[story('현대차 미국 공장 투자 승인'),story('현대차 미국 공장 투자 승인','b',publisher='매체B')])
+        self.assertEqual(material_signature(approve),material_signature(reprint))
 
 
 if __name__=='__main__':unittest.main()
