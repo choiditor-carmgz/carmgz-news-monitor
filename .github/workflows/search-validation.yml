@@ -1,0 +1,27 @@
+name: CARMGZ search validation
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/carmgz-search-repair']
+    paths: ['carmgz/coverage.py', 'scripts/check_carmgz_search.py', '.github/workflows/search-validation.yml']
+permissions:
+  contents: read
+jobs:
+  official-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check five known articles and an empty search within existing request budget
+        run: python scripts/check_carmgz_search.py search-validation.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carmgz-search-validation
+          path: search-validation.json
+          retention-days: 1
