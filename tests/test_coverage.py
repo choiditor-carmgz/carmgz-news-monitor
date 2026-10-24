@@ -6,7 +6,7 @@ import tempfile
 import time
 import unittest
 
-from carmgz.coverage import Checker, compare, own_url, parse_search, verify_issues, RULE_VERSION, search_diagnostics
+from carmgz.coverage import Checker, compare, own_url, parse_search, verify_issues, RULE_VERSION, search_diagnostics, safe_response_url
 from carmgz.operations import run, track, enrich
 from carmgz.analysis import analyze
 from carmgz.relevance import automotive_terms
@@ -30,6 +30,14 @@ class FakeChecker:
 
 
 class CoverageTests(unittest.TestCase):
+    def test_unexpected_redirect_values_are_redacted(self):
+        requested = 'https://www.carmgz.kr/news/articleList.html?sc_word=public'
+        self.assertEqual(safe_response_url(requested, requested), requested)
+        for actual in ('https://www.carmgz.kr/news/articleList.html?token=PRIVATE',
+                       'https://www.carmgz.kr/PRIVATE?token=PRIVATE',
+                       'https://PRIVATE.example/PRIVATE?token=PRIVATE'):
+            self.assertNotIn('PRIVATE', safe_response_url(actual, requested))
+
     def test_diagnostics_store_only_structural_facts_not_response_secrets(self):
         body = b'''<html><article id="section-list"></article>
         <script>params['total']="0";params['sc_word']="fixture";</script>

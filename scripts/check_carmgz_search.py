@@ -40,6 +40,7 @@ def main():
             body = checker.fetch(url)
             row['http_status'] = checker.client.last_status
             row['content_type'] = checker.client.last_content_type
+            row['request_profile'] = checker.client.last_request_profile
             row['diagnostics'] = search_diagnostics(body, query)
             urls, total = parse_search(body, query=query)
             checker.same_search_failures = 0

@@ -13,6 +13,7 @@ class PolicyClient(HttpClient):
         self.evidence = []
         self.last_status = None
         self.last_content_type = None
+        self.last_request_profile = None
         self.policy_result = 'not_checked'
         self.checking_policy = False
         owner = self
@@ -29,6 +30,9 @@ class PolicyClient(HttpClient):
         self.transport = build_opener(Redirect()).open
         self.opener = self._open
     def _open(self, req, timeout):
+        # Explicit allowlist: never inspect or retain Cookie/Authorization headers.
+        self.last_request_profile = dict(method=req.get_method(),
+            user_agent=req.get_header('User-agent'), accept=req.get_header('Accept'))
         try:
             response = self.transport(req, timeout=timeout)
             self.last_status = response.status
