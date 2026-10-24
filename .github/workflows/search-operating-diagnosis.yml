@@ -1,0 +1,46 @@
+name: CARMGZ operating search diagnosis
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'Main operations run whose state is copied; original state is never changed'
+        default: '40065777134'
+        required: true
+        type: string
+  push:
+    branches: ['codex/carmgz-operating-search-diagnosis']
+    paths: ['carmgz/coverage.py', 'carmgz/policy_http.py', 'scripts/*carmgz_search.py', '.github/workflows/search-operating-diagnosis.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnosis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download immutable state for disposable refresh replay
+        uses: actions/download-artifact@v4
+        with:
+          name: carmgz-state-${{ inputs.source_run_id || '40065777134' }}-1
+          run-id: ${{ inputs.source_run_id || '40065777134' }}
+          github-token: ${{ github.token }}
+          path: replay-input
+      - name: Replay operations refresh without RSS or deployment
+        run: python scripts/replay_carmgz_search.py replay-input/news.sqlite3 operating-replay.json
+      - name: Check known articles and operating queries with cold search caches
+        if: always()
+        run: python scripts/check_carmgz_search.py search-validation.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carmgz-operating-search-diagnosis
+          path: |
+            search-validation.json
+            operating-replay.json
+          retention-days: 1
