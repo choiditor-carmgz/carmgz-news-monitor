@@ -134,6 +134,8 @@ def score(issue, at):
               ('production',22,'생산·투자·공급'),('technology',15,'핵심 기술'),
               ('market',14,'판매·시장 구조'),('launch',8,'신차·상품 발표')]
     best = max((r for r in rubric if r[0] in actions),key=lambda x:x[1],default=(None,6,'자동차 산업 관련 제목'))
+    if best[0]=='restructure' and re.search('퇴사',joined) and not re.search(r'감원|감축|구조조정|희망퇴직|철수',joined):
+        best=('restructure',10,'퇴사·보상제도: 조직 변화 규모 미확인')
     impact = best[1]
     evidence.append('제목 단서: '+best[2])
     if re.search(r'생산\s*(?:중단|중지)|공장.*(?:신설|건설|착공)|사업\s*철수',joined):
@@ -147,7 +149,12 @@ def score(issue, at):
                 (u=='원' and v>=100_000_000_000) or (u=='달러' and v>=100_000_000)]
     if large and actions & {'policy','safety','restructure','earnings','production','market'}:
         impact+=5
-        evidence.append('제목에 대규모 수치 명시 (원문 확인 필요)')
+        def label(unit,value):
+            for scale,name in ((1e12,'조'),(1e8,'억'),(1e4,'만')):
+                if value>=scale and unit in ('원','달러','대'):
+                    return f'{value/scale:g}{name}{unit}'
+            return f'{value:,.0f}{unit}'
+        evidence.append('제목상 규모: '+' · '.join(sorted({label(u,v) for u,v in large})[:2])+' (원문 확인 필요)')
     if 'safety' in actions and re.search(r'사망|숨져|인명',joined):
         impact+=3
     # Promotion is allowed as automotive news, but cannot inherit technology significance by name alone.
@@ -199,7 +206,7 @@ def score(issue, at):
     separate_policy = bool(re.search(r'관세.*(?:인상|인하|부과|시행|면제|변경)|규제.*(?:시행|강화|완화|폐지)|법안.*(?:통과|발의)|보조금.*(?:삭감|폐지)',joined))
     issue['business_context'] = dict(entities=sorted(set(e for p in profiles for e in p['entities'])),
         periods=sorted(set(v for p in profiles for v in p['periods'])),
-        financial=bool(actions & {'restructure','earnings'}) and not separate_policy)
+        financial=(bool(actions & {'restructure','earnings'}) or bool(re.search(r'투자.*(?:축소|감축)',joined))) and not separate_policy)
 
 
 def rank(issues, limit=10):

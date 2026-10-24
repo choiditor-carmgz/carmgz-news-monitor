@@ -55,6 +55,7 @@ class EditorialTests(unittest.TestCase):
             self.assertEqual(classify(story(title))[0],'relevant')
             self.assertGreaterEqual(build_issues([story(title)],NOW)[0]['score_components']['impact'],25)
         for title in weak:self.assertNotEqual(classify(story(title))[0],'relevant')
+        self.assertLess(build_issues([story('BMW 퇴사하면 최대 10억원 보상금 제시')],NOW)[0]['score_components']['impact'],20)
         for title in ['BMW 골프 GTI 신형 출시','현대차 모터스포츠 랠리 기술 공개',
                       'BMW 골프대회서 신차 공개']:
             self.assertEqual(classify(story(title))[0],'relevant')
