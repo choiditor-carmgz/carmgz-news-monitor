@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import shutil
 import sqlite3
+import time
 
 from .analysis import analyze, timestamp
 from .backup import backup
@@ -17,6 +18,7 @@ from .multi import collect_publishers, load_sources
 from .multi_storage import MultiStorage
 from .retention import migrate, prune
 from .schedule import KST, slots
+from .editorial import rank
 
 
 def state(db, key, default=None):
@@ -120,7 +122,8 @@ def briefing(db, report, kind, scheduled, at, last_collection):
     for name,key in [('spread','spread_score'),('rising','rising_score'),('industry','importance_score')]:
         pool = [i for i in current if i['volume_1h'] and i['growth_per_hour']>0] if name=='rising' else current
         ranking_ids[name]=[i['id'] for i in sorted(pool,key=lambda i:(-i[key],-i['independent_publishers'],-i['article_count'],i['id']))[:10]]
-    ranking_ids['major'] = [i['id'] for i in sorted(current, key=lambda i: (-i['importance_score'], -i['volume_24h'], -i['independent_publishers'], i['id']))[:10]]
+    ranking_ids['industry'] = [i['id'] for i in rank(current)]
+    ranking_ids['major'] = list(ranking_ids['industry'])
     # Briefings store links and labels only, and expire when any referenced article expires.
     deadlines = [(timestamp(a['published_at']) or timestamp(a['first_collected_at']))+timedelta(hours=168) for i in current for a in i['articles']]
     payload = dict(kind=kind, scheduled_at=scheduled.isoformat(), generated_at=at.isoformat(),
@@ -128,15 +131,16 @@ def briefing(db, report, kind, scheduled, at, last_collection):
                    delayed_minutes=max(0, (at-scheduled).total_seconds()/60),
                    expires_at=min(deadlines+[at+timedelta(hours=168)]).isoformat(),
                    rankings=ranking_ids,
-                   coverage_lists={status:[i['id'] for i in sorted(current,key=lambda i:(-i['importance_score'],i['id'])) if i.get('carmgz',{}).get('status')==status][:10] for status in ('미보도','후속 보도 검토')},
+                   coverage_lists={status:[i['id'] for i in rank(current) if i.get('carmgz',{}).get('display_status',i.get('carmgz',{}).get('status'))==status] for status in ('검색 범위 내 미발견','후속 보도 검토')},
                    entries={i['id']:dict(label=i['label'],article_count=i['article_count'],publishers=i['independent_publishers'],carmgz=i.get('carmgz')) for i in current},
                    changes=changes,
-                   follow_up=[dict(issue_id=i['id'], reason='원문·정책/안전 영향 확인 필요') for i in current if i['importance_score'] >= 25])
+                   follow_up=[dict(issue_id=i['id'], reason='원문·정책/안전 영향 확인 필요') for i in current if i.get('score_components',{}).get('impact',i['importance_score']) >= 25])
     db.execute('INSERT INTO briefings VALUES(?,?,?,?)', (slot, kind, at.isoformat(), json.dumps(payload, ensure_ascii=False)))
     return payload
 
 
 def public_payload(db, report, at, data_kind='real_rss'):
+    from .coverage import public_result
     # No raw DB, article body, stack trace or request evidence is published.
     articles = []
     for a in report['articles']:
@@ -145,14 +149,15 @@ def public_payload(db, report, at, data_kind='real_rss'):
         words = [r[0] for r in db.execute('SELECT keyword FROM article_keywords WHERE article_id=?', (a['id'],))]
         articles.append({**{k: a[k] for k in ('id','title','publisher','published_at','url','first_collected_at')}, 'keywords': words})
     public_fields = set('id label article_count independent_publishers publishers independence_basis first_published_at volume_1h volume_3h volume_24h growth_per_hour syndication_ratio syndication_status views comments importance_score importance_reasons spread_score rising_score grouping_basis views_coverage comments_coverage publishers_3h previous_3h growth_ratio_3h growth_status timeliness_hours similar_title_pair_ratio similarity_basis hourly_volumes carmgz'.split())
-    issues = [{k: v for k,v in i.items() if k in public_fields} | {'article_ids': [a['id'] for a in i['articles']]} for i in report['issues']]
+    public_fields.update(('score_components','selection_reasons','ranking_version','effective_event_at'))
+    issues = [{k: v for k,v in i.items() if k in public_fields and k!='carmgz'} |
+        {'article_ids': [a['id'] for a in i['articles']], 'carmgz':public_result(i.get('carmgz',{}))} for i in report['issues']]
     rankings = {k: [i['id'] for i in v] for k,v in report['rankings'].items()}
-    today = at.astimezone(KST).date()
-    major = [i for i in report['issues'] if any(timestamp(a['published_at']) and timestamp(a['published_at']).astimezone(KST).date() == today for a in i['articles'])]
-    rankings['major'] = [i['id'] for i in sorted(major, key=lambda i: (-i['importance_score'], -i['volume_24h'], -i['independent_publishers'], i['id']))[:10]]
+    rankings['major'] = [i['id'] for i in rank(report['issues'])]
     return dict(data_kind=data_kind, generated_at=at.isoformat(), expires_at=(at+timedelta(hours=6)).isoformat(),
                 last_collection_at=state(db, 'last_collection_at'), last_attempt_at=state(db, 'last_attempt_at'),
                 catchup=state(db, 'catchup'), retention_hours=168,
+                coverage_summary=report.get('coverage_summary',{}),
                 articles=articles, issues=issues, rankings=rankings, publishers=report['publishers'],
                 briefings=[json.loads(r[0]) for r in db.execute('SELECT payload FROM briefings ORDER BY generated_at DESC')],
                 alerts=[dict(issue_id=r[0], created_at=r[1], reasons=json.loads(r[2]), delivery_status=r[3]) for r in db.execute('SELECT issue_id,created_at,reasons,delivery_status FROM alert_candidates ORDER BY created_at DESC')],
@@ -209,11 +214,25 @@ def run(cfg, database, sources, output, mode='scheduled', at=None, client_factor
                 track(db, report, finished)
                 # Check after stable issue IDs, before briefing snapshots. Fixture runs stay offline.
                 if cfg.get('coverage', True) and (cfg.get('data_kind','real_rss') != 'synthetic_fixture' or coverage_checker):
-                    from .coverage import load_config, verify_issues
-                    coverage_config = load_config(cfg.get('coverage_config','coverage.json'))
-                    if coverage_config.get('enabled'):
-                        verify_issues(db, report, finished, coverage_config,
-                                      force=any(due_briefs), checker=coverage_checker)
+                    coverage_started=time.monotonic()
+                    try:
+                        from .coverage import load_config, verify_issues
+                        coverage_config = load_config(cfg.get('coverage_config','coverage.json'))
+                        if coverage_config.get('enabled'):
+                            verify_issues(db, report, finished, coverage_config, checker=coverage_checker)
+                    except Exception as exc:
+                        report['coverage_summary']=dict(error='optional_search_unavailable',attempted_issues=None)
+                        # Optional search must not prevent the already computed TOP 10/snapshot.
+                        db.execute('INSERT INTO operation_errors(created_at,phase,message) VALUES(?,?,?)',
+                            (finished.isoformat(),'coverage',type(exc).__name__))
+                        for issue in report['rankings']['industry']:
+                            if not issue.get('carmgz',{}).get('checked_at'):
+                                issue['carmgz']=dict(status='확인 불가',display_status='검색 실패',
+                                    checked_at=None,search_success=False,search_outcome='error',matches=[],
+                                    reason='선택적 보도 검색 시작 오류: 순위·뉴스 정보 생성은 계속')
+                    finally:
+                        if 'coverage_summary' in report:
+                            report['coverage_summary']['elapsed_seconds']=round(time.monotonic()-coverage_started,3)
                 if should_collect:
                     alerts(db, report['issues'], finished)
                 last_collection = state(db, 'last_collection_at')

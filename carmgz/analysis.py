@@ -17,8 +17,8 @@ EXCLUDED_NAMES = {'모터그래프', '탑라이더', '카가이', '오토뷰'}
 # Each event needs multiple concrete anchors, never a title similarity threshold.
 EVENTS = [
     ('winter-evo4', '한국타이어 윈터 아이셉트 에보4 독일 평가', [r'한국타이어', r'윈터\s*아이셉트\s*에보\s*4', r'독일|獨', r'1위']),
-    ('bali-bus', '발리 전기버스 공급·충전 사업', [r'발리', r'전기버스']),
-    ('gm-autonomy', 'GM 자율주행 확대 로드맵', [r'GM|제너럴 모터스', r'자율주행']),
+    ('bali-bus', '발리 전기버스 공급·충전 사업', [r'발리', r'전기버스|카운티']),
+    ('gm-autonomy', 'GM 자율주행 확대 로드맵', [r'GM|제너럴 모터스|캐딜락', r'자율주행']),
     ('pbv-dealers', '기아 글로벌 PBV 딜러 초청', [r'기아', r'PBV', r'딜러', r'초청|집결']),
     ('ev6-test', '기아 EV6 GT 독일 비교평가', [r'EV6', r'GT', r'평가', r'1위']),
     ('tucson-orders', '신형 투싼 첫날 계약 실적', [r'투싼', r'첫날', r'계약']),
@@ -31,13 +31,6 @@ EVENTS = [
     ('ideas', '현대차 아이디어 페스티벌', [r'현대차', r'아이디어 페스티벌']),
     ('school-bus', '현대차 인도네시아 교육 지원', [r'현대차', r'인니|인도네시아', r'교육']),
     ('cheonggye', '청계천 야간 자율주행버스', [r'청계천', r'자율주행', r'야경|야간']),
-]
-IMPORTANCE = [
-    ('안전·리콜·사고', 30, r'리콜|화재|결함|사망'),
-    ('정책·규제·보조금', 25, r'규제|법안|보조금|사업자 도입'),
-    ('생산·실적·공급망', 20, r'실적|생산|공장|공급|판매|계약'),
-    ('핵심 기술·상용화', 20, r'자율주행|배터리|충전|상용화|V2X'),
-    ('시장·해외 확장', 5, r'글로벌|해외|유럽|독일|인니|발리|일본'),
 ]
 
 
@@ -56,6 +49,10 @@ def classify(article):
     title = article['title'] or ''
     if HUNGER.search(title):
         return 'irrelevant', '기아 자동차와 동음이의어인 구호단체'
+    from .editorial import context, facts
+    contextual = context(title)
+    if contextual:
+        return contextual
     if re.search(r'정몽구\s*재단',title) and not re.search(r'자동차\s*(?:기술|산업|안전)|미래차|전기차|자율주행',title):
         return 'review', '완성차 재단 사회공헌: 자동차 산업과의 직접 연결 확인 필요'
     if re.search(r'바둑로봇|건설작업로봇|주강로보테크|빅웨이브로보틱스|한일,', title):
@@ -64,6 +61,10 @@ def classify(article):
         return 'review', '배터리 선박: 자동차 중심 범위 재검토 필요'
     if automotive_terms(title):
         return 'relevant', 'RSS 제목에 자동차·이동수단·핵심 전지 기술 근거'
+    if facts(title)['entities'] and facts(title)['actions']:
+        return 'relevant', '자동차·부품·전지 기업과 구체 산업 사건 제목 근거'
+    if re.search(r'완성차|승용차|수입차|차량|부품업체|이차전지|전고체|로보택시|車',title) and facts(title)['actions']:
+        return 'relevant', '차량·완성차·핵심 전지 산업 문맥과 구체 사건 제목 근거'
     return 'review', '제목만으로 관련성 확정 불가'
 
 
@@ -71,6 +72,14 @@ def same_event(a, b):
     da, db = timestamp(a['published_at']), timestamp(b['published_at'])
     if not da or not db or abs((da-db).total_seconds()) > 72*3600:
         return None
+    from .editorial import facts
+    left,right=facts(a['title']),facts(b['title'])
+    if left['years'] and right['years'] and not set(left['years']) & set(right['years']):
+        return None
+    if all(re.search(r'공급|투입',x['title']) for x in (a,b)):
+        counts=[{v for unit,v in p['quantities'] if unit=='대'} for p in (left,right)]
+        if all(counts) and not counts[0] & counts[1]:
+            return None
     # Materially different actions or explicit locations/numbers veto broad anchors.
     for facet in (r'리콜|결함', r'사망|사고', r'생산\s*중단', r'화재'):
         if bool(re.search(facet, a['title'])) != bool(re.search(facet, b['title'])):
@@ -86,6 +95,10 @@ def same_event(a, b):
             if all(years) and years[0] != years[1]:
                 return None
             return key, label
+    from .editorial import related_event
+    matched = related_event(a['title'],b['title'])
+    if matched:
+        return matched[0], min(a['title'],b['title'])
     return None
 
 
@@ -105,8 +118,6 @@ def build_issues(articles, as_of):
         count = lambda lo, hi: sum(lo <= (as_of-t).total_seconds()/3600 < hi for t in times)
         n1, n3, n24 = count(0, 1), count(0, 3), count(0, 24)
         growth = n1-count(1, 3)/2
-        reasons = [dict(criterion=n, points=p) for n, p, pattern in IMPORTANCE
-                   if any(re.search(pattern, a['title']) for a in group)]
         publishers = sorted({a['publisher'] for a in group})
         issues.append(dict(id=hashlib.sha256('|'.join(sorted(a['id'] for a in group)).encode()).hexdigest()[:16],
             label=event[1] if event else group[0]['title'], articles=group,
@@ -116,10 +127,13 @@ def build_issues(articles, as_of):
             volume_1h=n1, volume_3h=n3, volume_24h=n24, growth_per_hour=growth,
             syndication_ratio=None, syndication_status='본문·배포 출처 미확보: 전재/독립 후속취재 미확인',
             views=None, comments=None,
-            importance_score=sum(x['points'] for x in reasons), importance_reasons=reasons,
+            importance_score=0, importance_reasons=[],
             spread_score=len(publishers)*10+len(group),
             rising_score=max(0, growth)*3+n1,
             grouping_basis='사건별 복수 앵커 + 72시간 + 그룹 전체 쌍 검증' if event else '병합 근거 부족: 단독 이슈'))
+    from .editorial import score
+    for issue in issues:
+        score(issue,as_of)
     return issues
 
 
@@ -144,7 +158,8 @@ def analyze(database, sources, as_of):
         a['missing_fields'] = [k for k in ('publisher', 'title', 'published_at', 'url') if not a[k]]
         a['invalid_date'] = bool(a['published_at'] and not timestamp(a['published_at']))
         a['invalid_url'] = urlsplit(a['url']).scheme not in ('http', 'https') or not urlsplit(a['url']).netloc
-    eligible = [a for a in articles if a['classification'] == 'relevant']
+    eligible = [a for a in articles if a['classification'] == 'relevant' and
+                (timestamp(a['published_at']) is None or 0 <= (as_of-timestamp(a['published_at'])).total_seconds() < 168*3600)]
     issues = build_issues(eligible, as_of)
     # Most recent public observations per article, per field; missing values stay null.
     for issue in issues:
@@ -177,6 +192,9 @@ def analyze(database, sources, as_of):
     for name, key in [('spread', 'spread_score'), ('rising', 'rising_score'), ('industry', 'importance_score')]:
         pool = [i for i in issues if i['volume_1h'] and i['growth_per_hour'] > 0] if name == 'rising' else issues
         rankings[name] = sorted(pool, key=lambda i: (-i[key], -i['independent_publishers'], -i['article_count'], i['id']))[:10]
+    from .editorial import rank
+    rankings['industry'] = rank(issues)
+    rankings['major'] = list(rankings['industry'])
     return dict(data_kind='real_sqlite_rss', as_of=as_of.isoformat(), database_integrity=integrity,
         latest_run=latest['id'], latest_rss_items=sum(c['fetched'] for c in checks),
         latest_keyword_candidates=sum(c['relevant'] for c in checks), stored_articles=len(articles),

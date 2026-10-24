@@ -151,7 +151,7 @@ class Checker:
     def __init__(self, config, client=None):
         self.config = config
         self.client = client or PolicyClient(config.get('interval_seconds',2),config.get('timeout_seconds',8),0)
-        self.deadline = time.monotonic()+config.get('max_seconds',180)
+        self.deadline = time.monotonic()+min(config.get('max_seconds',180),180)
         if hasattr(self.client,'sleep'):
             original_sleep = self.client.sleep
             def bounded_sleep(seconds):
@@ -261,36 +261,83 @@ def migrate(db):
         fingerprint TEXT NOT NULL, payload TEXT NOT NULL)''')
 
 
+def display_status(result):
+    if result.get('status') in ('보도 완료','후속 보도 검토','확인 필요'):
+        return result['status']
+    if not result.get('checked_at'):
+        return '검색 대기'
+    if not result.get('search_success') or result.get('errors'):
+        return '검색 실패'
+    return '검색 범위 내 미발견'
+
+
+def public_result(result):
+    # Search requests/errors stay in private SQLite, not in the dashboard payload.
+    public = {k:result[k] for k in ('status','checked_at','search_success','search_outcome',
+        'reason','scope','date_limit','matches','cached','display_status') if k in result}
+    public['display_status'] = result.get('display_status') or display_status(result)
+    return public
+
+
 def verify_issues(db, report, at, config, force=False, checker=None):
+    started = time.monotonic()
+    attempted = query_attempts = 0
     migrate(db)
-    checker = checker or Checker(config)
+    from .editorial import rank, material_signature
+    top = report.get('rankings',{}).get('industry')
+    if top is None:
+        top = rank(report['issues'])
+    targets = {i['id'] for i in top[:max(0,min(10,config.get('max_issues',20),20))]}
     pending = []
     for issue in report['issues']:
-        signature = hashlib.sha256(json.dumps(sorted((a['title'],a['published_at']) for a in issue['articles']),ensure_ascii=False).encode()).hexdigest()
+        signature = material_signature(issue)
         row = db.execute('SELECT checked_at,fingerprint,payload FROM carmgz_checks WHERE issue_id=?',(issue['id'],)).fetchone()
         cached = json.loads(row[2]) if row else None
         fresh = row and timestamp(row[0]) and at-timestamp(row[0]) < timedelta(hours=config.get('cache_hours',6))
-        if fresh and row[1]==signature and cached.get('rule_version','v1')==RULE_VERSION and not force:
+        # Briefings and elapsed TTL alone do not force a repeat of successful unchanged searches.
+        completed = cached and (cached.get('status') in ('보도 완료','후속 보도 검토') or
+                                (cached.get('search_success') and not cached.get('errors')))
+        reusable = row and row[1]==signature and cached.get('rule_version','v1')==RULE_VERSION and (completed or fresh)
+        if reusable:
             issue['carmgz'] = dict(cached, cached=True)
         else:
             issue['carmgz'] = dict(status='확인 불가',checked_at=None,search_success=False,matches=[],queries=[],
                                    reason='이번 실행 검색 대기·시간 예산 제한',scope=config.get('scope_note',''),date_limit=None,search_outcome='pending')
             if cached:
                 issue['carmgz']['previous_check'] = {k:cached.get(k) for k in ('status','checked_at')}
-            pending.append((row is not None, issue, signature))
-    # New issues first, then oldest checked. Do not starve the remaining backlog.
-    pending.sort(key=lambda x:(x[0], db.execute('SELECT checked_at FROM carmgz_checks WHERE issue_id=?',(x[1]['id'],)).fetchone()[0] if x[0] else '', -x[1]['importance_score']))
-    for _, issue, signature in pending[:config.get('max_issues',20)]:
+            if issue['id'] in targets:
+                pending.append((issue,signature))
+            else:
+                issue['carmgz']['reason']='TOP 10 보조 검색 대상 외: 편집자 확인 가능'
+    order={i['id']:n for n,i in enumerate(top)}
+    pending.sort(key=lambda x:order[x[0]['id']])
+    # No HTTP client, robots lookup or timer is needed when every target is cached.
+    checker = checker or (Checker(config) if pending else None)
+    for issue, signature in pending:
         if time.monotonic() >= checker.deadline or getattr(checker,'circuit_open',False):
             break
-        result = checker.check(issue, at)
+        try:
+            attempted += 1
+            result = checker.check(issue, at)
+        except Exception as exc:
+            checker.circuit_open = True
+            result = dict(status='확인 불가',rule_version=RULE_VERSION,checked_at=datetime.now(timezone.utc).isoformat(),
+                search_success=False,search_outcome='error',matches=[],errors=[type(exc).__name__],
+                reason='선택적 보도 검색 오류: 뉴스 순위에는 영향 없음')
         issue['carmgz'] = result
+        query_attempts += sum(not s.get('cached_in_run',False) for s in result.get('searches',[]))
         db.execute('INSERT OR REPLACE INTO carmgz_checks VALUES(?,?,?,?)',
                    (issue['id'],result['checked_at'],signature,json.dumps(result,ensure_ascii=False)))
     if getattr(checker,'circuit_open',False):
-        for _, issue, _ in pending:
+        for issue, _ in pending:
             if issue['carmgz'].get('search_outcome') == 'pending':
                 issue['carmgz'].update(search_outcome='deferred',reason='동일 검색 응답 오류 반복으로 이번 실행 검색 중단')
+    for issue in report['issues']:
+        issue['carmgz']['display_status'] = display_status(issue['carmgz'])
+    report['coverage_summary'] = dict(target_issues=len(targets),attempted_issues=attempted,
+        search_query_attempts=query_attempts,cached_issues=sum(bool(i['carmgz'].get('cached')) for i in report['issues']),
+        elapsed_seconds=round(time.monotonic()-started,3),max_issues=min(config.get('max_issues',20),20),
+        max_seconds=min(config.get('max_seconds',180),180))
     return report
 
 

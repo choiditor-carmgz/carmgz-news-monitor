@@ -90,7 +90,7 @@ class CoverageTests(unittest.TestCase):
             self.assertEqual(items[0]['carmgz']['searches'][0]['error_code'],'query_not_applied')
             self.assertTrue(checker.circuit_open)
             for i in items[1:]:
-                self.assertEqual(i['carmgz']['search_outcome'],'deferred')
+                self.assertIn(i['carmgz']['search_outcome'],('pending','deferred'))
                 self.assertIsNone(i['carmgz']['checked_at'])
                 self.assertEqual(i['carmgz']['status'],'확인 불가')
 
@@ -153,7 +153,7 @@ class CoverageTests(unittest.TestCase):
             db.executemany('INSERT INTO issues VALUES(?)',[(i['id'],) for i in items])
             checker=FakeChecker()
             verify_issues(db,{'issues':items},NOW,{'max_issues':20},checker=checker)
-            self.assertEqual(len(checker.calls),20)
+            self.assertEqual(len(checker.calls),10)
         class Client:
             def fetch(self,url):raise AssertionError('Expired budget must not request')
         checker=Checker({'max_seconds':0},Client())
@@ -190,7 +190,7 @@ class CoverageTests(unittest.TestCase):
             report['issues'][0]['articles'][0]['title']+=' 계획 변경'
             verify_issues(s.db,report,NOW,{},checker=checker)
             verify_issues(s.db,report,NOW,{},force=True,checker=checker)
-            self.assertEqual(len(checker.calls),3)
+            self.assertEqual(len(checker.calls),2)
             s.db.commit();prune(s.db,NOW+timedelta(days=8))
             self.assertEqual(s.db.execute('SELECT count(*) FROM carmgz_checks').fetchone()[0],0)
             s.close()
