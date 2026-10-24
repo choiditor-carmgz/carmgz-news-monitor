@@ -22,10 +22,11 @@ def search_diagnostics(body, query):
     """Allowlisted structural facts only; never persist response text or headers."""
     text = body.decode('utf-8-sig', errors='replace')
     echo = re.search(r'''params\[['"]sc_word['"]\]\s*=\s*(['"])(.*?)\1''', text, re.S)
+    total = re.search(r'''params\[['"]total['"]\]\s*=\s*['"]?(\d+)''', text)
     return dict(body_bytes=len(body), body_sha256=hashlib.sha256(body).hexdigest(),
                 has_query_echo=bool(echo), has_query_text=query in text,
                 has_section_list=bool(re.search(r'''<article\b[^>]*id=['"]section-list['"]''', text, re.I)),
-                has_total=bool(re.search(r'''params\[['"]total['"]\]''', text)),
+                has_total=bool(total), total=int(total.group(1)) if total else None,
                 has_html=bool(re.search(r'<html\b', text, re.I)))
 
 

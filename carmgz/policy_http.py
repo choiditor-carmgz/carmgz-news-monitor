@@ -72,6 +72,8 @@ class PolicyClient(HttpClient):
                             rate.seconds/rate.requests if rate else 0)
     def fetch(self, url):
         self.last_status = None
+        self.last_content_type = None
         self.check_url(url)
         self.last_status = None
+        self.last_content_type = None
         return super().fetch(url)

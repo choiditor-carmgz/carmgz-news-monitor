@@ -19,6 +19,7 @@ CASES = [
 
 # Exact public search phrases recorded by operations #25 and #26.
 OPERATING_QUERIES = ['중국산 승용차', '승용차 수입 만대', '강릉서 전기차', '전기차 화재 전소된']
+OPERATING_QUERIES += ['기술을 자동차 기술을 우주·의료까지 넓힌다', '자동차 기술을 우주·의료까지 넓힌다']
 
 
 def main():
