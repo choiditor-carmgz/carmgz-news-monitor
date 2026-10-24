@@ -2,23 +2,56 @@
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 
 const keySets = new Map();
+export function accessConfig(env) {
+  const rawTeam = typeof env.CF_ACCESS_TEAM_DOMAIN === 'string' ? env.CF_ACCESS_TEAM_DOMAIN : '';
+  const rawAudience = typeof env.CF_ACCESS_AUD === 'string' ? env.CF_ACCESS_AUD : '';
+  const team = rawTeam.trim().replace(/\/$/, '');
+  const issuer = team.startsWith('https://') ? team : `https://${team}`;
+  const valid = /^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(issuer);
+  let audience = rawAudience.trim();
+  // Accept a JSON-quoted copy of the configured tag, never infer an audience from a JWT.
+  if (audience.startsWith('"')) {
+    try { const parsed = JSON.parse(audience); if (typeof parsed === 'string') audience = parsed.trim(); } catch {}
+  }
+  return {issuer, audience, flags: {
+    team_present: Boolean(rawTeam), audience_present: Boolean(rawAudience),
+    team_original_format_valid: /^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com\/?$/.test(rawTeam),
+    team_normalized_valid: valid, audience_nonempty: Boolean(rawAudience.trim()),
+    audience_json_array: rawAudience.trim().startsWith('['),
+    audience_original_hex_tag: /^[a-f0-9]{64}$/i.test(rawAudience.trim()),
+    audience_normalized_hex_tag: /^[a-f0-9]{64}$/i.test(audience),
+    assets_present: typeof env.ASSETS?.fetch === 'function',
+  }};
+}
+
 export function createHandler(resolveKeys = issuer => {
   if (!keySets.has(issuer)) keySets.set(issuer, createRemoteJWKSet(new URL(`${issuer}/cdn-cgi/access/certs`)));
   return keySets.get(issuer);
 }) {
   return async (request, env) => {
-    const issuer = env.CF_ACCESS_TEAM_DOMAIN?.replace(/\/$/, '');
-    const audience = env.CF_ACCESS_AUD;
+    const {issuer, audience, flags} = accessConfig(env);
     const headers = {'Cache-Control': 'private, no-store', 'Vary': 'Cf-Access-Jwt-Assertion, Cookie'};
-    if (!/^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(issuer || '') || !audience) {
-      return new Response('Access verification is not configured', {status: 503, headers});
+    if (!flags.team_normalized_valid || !audience) {
+      return new Response('Access verification is not configured\n'+JSON.stringify(flags), {status: 503, headers});
     }
+    const assertion = request.headers.get('Cf-Access-Jwt-Assertion') || '';
     try {
-      await jwtVerify(request.headers.get('Cf-Access-Jwt-Assertion') || '', resolveKeys(issuer), {
+      await jwtVerify(assertion, resolveKeys(issuer), {
         issuer, audience, algorithms: ['RS256'], requiredClaims: ['exp', 'iat', 'sub'],
       });
-    } catch {
+    } catch (error) {
+      if (new URL(request.url).pathname === '/__diagnostics/access-config') {
+        const allowedCodes = ['ERR_JWT_CLAIM_VALIDATION_FAILED','ERR_JWT_EXPIRED','ERR_JWS_SIGNATURE_VERIFICATION_FAILED',
+          'ERR_JWS_INVALID','ERR_JWKS_NO_MATCHING_KEY','ERR_JWKS_TIMEOUT'];
+        return Response.json({revision:'access-runtime-v2',authenticated:false,...flags,
+          assertion_present:Boolean(assertion),
+          jwt_error:allowedCodes.includes(error.code)?error.code:'verification_failed',
+          claim:['iss','aud','exp','nbf','iat','sub'].includes(error.claim)?error.claim:null}, {status:403,headers});
+      }
       return new Response('Forbidden', {status: 403, headers});
+    }
+    if (new URL(request.url).pathname === '/__diagnostics/access-config') {
+      return Response.json({revision: 'access-runtime-v2', authenticated: true, ...flags}, {headers});
     }
     const asset = await env.ASSETS.fetch(request);
     const response = new Response(asset.body, asset);
