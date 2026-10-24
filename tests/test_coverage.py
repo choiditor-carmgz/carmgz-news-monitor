@@ -53,6 +53,7 @@ class CoverageTests(unittest.TestCase):
                 return ('''<article id="section-list"></article><script>params['total']="0";params['sc_word']='''+json.dumps(query)+''';</script>''').encode()
         result=Checker({},Client()).check(issue(),NOW)
         self.assertTrue(result['search_success']);self.assertEqual(result['status'],'확인 불가')
+        self.assertEqual(result['search_outcome'],'empty')
         self.assertIsNone(result['date_limit'])
 
     def test_http_200_unfiltered_archive_is_not_a_successful_search(self):
@@ -69,6 +70,95 @@ class CoverageTests(unittest.TestCase):
             def fetch(self,url): raise TimeoutError('fixture')
         r=Checker({},Client()).check(issue(),NOW)
         self.assertFalse(r['search_success']);self.assertEqual(r['status'],'확인 불가')
+        self.assertEqual(r['search_outcome'],'error')
+
+    def test_repeated_unapplied_queries_stop_remaining_issue_requests(self):
+        import sqlite3
+        class Client:
+            calls=0;last_status=200
+            def fetch(self,url):
+                self.calls+=1
+                return b'''<article id="section-list"></article><script>params['total']="19995";params['sc_word']="";</script>'''
+        client=Client();checker=Checker({},client)
+        with sqlite3.connect(':memory:') as db:
+            db.execute('CREATE TABLE issues(id TEXT PRIMARY KEY)')
+            items=[dict(issue(),id=str(n)) for n in range(20)]
+            db.executemany('INSERT INTO issues VALUES(?)',[(i['id'],) for i in items])
+            verify_issues(db,{'issues':items},NOW,{'max_issues':20},checker=checker)
+            self.assertEqual(client.calls,2)
+            self.assertEqual(db.execute('SELECT count(*) FROM carmgz_checks').fetchone()[0],1)
+            self.assertEqual(items[0]['carmgz']['searches'][0]['error_code'],'query_not_applied')
+            self.assertTrue(checker.circuit_open)
+            for i in items[1:]:
+                self.assertEqual(i['carmgz']['search_outcome'],'deferred')
+                self.assertIsNone(i['carmgz']['checked_at'])
+                self.assertEqual(i['carmgz']['status'],'확인 불가')
+
+    def test_partial_query_failure_is_not_reported_as_zero_results(self):
+        class Client:
+            calls=0
+            def fetch(self,url):
+                self.calls+=1
+                if self.calls==1:return b'<html>unexpected layout</html>'
+                from urllib.parse import urlsplit,parse_qs
+                query=parse_qs(urlsplit(url).query)['sc_word'][0]
+                return ('''<article id="section-list"></article><script>params['total']="0";params['sc_word']='''+json.dumps(query)+''';</script>''').encode()
+        r=Checker({},Client()).check(issue(),NOW)
+        self.assertTrue(r['search_success']);self.assertEqual(r['search_outcome'],'partial_error')
+        self.assertEqual(r['status'],'확인 불가');self.assertFalse(r['circuit_open'])
+
+    def test_article_metadata_error_does_not_misclassify_valid_search_as_request_failure(self):
+        class Client:
+            last_status=None
+            def fetch(self,url):
+                if 'articleView' in url:
+                    self.last_status=403
+                    return b'<html>no article metadata</html>'
+                self.last_status=200
+                from urllib.parse import urlsplit,parse_qs
+                query=parse_qs(urlsplit(url).query)['sc_word'][0]
+                return ('''<article id="section-list"><a href="/news/articleView.html?idxno=1">fixture</a></article><script>params['total']="1";params['sc_word']='''+json.dumps(query)+''';</script>''').encode()
+        checker=Checker({},Client());r=checker.check(issue(),NOW)
+        self.assertTrue(r['search_success']);self.assertEqual(r['search_outcome'],'results')
+        self.assertTrue(r['searches'][0]['article_errors'])
+        self.assertEqual(r['status'],'확인 불가');self.assertFalse(r['circuit_open'])
+        again=checker.check(issue(),NOW)
+        self.assertTrue(again['searches'][0]['cached_in_run'])
+        self.assertEqual(again['searches'][0]['http_status'],200)
+
+    def test_zero_total_with_article_links_is_an_error_not_empty_search(self):
+        from carmgz.coverage import SearchResponseError
+        with self.assertRaises(SearchResponseError) as caught:
+            parse_search(b'''<article id="section-list"><a href="/news/articleView.html?idxno=1">item</a></article><script>params['total']="0";</script>''')
+        self.assertEqual(caught.exception.code,'search_total_inconsistent')
+
+    def test_repeat_http_errors_with_different_urls_share_one_circuit(self):
+        from carmgz.http import FetchError
+        class Client:
+            calls=0;last_status=403
+            def fetch(self,url):
+                self.calls+=1;raise FetchError('HTTP 403: '+url)
+        client=Client();checker=Checker({},client)
+        r=checker.check(issue(),NOW)
+        self.assertEqual(client.calls,2);self.assertTrue(checker.circuit_open)
+        self.assertEqual(r['searches'][0]['error_code'],'http_403')
+        checker.check(issue('다른 제목'),NOW)
+        self.assertEqual(client.calls,2)
+
+    def test_existing_twenty_issue_and_time_budgets_are_enforced(self):
+        import sqlite3
+        with sqlite3.connect(':memory:') as db:
+            db.execute('CREATE TABLE issues(id TEXT PRIMARY KEY)')
+            items=[dict(issue(),id=str(n)) for n in range(21)]
+            db.executemany('INSERT INTO issues VALUES(?)',[(i['id'],) for i in items])
+            checker=FakeChecker()
+            verify_issues(db,{'issues':items},NOW,{'max_issues':20},checker=checker)
+            self.assertEqual(len(checker.calls),20)
+        class Client:
+            def fetch(self,url):raise AssertionError('Expired budget must not request')
+        checker=Checker({'max_seconds':0},Client())
+        r=checker.check(issue(),NOW)
+        self.assertFalse(r['search_success']);self.assertFalse(checker.circuit_open)
 
     def test_same_company_is_not_same_event(self):
         a=dict(title='현대차 인도네시아 공장 투자',published_at=NOW.isoformat())

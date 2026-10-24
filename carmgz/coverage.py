@@ -18,6 +18,12 @@ RULE_VERSION = 'v2-query-validated'
 HOSTS = {'carmgz.kr', 'www.carmgz.kr'}
 
 
+class SearchResponseError(ValueError):
+    def __init__(self, message, code, echoed_query=None):
+        super().__init__(message)
+        self.code, self.echoed_query = code, echoed_query
+
+
 def own_url(url):
     """Apex and www are one publisher; reject lookalikes and non-HTTP links."""
     u = urlsplit(url)
@@ -57,11 +63,12 @@ def parse_search(body, query=None):
             try: actual=json.loads('"'+echo.group(2)+'"')
             except ValueError: actual=None
         if actual is None or ' '.join(actual.split()) != ' '.join(query.split()):
-            raise ValueError('Search query was not applied/echoed; unfiltered archive is not a valid search result')
+            code = 'query_echo_missing' if not echo else 'query_echo_invalid' if actual is None else 'query_not_applied'
+            raise SearchResponseError('Search query was not applied/echoed; unfiltered archive is not a valid search result', code, actual)
     main = re.search(r'<article\b[^>]*id=["\']section-list["\'][^>]*>(.*?)</article>', text, re.S|re.I)
     total = re.search(r"params\[['\"]total['\"]\]\s*=\s*['\"]?(\d+)", text)
     if not main or not total:
-        raise ValueError('Unrecognized search layout/total; cannot infer no coverage')
+        raise SearchResponseError('Unrecognized search layout/total; cannot infer no coverage', 'search_layout_changed')
     urls = []
     for href in re.findall(r'href=["\']([^"\']*articleView\.html\?[^"\']+)["\']', main.group(1), re.I):
         try:
@@ -71,7 +78,9 @@ def parse_search(body, query=None):
         except ValueError:
             continue
     if int(total.group(1)) and not urls:
-        raise ValueError('Positive search total without parseable main results')
+        raise SearchResponseError('Positive search total without parseable main results', 'search_results_unparseable')
+    if not int(total.group(1)) and urls:
+        raise SearchResponseError('Zero search total with article results; inconsistent response', 'search_total_inconsistent')
     return urls, int(total.group(1))
 
 
@@ -152,6 +161,22 @@ class Checker:
             self.client.sleep = bounded_sleep
         self.article_cache = {}
         self.search_cache = {}
+        self.search_metadata = {}
+        self.circuit_open = False
+        self.last_search_failure = None
+        self.same_search_failures = 0
+
+    def search_failure(self, exc):
+        if isinstance(exc, SearchResponseError):
+            code = exc.code
+        else:
+            http = re.search(r'HTTP\s+(\d{3})', str(exc))
+            code = 'http_'+http.group(1) if http else ('budget_exhausted' if time.monotonic() >= self.deadline else 'network_error')
+        if code != 'budget_exhausted':
+            self.same_search_failures = self.same_search_failures+1 if code == self.last_search_failure else 1
+            self.last_search_failure = code
+            self.circuit_open = self.same_search_failures >= 2
+        return code
 
     def fetch(self, url):
         if time.monotonic() >= self.deadline:
@@ -161,9 +186,11 @@ class Checker:
     def check(self, issue, at):
         result = dict(status='확인 불가', rule_version=RULE_VERSION, checked_at=datetime.now(timezone.utc).isoformat(), search_success=False,
                       queries=[], searches=[], matches=[], scope=self.config.get('scope_note',''),
-                      date_limit=None, complete=False, reason='검색 범위 불완전', errors=[])
+                      date_limit=None, complete=False, reason='검색 범위 불완전', errors=[], search_outcome='error')
         related = []; all_totals = []
         for query in queries(issue)[:self.config.get('max_queries',2)]:
+            if self.circuit_open:
+                break
             result['queries'].append(query)
             search = dict(query=query,at=datetime.now(timezone.utc).isoformat(),success=False)
             result['searches'].append(search)
@@ -172,11 +199,27 @@ class Checker:
                 search['cached_in_run'] = query in self.search_cache
                 if query not in self.search_cache:
                     self.search_cache[query] = parse_search(self.fetch(url), query=query)
+                    evidence = getattr(self.client,'evidence',[])
+                    self.search_metadata[query] = dict(http_status=getattr(self.client,'last_status',None),
+                        response_url=evidence[-1].get('final_url') if evidence else None)
                 urls, total = self.search_cache[query]; all_totals.append(total)
-                search.update(success=True,total=total,returned=len(urls),url=url,
-                              http_status=getattr(self.client,'last_status',None))
+                search.update(success=True,total=total,returned=len(urls),url=url,outcome='results' if total else 'empty',
+                              **self.search_metadata[query])
                 result['search_success'] = True
-                for url in urls[:self.config.get('max_articles_per_issue',2)]:
+                self.same_search_failures = 0
+                self.last_search_failure = None
+            except Exception as exc:
+                search.update(outcome='error',error=type(exc).__name__+': '+str(exc),error_code=self.search_failure(exc),
+                              http_status=getattr(self.client,'last_status',None))
+                if isinstance(exc, SearchResponseError):
+                    search['echoed_query'] = exc.echoed_query
+                evidence = getattr(self.client,'evidence',[])
+                if evidence:
+                    search['response_url'] = evidence[-1].get('final_url') or evidence[-1].get('url')
+                result['errors'].append(search['error'])
+                continue
+            for url in urls[:self.config.get('max_articles_per_issue',2)]:
+                try:
                     if url not in self.article_cache:
                         self.article_cache[url] = parse_article(self.fetch(url),url)
                     article = self.article_cache[url]
@@ -187,15 +230,26 @@ class Checker:
                         if not any(m['url']==url for m in result['matches']):
                             result['matches'].append(evidence)
                         related.append((status,reason))
-            except Exception as exc:
-                search['error'] = type(exc).__name__+': '+str(exc)
-                result['errors'].append(type(exc).__name__+': '+str(exc))
+                except Exception as exc:
+                    error = type(exc).__name__+': '+str(exc)
+                    search.setdefault('article_errors',[]).append(dict(url=url,error=error))
+                    result['errors'].append(error)
         result['result_totals'] = all_totals
+        result['circuit_open'] = self.circuit_open
+        if result['search_success']:
+            result['search_outcome'] = ('partial_error' if any(s.get('outcome')=='error' for s in result['searches'])
+                                        else 'results' if any(all_totals) else 'empty')
         if related:
             status, reason = min(related, key=lambda r: ['후속 보도 검토','보도 완료','확인 필요'].index(r[0]))
             result.update(status=status, reason=reason)
         elif not result['search_success']:
             result['reason']='검색 응답 검증 실패 또는 접근 불가: 미보도로 판정하지 않음'
+        elif result['search_outcome'] == 'empty':
+            result['reason']='공식 검색 결과 0건: 검색 범위 내 미발견이며 미보도 확정 아님'
+        elif result['search_outcome'] == 'results':
+            result['reason']='검색 결과는 있으나 동일 사건 보도 근거 미확정'
+        elif result['search_outcome'] == 'partial_error':
+            result['reason']='일부 검색 요청 실패: 성공 응답 범위만 확인, 미보도 확정 아님'
         # No finite first-page keyword search proves absence from the whole archive.
         # The '미보도' state is reserved for a future verified exhaustive adapter.
         return result
@@ -220,19 +274,23 @@ def verify_issues(db, report, at, config, force=False, checker=None):
             issue['carmgz'] = dict(cached, cached=True)
         else:
             issue['carmgz'] = dict(status='확인 불가',checked_at=None,search_success=False,matches=[],queries=[],
-                                   reason='이번 실행 검색 대기·시간 예산 제한',scope=config.get('scope_note',''),date_limit=None)
+                                   reason='이번 실행 검색 대기·시간 예산 제한',scope=config.get('scope_note',''),date_limit=None,search_outcome='pending')
             if cached:
                 issue['carmgz']['previous_check'] = {k:cached.get(k) for k in ('status','checked_at')}
             pending.append((row is not None, issue, signature))
     # New issues first, then oldest checked. Do not starve the remaining backlog.
     pending.sort(key=lambda x:(x[0], db.execute('SELECT checked_at FROM carmgz_checks WHERE issue_id=?',(x[1]['id'],)).fetchone()[0] if x[0] else '', -x[1]['importance_score']))
     for _, issue, signature in pending[:config.get('max_issues',20)]:
-        if time.monotonic() >= checker.deadline:
+        if time.monotonic() >= checker.deadline or getattr(checker,'circuit_open',False):
             break
         result = checker.check(issue, at)
         issue['carmgz'] = result
         db.execute('INSERT OR REPLACE INTO carmgz_checks VALUES(?,?,?,?)',
                    (issue['id'],result['checked_at'],signature,json.dumps(result,ensure_ascii=False)))
+    if getattr(checker,'circuit_open',False):
+        for _, issue, _ in pending:
+            if issue['carmgz'].get('search_outcome') == 'pending':
+                issue['carmgz'].update(search_outcome='deferred',reason='동일 검색 응답 오류 반복으로 이번 실행 검색 중단')
     return report
 
 
