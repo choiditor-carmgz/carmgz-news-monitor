@@ -224,7 +224,7 @@ body:has(dialog[open]){overflow:hidden}
   .board{background:transparent;border:0}
   .board .board-head{background:var(--surface);border:1px solid var(--line);border-radius:8px}
   .board .caption{border:0;padding:0 2px}
-  .row{grid-template-columns:20px minmax(0,1fr);grid-template-areas:"rank title" "score score" "pubs pill";gap:8px 10px;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .row{grid-template-columns:20px minmax(0,1fr) auto;grid-template-areas:"rank title title" "score score score" "pubs pubs pill";gap:8px 10px;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
   .row:last-child{border-bottom:1px solid var(--line)}
   .rank{grid-area:rank;color:var(--plate);text-align:left}
   .title{grid-area:title}
