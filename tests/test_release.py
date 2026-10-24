@@ -80,7 +80,7 @@ class ReleaseTests(unittest.TestCase):
                 track(s.db,report,NOW)
                 report['issues'][0]['carmgz']={'status':'확인 불가'}
                 payload=briefing(s.db,report,'pm',NOW,NOW,None)
-            self.assertEqual(payload['coverage_lists'],{'미보도':[],'후속 보도 검토':[]})
+            self.assertEqual(payload['coverage_lists'],{'검색 범위 내 미발견':[],'후속 보도 검토':[]})
             s.close()
 
     def test_workflow_manual_preview_is_separate_from_pages_permissions(self):
