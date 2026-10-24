@@ -58,7 +58,8 @@ def facts(title):
             continue
         value=sum(float(n.replace(',',''))*{'만':10000,'천':1000,'억':100000000,'조':1000000000000}.get(power,1)
             for n,power in re.findall(r'(\d[\d,.]*)\s*(조|억|만|천)?',m[1]))
-        quantities.append((m[2],value))
+        if math.isfinite(value):
+            quantities.append((m[2],value))
     periods = tuple(sorted(set(re.findall(r'([1-4])\s*(?:분기|Q)',title,re.I))))
     models = tuple(sorted(set(x.casefold() for x in re.findall(r'\b(?:[A-Za-z]+[- ]?\d+[A-Za-z]*|FSD|PBV)\b|투싼|카운티|쏘나타|쏘렌토|발리',title,re.I))))
     years=tuple(sorted(set(re.findall(r'(20\d{2})(?:년)?',title))))

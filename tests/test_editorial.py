@@ -1,6 +1,7 @@
 """Synthetic behavioral regressions; real snapshot comparison is a separate report."""
 from copy import deepcopy
 from datetime import timedelta
+import hashlib
 import json
 from pathlib import Path
 import sqlite3
@@ -64,6 +65,7 @@ class EditorialTests(unittest.TestCase):
         self.assertIn(('대',16254),facts('혼다 1만6,254대 리콜')['quantities'])
         self.assertNotIn(('대',30),facts('전기차 화재 30대 남성 숨져')['quantities'])
         self.assertIn(('원',1_240_000_000_000),facts('공장 투자 1조2400억원')['quantities'])
+        self.assertEqual(facts('공장 투자 '+'9'*400+'원')['quantities'],())
 
     def test_earnings_grouping_preserves_different_quarters_and_factories(self):
         a=story('볼보 3분기 7400억 적자 2500명 감원')
@@ -120,6 +122,19 @@ class EditorialTests(unittest.TestCase):
             self.assertEqual(len(checker.calls),10)
             self.assertEqual(report['coverage_summary']['attempted_issues'],0)
         self.assertEqual([i['id'] for i in rank(issues)],before)
+
+    def test_unchanged_legacy_success_migrates_without_an_http_check(self):
+        from carmgz.coverage import migrate
+        item=build_issues([story('혼다 3만대 결함 리콜')],NOW)[0]
+        legacy=hashlib.sha256(json.dumps(sorted((a['title'],a['published_at']) for a in item['articles']),ensure_ascii=False).encode()).hexdigest()
+        cached=dict(status='보도 완료',rule_version=RULE_VERSION,checked_at=(NOW-timedelta(days=1)).isoformat(),search_success=True,matches=[])
+        with sqlite3.connect(':memory:') as db:
+            migrate(db)
+            db.execute('INSERT INTO carmgz_checks VALUES(?,?,?,?)',(item['id'],cached['checked_at'],legacy,json.dumps(cached)))
+            checker=RecordingChecker();verify_issues(db,dict(issues=[item]),NOW,{},checker=checker)
+            self.assertEqual(checker.calls,[])
+            self.assertEqual(db.execute('SELECT fingerprint FROM carmgz_checks').fetchone()[0],material_signature(item))
+            self.assertEqual(item['carmgz']['checked_at'],cached['checked_at'])
 
     def test_optional_search_initialization_failure_still_builds_snapshot(self):
         with tempfile.TemporaryDirectory() as directory:

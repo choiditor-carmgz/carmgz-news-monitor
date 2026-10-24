@@ -293,6 +293,12 @@ def verify_issues(db, report, at, config, force=False, checker=None):
         signature = material_signature(issue)
         row = db.execute('SELECT checked_at,fingerprint,payload FROM carmgz_checks WHERE issue_id=?',(issue['id'],)).fetchone()
         cached = json.loads(row[2]) if row else None
+        if row and row[1]!=signature and cached.get('rule_version')==RULE_VERSION:
+            # Upgrade an unchanged legacy article fingerprint without another HTTP search.
+            legacy=hashlib.sha256(json.dumps(sorted((a['title'],a['published_at']) for a in issue['articles']),ensure_ascii=False).encode()).hexdigest()
+            if row[1]==legacy:
+                db.execute('UPDATE carmgz_checks SET fingerprint=? WHERE issue_id=?',(signature,issue['id']))
+                row=(row[0],signature,row[2])
         fresh = row and timestamp(row[0]) and at-timestamp(row[0]) < timedelta(hours=config.get('cache_hours',6))
         # Briefings and elapsed TTL alone do not force a repeat of successful unchanged searches.
         completed = cached and (cached.get('status') in ('보도 완료','후속 보도 검토') or
