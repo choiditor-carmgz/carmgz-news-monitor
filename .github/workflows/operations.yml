@@ -12,6 +12,10 @@ on:
     - cron: '0 8 * * *'
   workflow_dispatch:
     inputs:
+      redeploy_run_id:
+        description: '런타임 수정 검증용: 성공한 main 실행의 기존 dashboard만 Production 재배포 (수집·DB 변경 없음)'
+        type: string
+        default: ''
       diagnose_auth:
         description: '읽기 전용 Cloudflare API 인증 진단만 실행 (수집·배포 없음)'
         type: boolean
@@ -61,7 +65,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python scripts/inspect_cloudflare_runtime.py
   operate:
-    if: (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch') && !inputs.diagnose_auth
+    if: (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch') && !inputs.diagnose_auth && !inputs.redeploy_run_id
     runs-on: ubuntu-latest
     # RSS budget 8 min + CARMGZ 3 min + state/deployment overhead.
     timeout-minutes: 15
@@ -121,6 +125,63 @@ jobs:
         if: failure()
         run: echo 'Operation failed. Inspect the failed step; previous state is preserved unless a newer verified snapshot was uploaded.' >> "$GITHUB_STEP_SUMMARY"
 
+  redeploy-runtime:
+    if: github.event_name == 'workflow_dispatch' && inputs.redeploy_run_id && !inputs.diagnose_auth
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+    environment:
+      name: cloudflare-pages
+      url: https://carmgz-news-monitor.pages.dev/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify immutable dashboard source run
+        env:
+          SOURCE_RUN_ID: ${{ inputs.redeploy_run_id }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/select_dashboard_artifact.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: dashboard-preview
+          path: site
+          run-id: ${{ inputs.redeploy_run_id }}
+          github-token: ${{ github.token }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm test
+      - run: pnpm run build:guard
+      - run: python scripts/prepare_cloudflare.py
+      - name: Preserve exact runtime deployment bundle for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-deployment-bundle
+          path: cloudflare-dist
+          if-no-files-found: error
+          retention-days: 1
+      - name: Verify Production bindings and deploy runtime repair
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: 'false'
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          python scripts/check_cloudflare.py
+          pnpm exec wrangler pages deploy cloudflare-dist --project-name carmgz-news-monitor --branch main --commit-hash "$SOURCE_COMMIT" --commit-message "Runtime guard repair; existing dashboard preserved"
+          python scripts/inspect_cloudflare_runtime.py
+
   deploy:
     needs: operate
     if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.publish)
@@ -152,6 +213,13 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm run build:guard
       - run: python scripts/prepare_cloudflare.py
+      - name: Preserve exact Cloudflare deployment bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-deployment-bundle
+          path: cloudflare-dist
+          if-no-files-found: error
+          retention-days: 1
       - name: Check Cloudflare deployment credentials
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

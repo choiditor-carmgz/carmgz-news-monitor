@@ -1,7 +1,10 @@
 """Read-only Pages deployment metadata. Never print binding values or API bodies."""
 import os
 import sys
-from check_cloudflare import query, PROJECT, EXPECTED_ACCOUNT
+if __package__:
+    from .check_cloudflare import query, PROJECT, EXPECTED_ACCOUNT
+else:
+    from check_cloudflare import query, PROJECT, EXPECTED_ACCOUNT
 
 
 def binding_flags(config):

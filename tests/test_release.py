@@ -88,7 +88,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn('STATE_BRANCH: ${{ github.ref_name }}',text)
         self.assertIn('publish:',text)
         operate,deploy=text.split('\n  deploy:')
-        self.assertNotIn('environment:',operate.split('\n  operate:')[1])
+        self.assertNotIn('environment:',operate.split('\n  operate:')[1].split('\n  redeploy-runtime:')[0])
         self.assertIn('&& !inputs.diagnose_auth',operate)
         self.assertIn('name: cloudflare-pages',deploy)
         self.assertIn("github.ref == 'refs/heads/main'",deploy)
