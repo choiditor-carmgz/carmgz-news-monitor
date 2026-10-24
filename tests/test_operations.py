@@ -182,7 +182,10 @@ class RuntimeTests(unittest.TestCase):
                     items=''.join(f'<item><title>현대차 전기차 기사 {i}</title><link>https://example.org/night/{i}</link><guid>night-{i}</guid><pubDate>{published[i].isoformat()}</pubDate></item>' for i in range(self.count))
                     return ('<rss><channel>'+items+'</channel></rss>').encode()
             class NoRSS:
-                def __init__(self,*args): raise AssertionError('Briefing-only refresh must not collect RSS')
+                calls=0
+                def __init__(self,*args):
+                    type(self).calls+=1
+                    raise AssertionError('Briefing-only refresh must not collect RSS')
             with tempfile.TemporaryDirectory() as d:
                 path=Path(d)/'db';out=Path(d)/'site'
                 first=run(CFG,path,[SOURCE],out,'scheduled',previous,NightClient)
@@ -195,6 +198,7 @@ class RuntimeTests(unittest.TestCase):
                 self.assertEqual(len(again['articles']),2)
                 brief_at=morning.replace(hour=17 if weekend else 9)
                 refreshed=run(CFG,path,[SOURCE],out,'refresh',brief_at,NoRSS)
+                self.assertEqual(NoRSS.calls,0)
                 self.assertEqual(refreshed['last_collection_at'],again['last_collection_at'])
                 self.assertTrue(any(b['kind']==('pm' if weekend else 'am') and b['scheduled_at']==brief_at.astimezone(timezone.utc).isoformat() for b in refreshed['briefings']))
                 self.assertTrue((out/'dashboard.json').exists())
