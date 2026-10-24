@@ -104,6 +104,55 @@ def related_event(left,right):
     return None
 
 
+GENERIC = frozenset('''출시 공개 발표 개최 진행 추진 강화 확대 기록 돌파 국내 글로벌 올해 최초 신형 이번 관련 위해 통해 대한
+    시장 자동차 전기차 현대차 기아 그룹 현대차그룹 코리아 사진 포토 종합 속보 단독 시작 본격 계획 나선다 나서 미래 기술 고객'''.split())
+PARTICLE = re.compile(r'(?:으로|에서|에게|까지|부터|이다|은|는|이|가|을|를|에|의|와|과|도|로|만)$')
+
+
+@lru_cache(maxsize=4096)
+def title_terms(title):
+    import unicodedata
+    text = re.sub(r'\[[^\]]*\]', ' ', unicodedata.normalize('NFKC', title).casefold())
+    terms = set()
+    for word in re.findall(r'[가-힣]{2,}|[a-z][a-z0-9]+|\d+(?:[.,]\d+)?[가-힣a-z%]*', text):
+        if re.fullmatch(r'[가-힣]{3,}', word):
+            word = PARTICLE.sub('', word)
+        if len(word) >= 2 and word not in GENERIC:
+            terms.add(word)
+    return frozenset(terms)
+
+
+@lru_cache(maxsize=8192)
+def bigram_overlap(left, right):
+    from .rss import normalized_title
+    a, b = (normalized_title(x) for x in (left, right))
+    a, b = ({x[i:i+2] for i in range(len(x)-1)} for x in (a, b))
+    return len(a & b)/len(a | b) if a | b else 0
+
+
+def close(x, y):
+    """Rounded reports of one figure (7400억/7500억, 1만5045대/1만5000대) stay compatible."""
+    # Small counts/ordinals (20번째, 11대) are exact facts, not rounded figures.
+    return x == y or (max(x, y) >= 100 and abs(x-y) <= .1*max(x, y))
+
+
+def similar_event(left, right):
+    """Generic wording evidence for events no hand-written rule anticipated.
+
+    Requires several shared specific terms (company/model/place/number words beyond
+    generic verbs and brand names) AND character overlap; callers apply time/fact vetoes.
+    """
+    shared = title_terms(left) & title_terms(right)
+    overlap = bigram_overlap(left, right)
+    # Serial/numbered titles (1번째, 2번째) differ only by numbers; require a common figure.
+    numbers = [{float(n.replace(',','')) for n in re.findall(r'\d[\d,]*(?:\.\d+)?',x)} for x in (left,right)]
+    if all(numbers) and not any(close(x,y) for x in numbers[0] for y in numbers[1]):
+        return None
+    if (len(shared) >= 3 and overlap >= .28) or (len(shared) >= 2 and overlap >= .35):
+        return 'title-overlap', '구체 단어 복수 일치 + 제목 문자 유사도 (그룹 과반 검증)'
+    return None
+
+
 def material_signature(issue):
     """Adding publishers/repeated titles with the same facts does not invalidate a search."""
     profiles = [facts(a['title']) for a in issue['articles']]
