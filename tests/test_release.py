@@ -66,8 +66,10 @@ class ReleaseTests(unittest.TestCase):
             old=dict(name=preview+'4-1',id=4,expired=False)
             new=dict(name=preview+'5-1',id=5,expired=False)
             production=dict(name='carmgz-state-3-1',id=3,expired=False)
-            with patch('scripts.actions_state.artifacts',return_value=[old,new,production]),patch('scripts.actions_state.api') as api:
-                rotate();api.assert_called_once_with('actions/artifacts/4','DELETE')
+            older=dict(name=preview+'2-1',id=2,expired=False,created_at='2026-10-23T00:00:00Z')
+            old['created_at']='2026-10-24T00:00:00Z'
+            with patch('scripts.actions_state.artifacts',return_value=[older,old,new,production]),patch('scripts.actions_state.api') as api:
+                rotate();api.assert_called_once_with('actions/artifacts/2','DELETE')
             with patch('scripts.actions_state.artifacts',return_value=[production]),patch('scripts.actions_state.api') as api:
                 with self.assertRaises(RuntimeError):restore('unused')
                 api.assert_not_called()

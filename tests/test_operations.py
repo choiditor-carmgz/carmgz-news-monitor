@@ -268,8 +268,31 @@ class ArtifactTests(unittest.TestCase):
         with patch.dict('os.environ',env),patch('scripts.actions_state.artifacts',return_value=[old]),patch('scripts.actions_state.api') as api:
             with self.assertRaises(RuntimeError):rotate()
             api.assert_not_called()
+        older=dict(name='carmgz-state-3-1',id=3,expired=False,created_at='2026-10-23T00:00:00Z')
+        old['created_at']='2026-10-24T00:00:00Z'
         with patch.dict('os.environ',env),patch('scripts.actions_state.artifacts',return_value=[old,new]),patch('scripts.actions_state.api') as api:
-            rotate();api.assert_called_once_with('actions/artifacts/4','DELETE')
+            rotate();api.assert_not_called()  # the previous snapshot stays as a fallback
+        with patch.dict('os.environ',env),patch('scripts.actions_state.artifacts',return_value=[older,old,new]),patch('scripts.actions_state.api') as api:
+            rotate();api.assert_called_once_with('actions/artifacts/3','DELETE')
+    def test_damaged_latest_state_falls_back_to_previous_and_never_empty(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'db';s=seed(path);s.close()
+            good=io.BytesIO()
+            with zipfile.ZipFile(good,'w') as z:z.writestr('news.sqlite3',path.read_bytes())
+            bad=io.BytesIO()
+            with zipfile.ZipFile(bad,'w') as z:z.writestr('news.sqlite3',b'not a database')
+            latest=dict(name='carmgz-state-9-1',id=9,expired=False,created_at='2026-10-24T09:00:00Z',workflow_run={'id':9})
+            previous=dict(name='carmgz-state-8-1',id=8,expired=False,created_at='2026-10-24T07:00:00Z',workflow_run={'id':8})
+            run={'head_branch':'main','path':'.github/workflows/operations.yml','event':'schedule'}
+            blobs={9:bad.getvalue(),8:good.getvalue()}
+            with patch.dict('os.environ',{'STATE_BRANCH':'main'}),patch('scripts.actions_state.artifacts',return_value=[latest,previous]),\
+                 patch('scripts.actions_state.api',return_value=run),patch('scripts.actions_state.download',side_effect=lambda a:blobs[a['id']]):
+                restore(Path(d)/'restored')
+            self.assertEqual((Path(d)/'restored').read_bytes(),path.read_bytes())
+            with patch.dict('os.environ',{'STATE_BRANCH':'main'}),patch('scripts.actions_state.artifacts',return_value=[latest]),\
+                 patch('scripts.actions_state.api',return_value=run),patch('scripts.actions_state.download',return_value=bad.getvalue()):
+                with self.assertRaises(RuntimeError):restore(Path(d)/'empty',allow_empty=True)
+            self.assertFalse((Path(d)/'empty').exists())
     def test_missing_state_fails_closed(self):
         with patch('scripts.actions_state.artifacts',return_value=[]):
             with self.assertRaises(RuntimeError):restore('unused')
